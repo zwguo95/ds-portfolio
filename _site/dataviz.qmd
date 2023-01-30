@@ -1,0 +1,17 @@
+---
+title: "Data visualizations"
+listing:
+  contents: dataviz
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: false
+  image-height: 10em
+page-layout: full
+title-block-banner: true
+---
+
+
+This webpage hosts my data visualizations. 
+

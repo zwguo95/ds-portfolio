@@ -1,0 +1,18 @@
+---
+title: "Visualizing Public Support for Government Surveillance"
+date: 12/20/2022
+author:
+  - name: Zhaowen Guo
+title-block-banner: true
+format:
+  html:
+    theme: flatly
+    code-fold: false
+    code-tools: true
+    toc: false
+    number-sections: true
+link-citations: yes
+categories: [code, analysis, visualization]
+image: "support_surveillance_map.png"
+---
+

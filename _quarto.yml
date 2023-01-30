@@ -15,11 +15,12 @@ website:
         text: Home
       - href: projects.qmd
         text: Projects
-      - href: blogs.qmd
-        text: Blogs
+      - href: dataviz.qmd
+        text: Data Visualization
       - text: Tutorials
         menu: 
           - tutorials/workshop_visual_r.qmd
+          - tutorials/workshop_word_embedding_r.qmd
     
     right:
       - text: LinkedIn
