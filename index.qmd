@@ -12,7 +12,7 @@ about:
     - text: GitHub
       icon: github
       url: "https://github.com/zwguo95"
-    - text: Email
+    - text: Contact me
       url: "zwguo@uw.edu"
       icon: envelope
 ---
