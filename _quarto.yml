@@ -1,0 +1,47 @@
+project:
+  type: website
+
+website:
+  title: "Zhaowen Guo"
+  site-url: https://zhaowenguo.github.io/
+  favicon: "headshot_guo.jpg"
+    
+  search: 
+    location: navbar
+    type: overlay
+  navbar:
+  
+    left:
+      - href: index.qmd
+        text: Home
+      - href: projects.qmd
+        text: Projects
+      - href: blogs.qmd
+        text: Blogs
+      - text: Tutorials
+        menu: 
+          - tutorials/workshop_visual_r.qmd
+    
+    right:
+      - text: LinkedIn
+        url: "https://www.linkedin.com/in/zhaowen-guo-20535312a/"
+        icon: linkedin
+      - text: GitHub
+        icon: github
+        url: "https://github.com/zwguo95"
+      - text: Email
+        url: "zwguo@uw.edu"
+        icon: envelope
+      - text: Resume
+        url: "resume.pdf"
+        icon: file-earmark-person
+
+format:
+  html:
+    theme: sandstone
+    css: styles.css
+    citations-hover: true
+    code-link: true
+    code-fold: show
+    code-tools: false
+    code-block-border-left: "#004E4F"

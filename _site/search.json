@@ -1,0 +1,149 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Zhaowen Guo",
+    "section": "",
+    "text": "I am a data scientist and PhD researcher."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Zhaowen Guo",
+    "section": "Education",
+    "text": "Education\nUniversity of California, San Diego | San Diego, CA PhD in Mathematics | Sept 2011 - June 2015\nMacalester College | St. Paul MA B.A in Economics | Sept 2007 - June 2011"
+  },
+  {
+    "objectID": "index.html#experience",
+    "href": "index.html#experience",
+    "title": "Zhaowen Guo",
+    "section": "Experience",
+    "text": "Experience\nWengo Analytics | Head Data Scientist | April 2018 - present\nGeoScynce | Chief Analyst | Sept 2012 - April 2018"
+  },
+  {
+    "objectID": "tutorials/workshop_visual_r.html#agenda",
+    "href": "tutorials/workshop_visual_r.html#agenda",
+    "title": "Visualizing Data with R",
+    "section": "Agenda",
+    "text": "Agenda\n\nggplot2 and elements of information visualization\nVisualizing tabular data\n\nInformation from one variable\nInformation from multiple variables"
+  },
+  {
+    "objectID": "tutorials/workshop_visual_r.html#graphic-systems-in-r",
+    "href": "tutorials/workshop_visual_r.html#graphic-systems-in-r",
+    "title": "Visualizing Data with R",
+    "section": "Graphic systems in R",
+    "text": "Graphic systems in R\n\n\nImperative programming\n\nStep-by-step instructions to control the exact construction of output\nHands on and more work\nbase, grid, tile\n\nDeclarative programming\n\nAllow software to apply a standard solution\nCustomize with a stylesheet\nggplot2"
+  },
+  {
+    "objectID": "tutorials/workshop_visual_r.html#what-is-ggplot2",
+    "href": "tutorials/workshop_visual_r.html#what-is-ggplot2",
+    "title": "Visualizing Data with R",
+    "section": "What is ggplot2",
+    "text": "What is ggplot2\n\n\nGraphics link data to dimensions of specific aesthetic objects, which are distinguishable by their geometric structure and modifiable in scale and style\nUsers supply the data and request a geometry, leaving others to the software\nLayered grammar of graphics\n\nLayers: components of a graph connected by +\nAesthetics: specified inside layers about how layers appear"
+  },
+  {
+    "objectID": "tutorials/workshop_visual_r.html#elements-of-information-visualization",
+    "href": "tutorials/workshop_visual_r.html#elements-of-information-visualization",
+    "title": "Visualizing Data with R",
+    "section": "Elements of information visualization",
+    "text": "Elements of information visualization\nObjects\n\n\nKnown as \\(geoms\\) in ggplot2 which specifies how the data are presented on the plot\nPoints or texts can represent location: geom_point(), geom_text(), geom_label()\nLines can represent numerical values and relationships: geom_line(), geom_smooth()\nPolygons can represent area or size: geom_rect(), geom_bar()"
+  },
+  {
+    "objectID": "tutorials/workshop_visual_r.html#elements-of-information-visualization-1",
+    "href": "tutorials/workshop_visual_r.html#elements-of-information-visualization-1",
+    "title": "Visualizing Data with R",
+    "section": "Elements of information visualization",
+    "text": "Elements of information visualization\nAesthetics\n\n\nColors: use default colors or brewer palettes ColorBrewer, R palettes and specify fill or color argument\nLine types: specify the linetype argument by an integer or a character (see reference here)\nDot types: specify the shape argument by an integer or a character (see reference here)\nStacked bar plots or histograms: specify the fill argument"
+  },
+  {
+    "objectID": "tutorials/workshop_visual_r.html#elements-of-information-visualization-2",
+    "href": "tutorials/workshop_visual_r.html#elements-of-information-visualization-2",
+    "title": "Visualizing Data with R",
+    "section": "Elements of information visualization",
+    "text": "Elements of information visualization\nComponents\n\nTitle\nLegend\nAnnotations\nLabels\nBackground"
+  },
+  {
+    "objectID": "tutorials/workshop_visual_r.html#steps-to-create-a-ggplot2-graphic",
+    "href": "tutorials/workshop_visual_r.html#steps-to-create-a-ggplot2-graphic",
+    "title": "Visualizing Data with R",
+    "section": "Steps to create a ggplot2 graphic",
+    "text": "Steps to create a ggplot2 graphic\n\n\nEstablish a mapping between data variables and plotting dimensions or elements\nApply the mapping to one or more standardized aesthetic elements\nDraw the resulting set of graphical objects"
+  },
+  {
+    "objectID": "tutorials/workshop_visual_r.html#an-illustration",
+    "href": "tutorials/workshop_visual_r.html#an-illustration",
+    "title": "Visualizing Data with R",
+    "section": "An illustration",
+    "text": "An illustration\nHow did GDP per capita change over time in Oceanian countries?\n\noptions(scipen = 999) # prevent scientific notation like e\nlibrary(gapminder) # load gapminder dataset from gapminder package\nlibrary(ggplot2) # load ggplot2 package for visualization\nlibrary(tidyverse) # load tidyverse package for data wrangling\nstr(gapminder) # examine gapminder dataset\n\ntibble [1,704 x 6] (S3: tbl_df/tbl/data.frame)\n $ country  : Factor w/ 142 levels \"Afghanistan\",..: 1 1 1 1 1 1 1 1 1 1 ...\n $ continent: Factor w/ 5 levels \"Africa\",\"Americas\",..: 3 3 3 3 3 3 3 3 3 3 ...\n $ year     : int [1:1704] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 ...\n $ lifeExp  : num [1:1704] 28.8 30.3 32 34 36.1 ...\n $ pop      : int [1:1704] 8425333 9240934 10267083 11537966 13079460 14880372 12881816 13867957 16317921 22227415 ...\n $ gdpPercap: num [1:1704] 779 821 853 836 740 ...\n\n\n\noceania <- gapminder %>%\n  filter(continent == \"Oceania\")"
+  },
+  {
+    "objectID": "tutorials/workshop_visual_r.html#an-illustration-1",
+    "href": "tutorials/workshop_visual_r.html#an-illustration-1",
+    "title": "Visualizing Data with R",
+    "section": "An illustration",
+    "text": "An illustration\nggplot(oceania, # input the data\n  aes(x = year, \n      y = gdpPercap, \n      color = country,\n      linetype = country)) + # establish aesthetic mappings\n  geom_line(size = 1) + # apply mapping to geom objects\n  ggtitle(\"Life expectancy in Oceanian countries over time\") + # add title\n  labs(x = \"Year\", y = \"GDP per capita\") + # add labels\n  theme_bw() # change background to white background with grey gridlines"
+  },
+  {
+    "objectID": "tutorials/workshop_visual_r.html#an-illustration-2",
+    "href": "tutorials/workshop_visual_r.html#an-illustration-2",
+    "title": "Visualizing Data with R",
+    "section": "An illustration",
+    "text": "An illustration\n\nPlotData\n\n\n\nggplot(oceania, # input the data\n  aes(x = year, \n      y = gdpPercap, \n      color = country,\n      linetype = country)) + # establish aesthetic mappings\n  geom_line(size = 1) + # apply mapping to geom objects\n  ggtitle(\"Life expectancy in Oceanian countries over time\") + # add title\n  labs(x = \"Year\", y = \"GDP per capita\") + # add labels\n  theme_bw() # change background to white background with grey gridlines\n\n\n\n\n\n\n\nknitr::kable(oceania)\n\n\n\n\ncountry\ncontinent\nyear\nlifeExp\npop\ngdpPercap\n\n\n\n\nAustralia\nOceania\n1952\n69.120\n8691212\n10039.60\n\n\nAustralia\nOceania\n1957\n70.330\n9712569\n10949.65\n\n\nAustralia\nOceania\n1962\n70.930\n10794968\n12217.23\n\n\nAustralia\nOceania\n1967\n71.100\n11872264\n14526.12\n\n\nAustralia\nOceania\n1972\n71.930\n13177000\n16788.63\n\n\nAustralia\nOceania\n1977\n73.490\n14074100\n18334.20\n\n\nAustralia\nOceania\n1982\n74.740\n15184200\n19477.01\n\n\nAustralia\nOceania\n1987\n76.320\n16257249\n21888.89\n\n\nAustralia\nOceania\n1992\n77.560\n17481977\n23424.77\n\n\nAustralia\nOceania\n1997\n78.830\n18565243\n26997.94\n\n\nAustralia\nOceania\n2002\n80.370\n19546792\n30687.75\n\n\nAustralia\nOceania\n2007\n81.235\n20434176\n34435.37\n\n\nNew Zealand\nOceania\n1952\n69.390\n1994794\n10556.58\n\n\nNew Zealand\nOceania\n1957\n70.260\n2229407\n12247.40\n\n\nNew Zealand\nOceania\n1962\n71.240\n2488550\n13175.68\n\n\nNew Zealand\nOceania\n1967\n71.520\n2728150\n14463.92\n\n\nNew Zealand\nOceania\n1972\n71.890\n2929100\n16046.04\n\n\nNew Zealand\nOceania\n1977\n72.220\n3164900\n16233.72\n\n\nNew Zealand\nOceania\n1982\n73.840\n3210650\n17632.41\n\n\nNew Zealand\nOceania\n1987\n74.320\n3317166\n19007.19\n\n\nNew Zealand\nOceania\n1992\n76.330\n3437674\n18363.32\n\n\nNew Zealand\nOceania\n1997\n77.550\n3676187\n21050.41\n\n\nNew Zealand\nOceania\n2002\n79.110\n3908037\n23189.80\n\n\nNew Zealand\nOceania\n2007\n80.204\n4115771\n25185.01"
+  },
+  {
+    "objectID": "tutorials/workshop_visual_r.html#information-from-one-variable",
+    "href": "tutorials/workshop_visual_r.html#information-from-one-variable",
+    "title": "Visualizing Data with R",
+    "section": "Information from one variable",
+    "text": "Information from one variable\n\nHistogramsDensity plotsBoxplotsBarplotsLollipop charts\n\n\n\n# show frequencies of a variable\ngapminder %>%\n  filter(year == 1952) %>%\n  ggplot(aes(x = lifeExp)) + \n  geom_histogram(binwidth = 2) +\n  theme_light() +\n  labs(x = \"Life Expectancy\", y = \"Count\", title = \"Life Expectancy in 1952\")\n\n\n\n\n\n\n\n# show frequencies of a variable\ngapminder %>%\n  filter(year == 1952) %>%\n  ggplot(aes(x = lifeExp)) + \n  geom_density(size = 1.5, alpha = 0.2, fill = \"red\") +\n  theme_light() +\n  labs(x = \"Life Expectancy\", y = \"Count\", title = \"Life Expectancy in 1952\")\n\n\n\n\n\n\n\n# show distribution of a variable (median, 1st, 3rd quantiles, outliers)\ngapminder %>% filter(year == 1952, continent==\"Europe\") %>%\n  ggplot(aes(y = lifeExp)) + \n  geom_boxplot(fill = \"grey\", color = \"blue\", outlier.shape = 1) + # adjust aesthetics\n  theme_light() +\n  labs(title = \"Life Expectancy in 1952 (Europe)\", \n       y = \"Life Expectancy\", \n       x = \"\") \n\n\n\n\n\n\n\n# show distribution of a discrete variable \nggplot(gapminder, \n       aes(x = continent,\n           fill = continent)) + # differentiate the filled colors\n  geom_bar() + \n  theme_classic() + \n  labs(y = \"Number of countries\", x = \"Continent\")\n\n\n\n\n\n\n\namericas <- gapminder %>% \n  filter(year == 2007 & continent == \"Americas\") %>% \n  arrange(gdpPercap) %>% \n  mutate(country = factor(country, levels = country))\n\nggplot(americas, aes(x = gdpPercap, y = country)) +\n  geom_segment(aes(x = 0, xend = gdpPercap, \n                   y = country, yend = country), # which is why we need to make country a factor\n               color = \"black\") + \n  geom_point(colour = \"blue\", size = 2, alpha = 0.8) +\n  scale_x_continuous(expand = c(0, 0), \n                     limits = c(0, max(americas$gdpPercap) * 1.1),\n                     labels = scales::dollar) + \n  theme_bw()"
+  },
+  {
+    "objectID": "tutorials/workshop_visual_r.html#information-from-multiple-variables",
+    "href": "tutorials/workshop_visual_r.html#information-from-multiple-variables",
+    "title": "Visualizing Data with R",
+    "section": "Information from multiple variables",
+    "text": "Information from multiple variables\n\nMultiplesLayered density plotsGrouped barplots\n\n\n\ngapminder %>%\n  ggplot(aes(x = lifeExp)) + \n  geom_histogram() + \n  facet_wrap(~ continent, ncol = 3) +\n  labs(title = \"Life expectancy distribution by continent\") +\n  theme_minimal()\n\n\n\n\n\n\n\ngapminder %>%\n  filter(year == 2007 & continent != \"Oceania\") %>%\n  ggplot(aes(x = lifeExp)) + \n  geom_density(aes(fill = continent), size = 0.1, alpha = 0.5) + \n  scale_fill_brewer(palette = \"Set1\") +\n  labs(title = \"Life expectancy distribution in 2007\") +\n  theme_minimal()\n\n\n\n\n\n\n\ngapminder %>% \n  filter(year > 1990) %>%\n  group_by(year, continent) %>%\n  summarise(totalpop = sum(as.double(pop))) %>%\n  ggplot(aes(x = year, y = totalpop, fill = continent)) + \n  geom_col(position = \"dodge\", size = 0.2, alpha = 0.8) + # dodge overlapping objects side by side \n  scale_x_continuous(breaks = seq(1992, 2007, 5), expand = c(0, 0)) +\n  scale_y_continuous(labels = scales::comma, expand = c(0, 0)) +\n  scale_fill_brewer(palette = \"Set1\") +\n  theme_bw()"
+  },
+  {
+    "objectID": "tutorials/workshop_visual_r.html#practices",
+    "href": "tutorials/workshop_visual_r.html#practices",
+    "title": "Visualizing Data with R",
+    "section": "Practices",
+    "text": "Practices\nExercise 1: Make a scatter plot with average GDP per capita across all countries on the y-axis and year on the x-axis.\nExercise 2: Break down the plot from exercise 1 by continent, using colors to distinguish the points and transforming mean GDP per capita on the log scale.\nExercise 3: Make a collection of bar plots faceted by year that compare mean GDP per capita across countries in a given year. Orient the plots to make it easier to read the continent labels.\nExercise 4: What is the relationship between life expectancy and GDP per capita in 2007 by non-Oceanian continents?"
+  },
+  {
+    "objectID": "tutorials/workshop_visual_r.html#solutions",
+    "href": "tutorials/workshop_visual_r.html#solutions",
+    "title": "Visualizing Data with R",
+    "section": "Solutions",
+    "text": "Solutions\n\nSolution 1Solution 2Solution 3Solution 4\n\n\n\ngapminder %>%\n  group_by(year) %>%\n  summarize(meanGDPpc = mean(gdpPercap)) %>%\n  ggplot(aes(x = year, y = meanGDPpc)) +\n  geom_point()\n\n\n\n\n\n\n\ngapminder %>%\n  group_by(year, continent) %>% # aggregate the information by year by continent\n  summarize(meanGDPpc = mean(gdpPercap)) %>%\n  ggplot(aes(x = year, y = meanGDPpc, color = continent)) +\n  geom_point() +\n  scale_y_log10() # apply the log scale to GDP per capita\n\n\n\n\n\n\n\ngapminder %>%\n  group_by(year, continent) %>%\n  summarize(meanGDPpc = mean(gdpPercap)) %>%\n  ggplot(aes(x = continent, y = meanGDPpc)) +\n  geom_col() +\n  facet_wrap(~ year) +\n  coord_flip() # flip the coordinates so that the continent names are visible\n\n\n\n\n\n\n\ngapminder %>%\n  filter(year == 2007 & continent != \"Oceania\") %>% \n  ggplot(aes(x = log(gdpPercap),\n             y = lifeExp,\n             color = continent)) +\n  geom_point(alpha = 0.5) +\n  geom_smooth(method = \"lm\") + \n  facet_wrap(~ continent)"
+  },
+  {
+    "objectID": "tutorials/workshop_visual_r.html#bonus-animations",
+    "href": "tutorials/workshop_visual_r.html#bonus-animations",
+    "title": "Visualizing Data with R",
+    "section": "Bonus: animations!",
+    "text": "Bonus: animations!\nCheck out plotly package\n\nlibrary(plotly)\nanimate_gapminder <- ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +\n  geom_point(aes(size = pop, ids = country, frame = year)) +\n  geom_smooth(se = FALSE, method = \"lm\") +\n  scale_x_log10() + \n  theme_bw() + \n  labs(x = \"GDP per capita\", y = \"Life expectancy\") +\n  theme(legend.position = \"none\") # remove legend\n\nggplotly(animate_gapminder) %>% \n  highlight(\"plotly_hover\") %>%\n  animation_slider(\n    currentvalue = list(prefix = \"Year \", font = list(color=\"black\"))\n  )\n\n\n\n\n\n\n\nCSSCR Workshop"
+  }
+]
