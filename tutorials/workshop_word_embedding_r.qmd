@@ -28,16 +28,12 @@ execute:
 
 ## Why using word embeddings?
 
-
-- The corpus comes from [Congressional Record](https://www.congress.gov/congressional-record) which records all remarks made by senators and representatives on the floor of the US Congress
-- Use congressional record for the 114th Congress as an example
-  - Two variables: speech, speech_id
-  - 67,557 observations
-
-
+-   The corpus comes from [Congressional Record](https://www.congress.gov/congressional-record) which records all remarks made by senators and representatives on the floor of the US Congress
+-   Use congressional record for the 114th Congress as an example
+    -   Two variables: speech, speech_id
+    -   67,557 observations
 
 ## Represent the text using BOW {auto-animate="true"}
-
 
 ``` r
 library(tidytext)
@@ -47,9 +43,7 @@ library(tidyverse)
 data <- readRDS("data114.RDS") 
 ```
 
-
 ## Represent the text using BOW {auto-animate="true"}
-
 
 ``` r
 library(tidytext)
@@ -62,9 +56,7 @@ data <- readRDS("data114.RDS") %>%
   mutate(stem = wordStem(word))
 ```
 
-
 ## Represent the text using BOW {auto-animate="true"}
-
 
 ``` r
 library(tidytext)
@@ -80,18 +72,15 @@ data <- readRDS("data114.RDS") %>%
   cast_dfm(speech_id, stem, tf_idf)
 ```
 
-
 ## What do we find?
 
 ![](images/sparse-matrix.JPG)
 
 BOW representation is
 
-- extremely sparse (99.92% sparse)
+-   extremely sparse (99.92% sparse)
 
-- high-dimensional (98,235 features)
-
-
+-   high-dimensional (98,235 features)
 
 ## Represent the text using word embeddings
 
@@ -103,31 +92,28 @@ BOW representation is
 
 Why do we use them?
 
-- Understand language use
-  - across time
-  - across groups
-  - stereotype and bias
-
-- Feed into downstream NLP implementations
-
-
+-   Understand language use
+    -   across time
+    -   across groups
+    -   stereotype and bias
+-   Feed into downstream NLP implementations
 
 ## How to find word embeddings?
 
-- [Singular Vector Decomposition (SVD)](https://twitter.com/WomenInStat/status/1285610321747611653)
+-   [Singular Vector Decomposition (SVD)](https://twitter.com/WomenInStat/status/1285610321747611653)
 
-- Neural network-based techniques 
-  - [Word2Vec](https://arxiv.org/abs/1301.3781)
-  - [GloVe](https://nlp.stanford.edu/projects/glove/)
-  - language models with transformers such as [BERT](https://arxiv.org/abs/1810.04805)
+-   Neural network-based techniques
 
+    -   [Word2Vec](https://arxiv.org/abs/1301.3781)
+    -   [GloVe](https://nlp.stanford.edu/projects/glove/)
+    -   language models with transformers such as [BERT](https://arxiv.org/abs/1810.04805)
 
 ## Implementation of SVD {.smaller .scrollable transition="slide"}
 
 ::: panel-tabset
 #### skipgram probabilities
 
-```{.r code-line-numbers="1-7|9-22|1-22"} 
+``` {.r code-line-numbers="1-7|9-22|1-22"}
 nested_data <- readRDS("data114.RDS") %>%
   unnest_tokens(word, speech) %>%
   anti_join(get_stopwords()) %>%
@@ -152,10 +138,9 @@ slide_windows <- function(tbl, window_size) {
 }
 ```
 
-
 #### pointwise mutual information (PMI)
 
-```{.r code-line-numbers="1-3|5-9|1-19"} 
+``` {.r code-line-numbers="1-3|5-9|1-19"}
 library(widyr) 
 library(furrr)
 plan(multisession)
@@ -168,16 +153,15 @@ pmi <- nested_data %>%
 ```
 :::
 
-
 ## Explore word vectors
 
-The most similar words to "tax": 
+The most similar words to "tax":
 
 . . .
 
 ::: columns
 ::: {.column width="60%"}
-```  {.r code-line-numbers="1-2|4-10|12-13|1-13"} 
+``` {.r code-line-numbers="1-2|4-10|12-13|1-13"}
 word_vectors <- pmi %>%
   widely_svd(item1, item2, pmi, nv = 100, maxit = 1000)
   
@@ -192,11 +176,10 @@ nearest_neighbors <- function(df, token){
 word_vectors %>%
   nearest_neighbors("tax")
 ```
-::: 
+:::
+
 ::: {.column width="40%"}
-
 ![](images/similar-words-tax.JPG)
-
 :::
 :::
 
@@ -208,7 +191,7 @@ The first 6 principal components with top 10 contributing words:
 
 ::: columns
 ::: {.column width="60%"}
-```  {.r code-line-numbers="1-2|4-10|12-13|15-27|1-27"} 
+``` {.r code-line-numbers="1-2|4-10|12-13|15-27|1-27"}
 word_vectors %>%
   filter(dimension <= 6) %>%
   group_by(dimension) %>%
@@ -226,14 +209,13 @@ word_vectors %>%
 :::
 
 ::: {.column width="40%"}
-
 ![](images/dimension-words.png)
 :::
 :::
 
-## Explore word vectors 
+## Explore word vectors
 
-Do politicians discuss "tax" in different ways? 
+Do politicians discuss "tax" in different ways?
 
 . . .
 
@@ -253,20 +235,16 @@ Republicans
 
 ## Implementation of GloVe {.smaller .scrollable transition="slide"}
 
-
-::: panel-tabset
-#### skipgram probabilities
-
-
+::: panel-tabset \#### skipgram probabilities
 
 ## What else should be aware of?
 
-- Embedding alignment 
+-   Embedding alignment
 
-- Boostrapping 
-
+-   Boostrapping
 
 ## References
+
 [Chris Moody's tutorial on building word embeddings from scratch](https://multithreaded.stitchfix.com/blog/2017/10/18/stop-using-word2vec/)
 
 [Dmitriy Selivanov's tutorial on GloVe Word Embeddings](http://text2vec.org/glove.html)

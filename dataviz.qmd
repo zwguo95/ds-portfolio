@@ -12,6 +12,4 @@ page-layout: full
 title-block-banner: true
 ---
 
-
-This webpage hosts my data visualizations. 
-
+This webpage hosts my data visualizations.
