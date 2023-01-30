@@ -145,5 +145,117 @@
     "title": "Visualizing Data with R",
     "section": "Bonus: animations!",
     "text": "Bonus: animations!\nCheck out plotly package\n\nlibrary(plotly)\nanimate_gapminder <- ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +\n  geom_point(aes(size = pop, ids = country, frame = year)) +\n  geom_smooth(se = FALSE, method = \"lm\") +\n  scale_x_log10() + \n  theme_bw() + \n  labs(x = \"GDP per capita\", y = \"Life expectancy\") +\n  theme(legend.position = \"none\") # remove legend\n\nggplotly(animate_gapminder) %>% \n  highlight(\"plotly_hover\") %>%\n  animation_slider(\n    currentvalue = list(prefix = \"Year \", font = list(color=\"black\"))\n  )\n\n\n\n\n\n\n\nCSSCR Workshop"
+  },
+  {
+    "objectID": "dataviz.html",
+    "href": "dataviz.html",
+    "title": "Data visualizations",
+    "section": "",
+    "text": "This webpage hosts my data visualizations.\n\n\n\n\n\n\n\n\n  \n\n\n\n\nVisualizing Public Support for Government Surveillance\n\n\n\n\n\n\n\ncode\n\n\nanalysis\n\n\nvisualization\n\n\n\n\n\n\n\n\n\n\n\nDec 20, 2022\n\n\nZhaowen Guo\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "tutorials/workshop_word_embedding_r.html#why-using-word-embeddings",
+    "href": "tutorials/workshop_word_embedding_r.html#why-using-word-embeddings",
+    "title": "Word Embeddings",
+    "section": "Why using word embeddings?",
+    "text": "Why using word embeddings?\n\nThe corpus comes from Congressional Record which records all remarks made by senators and representatives on the floor of the US Congress\nUse congressional record for the 114th Congress as an example\n\nTwo variables: speech, speech_id\n67,557 observations"
+  },
+  {
+    "objectID": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-bow",
+    "href": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-bow",
+    "title": "Word Embeddings",
+    "section": "Represent the text using BOW",
+    "text": "Represent the text using BOW\nlibrary(tidytext)\nlibrary(SnowballC)\nlibrary(tidyverse)\n\ndata <- readRDS(\"data114.RDS\")"
+  },
+  {
+    "objectID": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-bow-1",
+    "href": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-bow-1",
+    "title": "Word Embeddings",
+    "section": "Represent the text using BOW",
+    "text": "Represent the text using BOW\nlibrary(tidytext)\nlibrary(SnowballC)\nlibrary(tidyverse)\n\ndata <- readRDS(\"data114.RDS\") %>%\n  unnest_tokens(word, speech) %>%\n  anti_join(get_stopwords()) %>%\n  mutate(stem = wordStem(word))"
+  },
+  {
+    "objectID": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-bow-2",
+    "href": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-bow-2",
+    "title": "Word Embeddings",
+    "section": "Represent the text using BOW",
+    "text": "Represent the text using BOW\nlibrary(tidytext)\nlibrary(SnowballC)\nlibrary(tidyverse)\n\ndata <- readRDS(\"data114.RDS\") %>%\n  unnest_tokens(word, speech) %>%\n  anti_join(get_stopwords()) %>%\n  mutate(stem = wordStem(word)) %>%\n  count(speech_id, stem) %>%\n  bind_tf_idf(stem, speech_id, n) %>%\n  cast_dfm(speech_id, stem, tf_idf)"
+  },
+  {
+    "objectID": "tutorials/workshop_word_embedding_r.html#what-do-we-find",
+    "href": "tutorials/workshop_word_embedding_r.html#what-do-we-find",
+    "title": "Word Embeddings",
+    "section": "What do we find?",
+    "text": "What do we find?\n\nBOW representation is\n\nextremely sparse (99.92% sparse)\nhigh-dimensional (98,235 features)"
+  },
+  {
+    "objectID": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-word-embeddings",
+    "href": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-word-embeddings",
+    "title": "Word Embeddings",
+    "section": "Represent the text using word embeddings",
+    "text": "Represent the text using word embeddings\n\nSource: Rodriguez & Spirling, 2022"
+  },
+  {
+    "objectID": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-word-embeddings-1",
+    "href": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-word-embeddings-1",
+    "title": "Word Embeddings",
+    "section": "Represent the text using word embeddings",
+    "text": "Represent the text using word embeddings\nWhy do we use them?\n\nUnderstand language use\n\nacross time\nacross groups\nstereotype and bias\n\nFeed into downstream NLP implementations"
+  },
+  {
+    "objectID": "tutorials/workshop_word_embedding_r.html#how-to-find-word-embeddings",
+    "href": "tutorials/workshop_word_embedding_r.html#how-to-find-word-embeddings",
+    "title": "Word Embeddings",
+    "section": "How to find word embeddings?",
+    "text": "How to find word embeddings?\n\nSingular Vector Decomposition (SVD)\nNeural network-based techniques\n\nWord2Vec\nGloVe\nlanguage models with transformers such as BERT"
+  },
+  {
+    "objectID": "tutorials/workshop_word_embedding_r.html#implementation-of-svd",
+    "href": "tutorials/workshop_word_embedding_r.html#implementation-of-svd",
+    "title": "Word Embeddings",
+    "section": "Implementation of SVD",
+    "text": "Implementation of SVD\n\nskipgram probabilitiespointwise mutual information (PMI)\n\n\nnested_data <- readRDS(\"data114.RDS\") %>%\n  unnest_tokens(word, speech) %>%\n  anti_join(get_stopwords()) %>%\n  group_by(word) %>%\n  filter(n() >= 50) %>%\n  ungroup() %>%\n  nest(words = c(word))\n  \nslide_windows <- function(tbl, window_size) {\n  skipgrams <- slider::slide(\n    tbl, ~.x, .after = window_size - 1, .step = 1, .complete = T\n  )\n  safe_mutate <- safely(mutate)\n  \n  out <- map2(skipgrams, 1:length(skipgrams), ~safe_mutate(.x, window_id = .y))\n  \n  out %>%\n    transpose() %>%\n    pluck(\"result\") %>%\n    compact() %>%\n    bind_rows()\n}\n\n\nlibrary(widyr) \nlibrary(furrr)\nplan(multisession)\n\npmi <- nested_data %>%\n  mutate(words = future_map(words, slide_windows, 4)) %>%\n  unnest(words) %>%\n  unite(window_id, speech_id, window_id) %>%\n  pairwise_pmi(word, window_id)"
+  },
+  {
+    "objectID": "tutorials/workshop_word_embedding_r.html#explore-word-vectors",
+    "href": "tutorials/workshop_word_embedding_r.html#explore-word-vectors",
+    "title": "Word Embeddings",
+    "section": "Explore word vectors",
+    "text": "Explore word vectors\nThe most similar words to “tax”:\n\n\n\nword_vectors <- pmi %>%\n  widely_svd(item1, item2, pmi, nv = 100, maxit = 1000)\n  \nnearest_neighbors <- function(df, token){\n  df %>% \n    widely(~. %*% (.[token, ]),\n           sort = T,\n           maximum_size = NULL)(item1, dimension, value) %>%\n    select(-item2)\n}\n\nword_vectors %>%\n  nearest_neighbors(\"tax\")"
+  },
+  {
+    "objectID": "tutorials/workshop_word_embedding_r.html#explore-word-vectors-1",
+    "href": "tutorials/workshop_word_embedding_r.html#explore-word-vectors-1",
+    "title": "Word Embeddings",
+    "section": "Explore word vectors",
+    "text": "Explore word vectors\nThe first 6 principal components with top 10 contributing words:\n\n\n\nword_vectors %>%\n  filter(dimension <= 6) %>%\n  group_by(dimension) %>%\n  top_n(10, abs(value)) %>%\n  ungroup() %>%\n  mutate(dimension = as.factor(dimension),\n         item1 = reorder_within(item1, value, dimension)) %>%\n  ggplot(aes(item1, value, fill = dimension)) +\n  geom_col(show.legend = F) +\n  facet_wrap(~ dimension, scales = \"free_y\", ncol = 3) +\n  coord_flip() +\n  scale_x_reordered() + \n  theme_bw()"
+  },
+  {
+    "objectID": "tutorials/workshop_word_embedding_r.html#explore-word-vectors-2",
+    "href": "tutorials/workshop_word_embedding_r.html#explore-word-vectors-2",
+    "title": "Word Embeddings",
+    "section": "Explore word vectors",
+    "text": "Explore word vectors\nDo politicians discuss “tax” in different ways?\n\n\n\nDemocrats\n\n\nRepublicans"
+  },
+  {
+    "objectID": "tutorials/workshop_word_embedding_r.html#implementation-of-glove",
+    "href": "tutorials/workshop_word_embedding_r.html#implementation-of-glove",
+    "title": "Word Embeddings",
+    "section": "Implementation of GloVe",
+    "text": "Implementation of GloVe\n::: panel-tabset #### skipgram probabilities"
+  },
+  {
+    "objectID": "tutorials/workshop_word_embedding_r.html#what-else-should-be-aware-of",
+    "href": "tutorials/workshop_word_embedding_r.html#what-else-should-be-aware-of",
+    "title": "Word Embeddings",
+    "section": "What else should be aware of?",
+    "text": "What else should be aware of?\n\nEmbedding alignment\nBoostrapping"
+  },
+  {
+    "objectID": "tutorials/workshop_word_embedding_r.html#references",
+    "href": "tutorials/workshop_word_embedding_r.html#references",
+    "title": "Word Embeddings",
+    "section": "References",
+    "text": "References\nChris Moody’s tutorial on building word embeddings from scratch\nDmitriy Selivanov’s tutorial on GloVe Word Embeddings\nJulia Silge’s blog post on word vectors with tidy data principles\nChris Bail’s tutorial on word embedings\nHvitfeldt and Silge, 2022. Supervised Machine Learning for Text Analysis in R"
   }
 ]
