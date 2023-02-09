@@ -149,9 +149,9 @@
   {
     "objectID": "dataviz.html",
     "href": "dataviz.html",
-    "title": "Data visualization",
+    "title": "Data Visualization",
     "section": "",
-    "text": "This webpage hosts my data visualizations.\n\n\n\n\n\n\n\n\n  \n\n\n\n\nVisualizing Public Support for Government Surveillance\n\n\n\n\n\n\n\ncode\n\n\nanalysis\n\n\nvisualization\n\n\n\n\n\n\n\n\n\n\n\nDec 20, 2022\n\n\nZhaowen Guo\n\n\n\n\n\n\nNo matching items"
+    "text": "Trees for the Rich? Visualizing Tree Equity Gap\n\n\n\n\n\n\n\ncode\n\n\nanalysis\n\n\nvisualization\n\n\n\n\n\n\n\n\n\n\n\nDec 20, 2022\n\n\nZhaowen Guo\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "tutorials/workshop_word_embedding_r.html#why-using-word-embeddings",
@@ -257,5 +257,12 @@
     "title": "Word Embeddings",
     "section": "References",
     "text": "References\nChris Moody’s tutorial on building word embeddings from scratch\nDmitriy Selivanov’s tutorial on GloVe Word Embeddings\nJulia Silge’s blog post on word vectors with tidy data principles\nChris Bail’s tutorial on word embedings\nHvitfeldt and Silge, 2022. Supervised Machine Learning for Text Analysis in R"
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Visualizing Public Support for Government Surveillance\n\n\n\n\n\n\n\ncode\n\n\nanalysis\n\n\nvisualization\n\n\n\n\n\n\n\n\n\n\n\nDec 20, 2022\n\n\nZhaowen Guo\n\n\n\n\n\n\nNo matching items"
   }
 ]
