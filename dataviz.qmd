@@ -1,5 +1,5 @@
 ---
-title: "Data visualizations"
+title: "Data visualization"
 listing:
   contents: dataviz
   sort: "date desc"

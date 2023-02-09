@@ -15,12 +15,16 @@ website:
         text: Home
       - href: projects.qmd
         text: Projects
+      - href: statistics.qmd
+        text: Statistics
       - href: dataviz.qmd
         text: Data Visualization
       - text: Tutorials
         menu: 
-          - tutorials/workshop_visual_r.qmd
-          - tutorials/workshop_word_embedding_r.qmd
+          - text: Word Embeddings with R
+            href: tutorials/word_embeddings.html
+          - text: Visualizing Data with R
+            href: tutorials/data_visualization.html
     
     right:
       - text: LinkedIn
@@ -33,13 +37,14 @@ website:
         url: "zwguo@uw.edu"
         icon: envelope
       - text: Resume
-        url: "resume.pdf"
+        url: "resume_guo.pdf"
         icon: file-earmark-person
 
 format:
   html:
     theme: sandstone
     css: styles.css
+    page-layout: article
     citations-hover: true
     code-link: true
     code-fold: show
