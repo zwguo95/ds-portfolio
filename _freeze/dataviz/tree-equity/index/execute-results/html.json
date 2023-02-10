@@ -1,0 +1,14 @@
+{
+  "hash": "568655e5f1ef905a88b51bf97a06ea5a",
+  "result": {
+    "markdown": "---\ntitle: \"Trees for the Rich? Visualizing Tree Equity Gap\"\ndate: 12/20/2022\nauthor:\n  - name: Zhaowen Guo\n    url: https://www.linkedin.com/in/zhaowen-guo-20535312a/\ntitle-block-banner: true\nformat:\n  html:\n    theme: flatly\n    code-fold: false\n    code-tools: true\n    toc: false\n    number-sections: true\nlink-citations: yes\ncategories: [code, analysis, visualization]\nimage: \"tree_equity.png\"\n---\n\n\nUrban green spaces, such as parks, gardens, and forests, provide numerous benefits in creating livable cities. They help improve air and water quality, reduce heat islands, and increase physical activity and mental health. However, not all communities have equal access to these benefits, leading to the concept of \"tree equity.\"\n\nTree equity refers to the fair distribution of urban green spaces and trees, regardless of a community's socio-economic status, race, or ethnicity. [American Forests](https://www.americanforests.org/), a non-profit organization dedicated to protecting and restoring forests, has been working to measure and improve tree equity across the United States. \n\nIn this blog post, I will show you how to visualize tree equity score data to tell a compelling story. \n\n## Data Collection\n\nTree equity score data are currently hosted on this [webpage](https://treeequityscore.org/data/), where users need to manually download data for each state. \n\n```\n::: {.cell}\n\n:::\n\n```\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

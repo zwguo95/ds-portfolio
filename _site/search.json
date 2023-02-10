@@ -151,7 +151,7 @@
     "href": "dataviz.html",
     "title": "Data Visualization",
     "section": "",
-    "text": "Trees for the Rich? Visualizing Tree Equity Gap\n\n\n\n\n\n\n\ncode\n\n\nanalysis\n\n\nvisualization\n\n\n\n\n\n\n\n\n\n\n\nDec 20, 2022\n\n\nZhaowen Guo\n\n\n\n\n\n\nNo matching items"
+    "text": "Green Space for Everyone? Visualizing Tree Equity Gap\n\n\n\n\n\n\n\ncode\n\n\nanalysis\n\n\nvisualization\n\n\n\n\n\n\n\n\n\n\n\nDec 20, 2022\n\n\nZhaowen Guo\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "tutorials/workshop_word_embedding_r.html#why-using-word-embeddings",
@@ -264,5 +264,40 @@
     "title": "Projects",
     "section": "",
     "text": "Visualizing Public Support for Government Surveillance\n\n\n\n\n\n\n\ncode\n\n\nanalysis\n\n\nvisualization\n\n\n\n\n\n\n\n\n\n\n\nDec 20, 2022\n\n\nZhaowen Guo\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "dataviz/tree-equity/index.html",
+    "href": "dataviz/tree-equity/index.html",
+    "title": "Green Space for Everyone? Visualizing Tree Equity Gap",
+    "section": "",
+    "text": "Urban green spaces, such as parks, gardens, and forests, provide numerous benefits in creating livable cities. They help improve air and water quality, reduce heat islands, and increase physical activity and mental health. However, not all communities have equal access to these benefits, leading to the concept of “tree equity.”\nTree equity refers to the fair distribution of urban green spaces and trees, regardless of a community’s socio-economic status, race, or ethnicity. American Forests, a non-profit organization dedicated to protecting and restoring forests, has been working to measure and improve tree equity across the United States.\nIn this blog post, I will show you how to visualize tree equity score data to tell a compelling story. All code can be found here."
+  },
+  {
+    "objectID": "dataviz/tree-equity/index.html#data-collection",
+    "href": "dataviz/tree-equity/index.html#data-collection",
+    "title": "Green Space for Everyone? Visualizing Tree Equity Gap",
+    "section": "1 Data Collection",
+    "text": "1 Data Collection\nTree equity score data are currently hosted on this webpage, where users are required to manually download zip files containing geospatial data for each state. Furthermore, each shapefile includes not only tree equity scores, but also several other variables. Thus, we need to find an efficient method to automate the process of downloading files with minimal manual intervention and extract the desired variable of interest - the tree equity score - from the shapefiles.\nUpon checking the web addresses of several files, a pattern has become apparent: each URL shares a similar structure in its file name, while also possessing a unique postal code. This discovery suggests that it is possible to create a script that can automatically scrape the files. Fortunately, unzip() in base R and sf package offer a convenient solution for unzipping files and reading shapefiles, and we can easily write a function to automate this process.\n```{r}\nlibrary(sf)\nlibrary(tidyverse)\n\nread_shape_URL <- function(URL){\n  cur_tempfile <- tempfile()\n  download.file(url = URL, destfile = cur_tempfile)\n  out_directory <- tempfile()\n  unzip(cur_tempfile, exdir = out_directory)\n  \n  read_sf(dsn = out_directory)\n}\n```\nThe question that I am interested in is: which state has the greatest disparity in tree equity score across counties, as measured by the difference between the maximum and minimum tree equity scores within each state. Also, it is important to note that data availability may vary as not all states have available tree equity score data. To verify the existence of a URL, we can use Rcurl package and write a for-loop to produce the key variable of interest, the tree equity gap.\n```{r}\nstates <- read.csv(\"state-names.csv\") # downloaded https://worldpopulationreview.com/states/state-abbreviations\n\nstate_names <- rep(NA, 51)\ntes_gaps <- rep(NA, 51)\nfor (i in 1:nrow(states)){\n  state <- states$lower_code[i]\n  state_names[i] <- state\n  print(state)\n  URL <- paste0(\"https://national-tes-data-share.s3.amazonaws.com/national_tes_share/\", state, \".zip.zip\")\n  if (RCurl::url.exists(URL) == T) {\n    map <- read_shape_URL(paste0(\"https://national-tes-data-share.s3.amazonaws.com/national_tes_share/\", state, \".zip.zip\"))\n    tes_gap <- max(map$tes) - min(map$tes)\n    tes_gaps[i] <- tes_gap\n  } else {\n    tes_gaps[i] <- NA\n  }\n}\n\ndata <- data.frame(lower_code = state_names,\n                   gap = tes_gaps) %>%\n  cbind(states[1])\n```"
+  },
+  {
+    "objectID": "dataviz/tree-equity/index.html#data-cleaning",
+    "href": "dataviz/tree-equity/index.html#data-cleaning",
+    "title": "Green Space for Everyone? Visualizing Tree Equity Gap",
+    "section": "2 Data Cleaning",
+    "text": "2 Data Cleaning\nGreat, we now have our data! The next step is to clean and prepare it for visualization. With the consideration of working with spatial data across multiple regions and the fact that the tree equity gap is a continuous variable, hexbin maps become a desirable choice. Hexbin maps divide the map area into small hexagonal bins and consolidate the data points within them, presenting a clear and compact depiction of the vast amount of data.\n```{r}\nlibrary(geojsonio)\nlibrary(rgeos)\n\n# create a base hexbin map of US\nhex_states <- geojson_read(\"us_states_hexgrid.geojson\", what = \"sp\") \n\n# extract state names\nhex_states@data <- hex_states@data %>%\n  mutate(google_name = str_replace(google_name, \" \\\\(United States\\\\)\", \"\"))\n\n# create a data frame for hexbin map\nhex_states_fortify <- broom::tidy(hex_states, region = \"google_name\")\n\n# match state names\ndata_map <- hex_states_fortify %>%\n  right_join(data, by = c(\"id\" = \"state\")) %>%\n  mutate(id = state.abb[match(id, state.name)])\ndata_map$id[data_map$group == \"District of Columbia.1\"] <- \"DC\"\n\nlabels <- cbind.data.frame(data.frame(gCentroid(hex_states, byid = T),\n                                      id = hex_states@data$iso3166_2))\ndata_map <- data_map %>%\n  right_join(labels, by = \"id\") %>%\n  filter(is.na(gap) == F)\n```"
+  },
+  {
+    "objectID": "dataviz/tree-equity/index.html#data-visualization",
+    "href": "dataviz/tree-equity/index.html#data-visualization",
+    "title": "Green Space for Everyone? Visualizing Tree Equity Gap",
+    "section": "3 Data Visualization",
+    "text": "3 Data Visualization\nWe now have our spatial polygon data frame ready and can visualize it! To make it visually appealing, I pick a custom Google font “Pragati Narrow” for the graph and a stunning color palette from the scico package. One trick is to adjust text colors that contrast with the background color. For instance, in the case of Washington D.C., which has the narrowest gap in tree equity scores, the bin’s background can be made lighter. However, if white text is still used as in other areas, the label may not be easily visible. To mitigate this, we can establish a threshold for switching the text color as necessary.\n```{r}\nlibrary(scico)\nlibrary(showtext)\ntheme_set(theme_minimal(base_family = \"Pragati Narrow\"))\n\ntheme_update(\n  # legend\n  legend.title = element_blank(),\n  legend.position = 'top',\n  legend.direction = 'horizontal',\n  legend.key.width = unit(1.5, \"cm\"),\n  legend.text = element_text(color = \"black\",  size=30),\n  \n  # axis\n  axis.text.x = element_blank(),\n  axis.text.y = element_blank(),\n  \n  # titles\n  panel.grid = element_blank(),\n  plot.margin = margin(15, 30, 15, 30),\n  plot.background = element_rect(fill = \"#f5f5f2\", color = NA), \n  panel.background = element_rect(fill = \"#f5f5f2\", color = NA), \n  legend.title.align=1,\n  plot.title = element_text(\n    color = \"black\", \n    size = 70, \n    face = \"bold\",\n    margin = margin(t = 15),\n    hjust = 0.5\n  ),\n  plot.subtitle = element_text(\n    color = \"grey10\", \n    size = 45,\n    lineheight = 3,\n    margin = margin(t = 5),\n    hjust = 0.5\n  ),\n  plot.title.position = \"plot\",\n  plot.caption.position = \"plot\",\n  plot.caption = element_text(\n    color = \"grey20\", \n    size = 20,\n    lineheight = 0.5, \n    hjust = 0.5,\n    margin = margin(t = 40))\n)\n\ndata_map %>% \n  ggplot () +\n  geom_polygon(aes(x = long, y = lat, group = group, fill = gap), linewidth = 0.5) +\n  scale_fill_scico(palette = \"lajolla\", direction = 1) + \n  geom_text(aes(x=x, y=y, label=id, color = gap < 60), size = 8, alpha = 0.5, \n             show.legend = F) +\n  scale_color_manual(values = c(\"white\", \"black\")) +\n  coord_map(clip = \"off\") +\n  labs(title = \"TREE EQUITY GAP\",\n       subtitle = \"County-level disparities in tree equity scores within each state\",\n       x = \"\", y = \"\",\n       caption= \n         str_wrap(\n       \"Data comes from the Green Space Data Challenge, \n       collected and shared by the American Forests. \n       Tree Equity Score (TES) computes how much tree canopy and surface temperature align with income, \n       employment, race, age and health factors in the U.S | Visualization by Zhaowen Guo\", width=150))\n```"
+  },
+  {
+    "objectID": "dataviz/tree-equity/index.html#implications",
+    "href": "dataviz/tree-equity/index.html#implications",
+    "title": "Green Space for Everyone? Visualizing Tree Equity Gap",
+    "section": "4 Implications",
+    "text": "4 Implications\nWhat do we learn from this visualization? The graph clearly illustrates the unequal distribution of green spaces, particularly in states like Ohio and Minnesota, where the gap is much more pronounced. This calls for prompt and effective action to rectify this imbalance."
   }
 ]
