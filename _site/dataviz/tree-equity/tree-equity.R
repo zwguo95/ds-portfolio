@@ -36,8 +36,6 @@ for (i in 1:nrow(states)){
 data <- data.frame(lower_code = state_names,
                    gap = tes_gaps) %>%
   cbind(states[1])
-saveRDS(data, "data.RDS")
-
 
 font_add_google("Pragati Narrow")
 showtext_auto()
@@ -119,7 +117,7 @@ data_map %>%
   scale_color_manual(values = c("white", "black")) +
   coord_map(clip = "off") +
   labs(title = "TREE EQUITY GAP",
-       subtitle = "County-level disparities in tree equity scores within each state",
+       subtitle = "Block-level disparities in tree equity scores within each state",
        x = "", y = "",
        caption= 
          str_wrap(
@@ -127,6 +125,6 @@ data_map %>%
        collected and shared by the American Forests. 
        Tree Equity Score (TES) computes how much tree canopy and surface temperature align with income, 
        employment, race, age and health factors in the U.S | Visualization by Zhaowen Guo", width=150))
-ggsave("tree_equity.png", dpi = 320, width = 7, height = 6)
+ggsave("tree-equity.png", dpi = 320, width = 7, height = 6)
 
 

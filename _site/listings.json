@@ -9,8 +9,9 @@
   {
     "listing": "/dataviz.html",
     "items": [
-      "/dataviz/support-surveillance/index.html",
-      "/dataviz/tree-equity/index.html"
+      "/dataviz/geofacet-hexbin/index.html",
+      "/dataviz/tree-equity/index.html",
+      "/dataviz/support-surveillance/index.html"
     ]
   },
   {

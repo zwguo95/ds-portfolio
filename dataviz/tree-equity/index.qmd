@@ -3,18 +3,18 @@ title: "Green Space for Everyone? Visualizing Tree Equity Gap"
 date: 02/07/2023
 author:
   - name: Zhaowen Guo
-    url: https://www.linkedin.com/in/zhaowen-guo-20535312a/
+    url: "https://www.linkedin.com/in/zhaowen-guo-20535312a/"
 title-block-banner: true
 format:
   html:
     theme: flatly
     code-fold: false
-    code-tools: true
+    code-tools: false
     toc: false
     number-sections: true
 link-citations: yes
 categories: [code, visualization]
-image: "tree_equity.png"
+image: "tree-equity.png"
 ---
 
 Urban green spaces, such as parks, gardens, and forests, provide numerous benefits in creating livable cities. They help improve air and water quality, reduce heat islands, and increase physical activity and mental health. However, not all communities have equal access to these benefits, leading to the concept of "tree equity."
@@ -162,7 +162,7 @@ data_map %>%
   scale_color_manual(values = c("white", "black")) +
   coord_map(clip = "off") +
   labs(title = "TREE EQUITY GAP",
-       subtitle = "County-level disparities in tree equity scores within each state",
+       subtitle = "Block-level disparities in tree equity scores within each state",
        x = "", y = "",
        caption= 
          str_wrap(
@@ -172,7 +172,7 @@ data_map %>%
        employment, race, age and health factors in the U.S | Visualization by Zhaowen Guo", width=150))
 ```
 
-![](tree_equity.png)
+![](tree-equity.png)
 
 
 ## Implications
