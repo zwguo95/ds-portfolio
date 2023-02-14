@@ -1,6 +1,6 @@
 ---
 title: "Green Space for Everyone? Visualizing Tree Equity Gap"
-date: 12/20/2022
+date: 02/07/2023
 author:
   - name: Zhaowen Guo
     url: https://www.linkedin.com/in/zhaowen-guo-20535312a/
@@ -13,7 +13,7 @@ format:
     toc: false
     number-sections: true
 link-citations: yes
-categories: [code, analysis, visualization]
+categories: [code, visualization]
 image: "tree_equity.png"
 ---
 

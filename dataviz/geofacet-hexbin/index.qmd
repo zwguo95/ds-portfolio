@@ -1,0 +1,30 @@
+---
+title: "Revisiting Tree Equity Gap: hexbin or geofacet?"
+date: 02/13/2023
+author:
+  - name: Zhaowen Guo
+    url: https://www.linkedin.com/in/zhaowen-guo-20535312a/
+title-block-banner: true
+format:
+  html:
+    theme: flatly
+    code-fold: false
+    code-tools: true
+    toc: false
+    number-sections: true
+link-citations: yes
+categories: [code, visualization]
+image: "tree-equity-geofacet.png"
+---
+
+
+Last week, I introduced how to visualize disparities in tree equity scores using [hexbin maps](https://medium.com/@zhaowenguo/green-space-for-everyone-visualizing-tree-equity-gap-9e02f5278480). Hexbin maps are a useful tool for visualizing dense data points by summarizing them in a compact and understandable format. By grouping data points into hexagonal bins, they provide a clear picture of the spatial distribution of the data, enabling the detection of patterns that may be hidden by overplotting. 
+
+However, while hexagonal bins provide a clean representation of data, they result in information loss regarding the underlying shape of the data. For example, my [previous visual](https://medium.com/@zhaowenguo/green-space-for-everyone-visualizing-tree-equity-gap-9e02f5278480) using hexbin maps suggests that Ohio has the largest tree equity gap, which is defined as the maximum difference across county-level tree equity scores, but this does not provide a complete picture. When examining the distribution of tree equity scores across census blocks within each state, it is clear that Ohio has a considerable number of blocks with relatively high levels of tree equity, indicating that Ohio performs well in this regard. 
+
+
+
+
+![](tree-equity-geofacet.png)
+
+
