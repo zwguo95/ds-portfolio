@@ -13,7 +13,7 @@ format:
     toc: false
     number-sections: true
 link-citations: yes
-categories: [code, visualization]
+categories: [code, visualization, greenspace]
 image: "tree-equity.png"
 ---
 
