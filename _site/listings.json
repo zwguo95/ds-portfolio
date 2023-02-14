@@ -9,6 +9,7 @@
   {
     "listing": "/dataviz.html",
     "items": [
+      "/dataviz/support-surveillance/index.html",
       "/dataviz/tree-equity/index.html"
     ]
   },
@@ -17,5 +18,9 @@
     "items": [
       "/projects/support-surveillance/index.html"
     ]
+  },
+  {
+    "listing": "/statistics.html",
+    "items": []
   }
 ]

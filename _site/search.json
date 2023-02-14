@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Zhaowen Guo",
     "section": "",
-    "text": "I am a PhD candidate at the University of Washington, where I combine my expertise in both social and data science to develop and enhance metrics using innovative data collection and psychometric techniques.\nI enjoy connecting data from various sources, including administrative data, survey data, text data, image data, and spatial data, to deliver insightful analyses and support impact evaluations. My passion lies in communicating my findings through engaging data visualizations and promoting equity and inclusion in data science by sharing my knowledge."
+    "text": "I am a PhD candidate at the University of Washington, where I combine my expertise in both social and data science to develop and enhance metrics using innovative data collection and psychometric techniques.\nI enjoy connecting data from various sources, including administrative data, survey data, text data, image data, and spatial data, to deliver insightful analyses and support impact evaluations. My passion lies in communicating my findings through engaging data visualizations and promoting equity and inclusion in data science by knowledge sharing."
   },
   {
     "objectID": "about.html",
@@ -151,7 +151,7 @@
     "href": "dataviz.html",
     "title": "Data Visualization",
     "section": "",
-    "text": "Green Space for Everyone? Visualizing Tree Equity Gap\n\n\n\n\n\n\n\ncode\n\n\nanalysis\n\n\nvisualization\n\n\n\n\n\n\n\n\n\n\n\nDec 20, 2022\n\n\nZhaowen Guo\n\n\n\n\n\n\nNo matching items"
+    "text": "Visualizing Public Support for Government Surveillance\n\n\n\n\n\n\n\ncode\n\n\nanalysis\n\n\nvisualization\n\n\n\n\n\n\n\n\n\n\n\nDec 20, 2022\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nGreen Space for Everyone? Visualizing Tree Equity Gap\n\n\n\n\n\n\n\ncode\n\n\nanalysis\n\n\nvisualization\n\n\n\n\n\n\n\n\n\n\n\nDec 20, 2022\n\n\nZhaowen Guo\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "tutorials/workshop_word_embedding_r.html#why-using-word-embeddings",
@@ -299,5 +299,12 @@
     "title": "Green Space for Everyone? Visualizing Tree Equity Gap",
     "section": "4 Implications",
     "text": "4 Implications\nWhat do we learn from this visualization? The graph clearly illustrates the unequal distribution of green spaces, particularly in states like Ohio and Minnesota, where the gap is much more pronounced. This calls for prompt and effective action to rectify this imbalance."
+  },
+  {
+    "objectID": "statistics.html",
+    "href": "statistics.html",
+    "title": "Statistics",
+    "section": "",
+    "text": "No matching items"
   }
 ]

@@ -1,7 +1,7 @@
 ---
-title: "Projects"
+title: "Statistics"
 listing:
-  contents: projects
+  contents: statistics
   sort: "date desc"
   type: default
   categories: true
@@ -11,4 +11,3 @@ listing:
 page-layout: full
 title-block-banner: true
 ---
-
