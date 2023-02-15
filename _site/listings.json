@@ -11,8 +11,7 @@
     "items": [
       "/dataviz/tree-gunshot/index.html",
       "/dataviz/geofacet-hexbin/index.html",
-      "/dataviz/tree-equity/index.html",
-      "/dataviz/support-surveillance/index.html"
+      "/dataviz/tree-equity/index.html"
     ]
   },
   {
@@ -23,6 +22,8 @@
   },
   {
     "listing": "/statistics.html",
-    "items": []
+    "items": [
+      "/statistics/simulations/index.html"
+    ]
   }
 ]
