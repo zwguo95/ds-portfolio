@@ -14,7 +14,7 @@ format:
     number-sections: true
 link-citations: yes
 categories: [code, statistics, psychometrics]
-image: "monty-hall-wiki.png"
+image: "equivalence.png"
 ---
 
-You can find my slides [here]("kamata_paper_review.pdf").
+You can find my slides [here](kamata_paper_review.pdf).
