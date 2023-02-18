@@ -126,7 +126,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 }</script>
 
 
-<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -248,8 +247,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Although hexagonal bins provide a clean representation of data, they result in information loss regarding the underlying shape of the data. For example, my <a href="https://medium.com/@zhaowenguo/green-space-for-everyone-visualizing-tree-equity-gap-9e02f5278480">previous visual</a> using hexbin maps suggests that Ohio has the largest tree equity gap, which is defined as the maximum difference across block-level tree equity scores. However, this does not provide a complete picture. When examining the distribution of tree equity scores across census blocks within each state, it is evident that Ohio has a considerable number of blocks with relatively high levels of tree equity, indicating that Ohio performs well in this regard.</p>
 <p>Geofacet offers a useful alternative to hexbin maps, allowing for the restoration of the original data distributions while preserving the spatial information. By maintaining individual data points, geofacet provides a more detailed representation of data to enable a more nuanced view of spatial relationships.</p>
 <p>In this blog post, I will walk you through how to visualize tree equity score data using geofacet. All code can be found <a href="tree-equity-geofacet.R">here</a>.</p>
-<section id="data-collection" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="data-collection"><span class="header-section-number">1</span> Data Collection</h2>
+<section id="data-collection" class="level2">
+<h2 class="anchored" data-anchor-id="data-collection">Data Collection</h2>
 <p>We follow similar steps of data collection and the only difference is we keep the original variable - tree equity score.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># prepare a function to read zip urls with shapefiles </span></span>
@@ -276,8 +275,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, data_lists) <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>()</span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="data-visualization" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="data-visualization"><span class="header-section-number">2</span> Data Visualization</h2>
+<section id="data-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="data-visualization">Data Visualization</h2>
 <p>The function <code>facet_geo()</code> plays the magic, which creates the base map of the US that can be integrated with various data representations. By using the argument <code>grid = us_state_grid1[c(-2, -11), ]</code>, we can exclude Hawaii and Alaska from the map as there is no data available for these states. If you prefer to have the full state name, you can add the argument <code>label = "name"</code>.</p>
 <p>Another thing to keep in mind is that the <code>facet_geo()</code> layer should integrate with a <strong><em>pre-existing</em></strong> data representation. In this example where I am interested in displaying the distribution of tree equity scores, I add <code>geom_density()</code> layer beforehand.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>

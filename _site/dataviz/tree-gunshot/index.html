@@ -126,7 +126,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 }</script>
 
 
-<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -246,8 +245,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p>Despite being a small city, Washington, D.C. has the <a href="https://www.peacefordc.org/#:~:text=Compared%20to%20all%20states%2C%20DC,taxpayers%20%241%20billion%20in%202021.">highest homicide rate</a> among all U.S. states, with 226 deaths and 1330 emergency department visits due to gunshot wounds in 2021. As part of its efforts to combat gun violence, the city has adopted innovative strategies and technologies, including <a href="https://www.shotspotter.com/">ShotSpotter</a> which is a gunshot detection system that uses acoustic sensors to identify and locate gunfire in real-time.</p>
 <p>In this blog post, we will examine 2021 gunshot data in D.C. and explore how data visualization can provide deeper insights into gun violence in the city. All code can be found <a href="dc-gunshot-time.R">here</a>.</p>
-<section id="data-cleaning" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="data-cleaning"><span class="header-section-number">1</span> Data Cleaning</h2>
+<section id="data-cleaning" class="level2">
+<h2 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h2>
 <p>Suppose that we are interested in the temporal patterns of gun violence in D.C., one common way to visualize time series data is through line charts. These charts can break down time points into intervals, such as months, to observe how the values of gun violence incidents change over time. While this approach offers valuable insight into high-level temporal trends, it has one limitation: it only allows us to focus on one time interval at a time. For example, we can only see the temporal changes over months OR weeks, but not both intervals together.</p>
 <p>Inspired by GitHub’s contribution graph, we can use <code>geom_tile()</code> to create a similar calendar graph that effectively visualizes gun violence incidents. To situate a calendar within a data frame, we can observe clear parallels: the week of the month corresponds to the row number, the day of the week represents the column number, and each month is treated as a separate facet.</p>
 <p>One challenge here is to figure out the week for each month. Unfortunately, <code>week()</code> in the lubridate package only returns the week for the year, requiring us to create a week incrementer to manually calculate the week for each month. In other words, we increment the week counter by 1 when we encounter a “Sunday” or when the day is the first of the month.</p>
@@ -284,8 +283,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>gunshot_daily<span class="sc">$</span>month_name <span class="ot">&lt;-</span> <span class="fu">factor</span>(gunshot_daily<span class="sc">$</span>month_name, <span class="at">levels =</span> month_code)</span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="data-visualization" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="data-visualization"><span class="header-section-number">2</span> Data Visualization</h2>
+<section id="data-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="data-visualization">Data Visualization</h2>
 <p>Now, let’s visualize the data! Interestingly, the part I spent most time upon was making the month names appear above the weekday names, as they were initially positioned the opposite way. To resolve this issue, we have the option to adjust either the strips (weekday names) or the axes (month names). I decided to go for the former route by increasing the bottom parameter with <code>margin(b=25)</code>, which enabled the weekday names to move upwards until they were placed above the month names.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># theme</span></span>

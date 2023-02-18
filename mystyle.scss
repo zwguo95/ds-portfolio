@@ -1,0 +1,27 @@
+/*-- scss:defaults --*/
+
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400&family=Playfair+Display:wght@400;500&display=swap');
+
+// Colors
+$cream: #FDFBF7;
+$gray: #64605f;
+$purple: #AE8BD1;
+$dark-blue: #0a3351;
+$light-blue: #2f70a1;
+
+// Base document colors
+$navbar-bg: $dark-blue; // navbar
+$navbar-fg: $cream; // navbar foreground elements
+$navbar-hl: $light-blue; // highlight color when hovering over navbar links
+$body-color: $gray; // page text 
+$footer-bg: $dark-blue; // footer 
+$link-color: $light-blue; // hyperlinks 
+
+// Inline code
+$code-bg: $cream; // inline code background color
+$code-color: $purple; // inline code text color
+
+// Code blocks
+$code-block-bg: $cream; // code block background color

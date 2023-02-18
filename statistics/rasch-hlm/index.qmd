@@ -11,7 +11,7 @@ format:
     code-fold: false
     code-tools: false
     toc: false
-    number-sections: true
+    number-sections: false
 link-citations: yes
 categories: [code, statistics, psychometrics]
 image: "equivalence.png"

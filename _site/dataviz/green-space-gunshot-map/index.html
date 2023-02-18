@@ -126,7 +126,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 }</script>
 
 
-<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -247,8 +246,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><a href="https://www.openstreetmap.org/#map=5/38.007/-95.844">OpenStreetMap (OSM)</a> is an open-source mapping platform that provides detailed maps of the world. It is built and maintained by a global community of volunteers who contribute data, such as roads, buildings, and points of interest, to create a free and open map of the world.</p>
 <p>OSM offers a comprehensive API that enables users to easily access and use the map data seamlessly in their own applications. Previously, I relied on the OpenLayers plugin in QGIS to access OSM data. While QGIS provides a nice graphical user interface for loading and visualizing OSM data, I had to switch between R and QGIS to ensure consistency in the resulting graphs. Here comes the good news! Now we can directly access OSM from R using the <em>osmdata</em> package. By specifying the coordinates or the name of the geographic area of interest, we can easily obtain OSM data and perform analyses in R.</p>
 <p>Continuing on my previous articles about green spaces, in this blog post I will introduce how to map green spaces using OSM. Check out my full code <a href="gunshot_osm_dc2021.R">here</a>.</p>
-<section id="data-collection" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="data-collection"><span class="header-section-number">1</span> Data Collection</h2>
+<section id="data-collection" class="level2">
+<h2 class="anchored" data-anchor-id="data-collection">Data Collection</h2>
 <p>Once we have installed the <em>osmdata</em> package, we can begin gathering our data. The first step is to define a specific area of interest using coordinates or place names. For example, to download all OSM data for Washington DC, we can try either of the following approaches to specify the bounding box:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># first approach</span></span>
@@ -272,8 +271,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">osmdata_sf</span>()</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="data-visualization" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="data-visualization"><span class="header-section-number">2</span> Data Visualization</h2>
+<section id="data-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="data-visualization">Data Visualization</h2>
 <p>With our data now downloaded, we can begin visualizing it using <em>ggplot2</em>. To visualize spatial data, we simply add a layer by geom_sf(). We can include an argument <em>inherit.aes = FALSE</em> to customize each layer, making its aesthetics (i.e.&nbsp;color, size) not inherit from previous layers.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>

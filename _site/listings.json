@@ -12,6 +12,7 @@
     "listing": "/statistics.html",
     "items": [
       "/statistics/simulations/index.html",
+      "/statistics/dssg-tracking-poverty/index.html",
       "/statistics/rasch-hlm/index.html"
     ]
   }

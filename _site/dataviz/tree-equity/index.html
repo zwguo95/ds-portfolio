@@ -126,7 +126,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 }</script>
 
 
-<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -247,8 +246,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Urban green spaces, such as parks, gardens, and forests, provide numerous benefits in creating livable cities. They help improve air and water quality, reduce heat islands, and increase physical activity and mental health. However, not all communities have equal access to these benefits, leading to the concept of “tree equity.”</p>
 <p>Tree equity refers to the fair distribution of urban green spaces and trees, regardless of a community’s socio-economic status, race, or ethnicity. <a href="https://www.americanforests.org/">American Forests</a>, a non-profit organization dedicated to protecting and restoring forests, has been working to measure and improve tree equity across the United States.</p>
 <p>In this blog post, I will show you how to visualize tree equity score data to tell a compelling story. All code can be found <a href="tree-equity.R">here</a>.</p>
-<section id="data-collection" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="data-collection"><span class="header-section-number">1</span> Data Collection</h2>
+<section id="data-collection" class="level2">
+<h2 class="anchored" data-anchor-id="data-collection">Data Collection</h2>
 <p>Tree equity score data are currently hosted on this <a href="https://treeequityscore.org/data/">webpage</a>, where users are required to manually download zip files containing geospatial data for each state. Furthermore, each shapefile includes not only tree equity scores, but also several other <a href="https://treeequityscore.org/datasources/">variables</a>. Thus, we need to find an efficient method to automate the process of downloading files with minimal manual intervention and extract the desired variable of interest - the tree equity score - from the shapefiles.</p>
 <p>Upon checking the web addresses of several files, a pattern has become apparent: each URL shares a similar structure in its file name, while also possessing a unique postal code. This discovery suggests that it is possible to create a script that can automatically scrape the files. Fortunately, unzip() in base R and <em>sf</em> package offer a convenient solution for unzipping files and reading shapefiles, and we can easily write a function to automate this process.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
@@ -289,8 +288,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(states[<span class="dv">1</span>])</span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="data-cleaning" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="data-cleaning"><span class="header-section-number">2</span> Data Cleaning</h2>
+<section id="data-cleaning" class="level2">
+<h2 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h2>
 <p>Great, we now have our data! The next step is to clean and prepare it for visualization. With the consideration of working with spatial data across multiple regions and the fact that the tree equity gap is a continuous variable, hexbin maps become a desirable choice. Hexbin maps divide the map area into small hexagonal bins and consolidate the data points within them, presenting a clear and compact depiction of the vast amount of data.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geojsonio)</span>
@@ -319,8 +318,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(gap) <span class="sc">==</span> F)</span>
 <span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="data-visualization" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="data-visualization"><span class="header-section-number">3</span> Data Visualization</h2>
+<section id="data-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="data-visualization">Data Visualization</h2>
 <p>We now have our spatial polygon data frame ready and can visualize it! To make it visually appealing, I pick a custom Google font “Pragati Narrow” for the graph and a stunning color palette from the <em>scico</em> <a href="https://www.data-imaginist.com/2018/scico-and-the-colour-conundrum/">package</a>. One trick is to adjust text colors that contrast with the background color. For instance, in the case of Washington D.C., which has the narrowest gap in tree equity scores, the bin’s background can be made lighter. However, if white text is still used as in other areas, the label may not be easily visible. To mitigate this, we can establish a threshold for switching the text color as necessary.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scico)</span>
@@ -389,8 +388,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><img src="tree-equity.png" class="img-fluid"></p>
 </section>
-<section id="implications" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="implications"><span class="header-section-number">4</span> Implications</h2>
+<section id="implications" class="level2">
+<h2 class="anchored" data-anchor-id="implications">Implications</h2>
 <p>What do we learn from this visualization? The graph clearly illustrates the unequal distribution of green spaces, particularly in states like Ohio and Minnesota, where the gap is much more pronounced. This calls for prompt and effective <a href="https://www.diversitydatakids.org/research-library/impact-story/increasing-tree-equity-akron-ohio">action</a> to rectify this imbalance.</p>
 
 

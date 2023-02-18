@@ -40,11 +40,14 @@ website:
 
 format:
   html:
-    theme: sandstone
-    css: styles.css
+    theme: 
+      - mystyle.scss
+    mainfont: Merriweather
+    fontsize: 18px
+    linestretch: 1.5
     page-layout: article
     citations-hover: true
     code-link: true
     code-fold: show
     code-tools: false
-    code-block-border-left: "#004E4F"
+    code-block-border-left: "#64605f"
