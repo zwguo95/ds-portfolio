@@ -1,0 +1,20 @@
+---
+title: "Unveilling Model Equivalence: Linking the Rasch Model with the Hierarchical Linear Model"
+date: 11/15/2022
+author:
+  - name: Zhaowen Guo
+    url: "https://www.linkedin.com/in/zhaowen-guo-20535312a/"
+title-block-banner: true
+format:
+  html:
+    theme: flatly
+    code-fold: false
+    code-tools: false
+    toc: false
+    number-sections: true
+link-citations: yes
+categories: [code, statistics, psychometrics]
+image: "monty-hall-wiki.png"
+---
+
+You can find my slides [here]("kamata_paper_review.pdf").

@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Zhaowen Guo",
-    "section": "",
-    "text": "I am a PhD candidate at the University of Washington, where I combine my expertise in both social and data science to develop and enhance metrics using innovative data collection and psychometric techniques.\nI enjoy connecting data from various sources, including administrative data, survey data, text data, image data, and spatial data, to deliver insightful analyses and support impact evaluations. My passion lies in communicating my findings through engaging data visualizations and promoting equity and inclusion in data science by knowledge sharing."
-  },
-  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
@@ -14,256 +7,25 @@
     "text": "About this blog"
   },
   {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
+    "objectID": "dataviz/geofacet-hexbin/index.html",
+    "href": "dataviz/geofacet-hexbin/index.html",
+    "title": "Revisiting Tree Equity Gap: Hexbin or Geofacet?",
     "section": "",
-    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
+    "text": "Last week, I introduced how to visualize disparities in tree equity scores using hexbin maps. Hexbin maps are a useful tool for visualizing dense data points by summarizing them in a compact and understandable format. By grouping data points into hexagonal bins, they provide a clear picture of the spatial distribution of the data, enabling the detection of patterns that may be hidden by overplotting.\nAlthough hexagonal bins provide a clean representation of data, they result in information loss regarding the underlying shape of the data. For example, my previous visual using hexbin maps suggests that Ohio has the largest tree equity gap, which is defined as the maximum difference across block-level tree equity scores. However, this does not provide a complete picture. When examining the distribution of tree equity scores across census blocks within each state, it is evident that Ohio has a considerable number of blocks with relatively high levels of tree equity, indicating that Ohio performs well in this regard.\nGeofacet offers a useful alternative to hexbin maps, allowing for the restoration of the original data distributions while preserving the spatial information. By maintaining individual data points, geofacet provides a more detailed representation of data to enable a more nuanced view of spatial relationships.\nIn this blog post, I will walk you through how to visualize tree equity score data using geofacet. All code can be found here."
   },
   {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
-    "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+    "objectID": "dataviz/geofacet-hexbin/index.html#data-collection",
+    "href": "dataviz/geofacet-hexbin/index.html#data-collection",
+    "title": "Revisiting Tree Equity Gap: Hexbin or Geofacet?",
+    "section": "1 Data Collection",
+    "text": "1 Data Collection\nWe follow similar steps of data collection and the only difference is we keep the original variable - tree equity score.\n```{r}\n# prepare a function to read zip urls with shapefiles \nread_shape_URL <- function(URL){\n  cur_tempfile <- tempfile()\n  download.file(url = URL, destfile = cur_tempfile)\n  out_directory <- tempfile()\n  unzip(cur_tempfile, exdir = out_directory)\n  \n  read_sf(dsn = out_directory)\n}\n\n# pull state, tes, priority from each dataframe\ndata_lists <- list()\nfor (i in 1:nrow(states)){\n  state <- states$lower_code[i]\n  print(state)\n  URL <- paste0(\"https://national-tes-data-share.s3.amazonaws.com/national_tes_share/\", state, \".zip.zip\")\n  if (RCurl::url.exists(URL) == T) {\n    map <- read_shape_URL(paste0(\"https://national-tes-data-share.s3.amazonaws.com/national_tes_share/\", state, \".zip.zip\"))\n    data_lists[[i]] <- map %>% select(tes, state, priority)\n  }\n}\ndata <- do.call(rbind, data_lists) %>% na.omit()\n```"
   },
   {
-    "objectID": "index.html#education",
-    "href": "index.html#education",
-    "title": "Zhaowen Guo",
-    "section": "Education",
-    "text": "Education\nUniversity of California, San Diego | San Diego, CA PhD in Mathematics | Sept 2011 - June 2015\nMacalester College | St. Paul MA B.A in Economics | Sept 2007 - June 2011"
-  },
-  {
-    "objectID": "index.html#experience",
-    "href": "index.html#experience",
-    "title": "Zhaowen Guo",
-    "section": "Experience",
-    "text": "Experience\nWengo Analytics | Head Data Scientist | April 2018 - present\nGeoScynce | Chief Analyst | Sept 2012 - April 2018"
-  },
-  {
-    "objectID": "tutorials/workshop_visual_r.html#agenda",
-    "href": "tutorials/workshop_visual_r.html#agenda",
-    "title": "Visualizing Data with R",
-    "section": "Agenda",
-    "text": "Agenda\n\nggplot2 and elements of information visualization\nVisualizing tabular data\n\nInformation from one variable\nInformation from multiple variables"
-  },
-  {
-    "objectID": "tutorials/workshop_visual_r.html#graphic-systems-in-r",
-    "href": "tutorials/workshop_visual_r.html#graphic-systems-in-r",
-    "title": "Visualizing Data with R",
-    "section": "Graphic systems in R",
-    "text": "Graphic systems in R\n\n\nImperative programming\n\nStep-by-step instructions to control the exact construction of output\nHands on and more work\nbase, grid, tile\n\nDeclarative programming\n\nAllow software to apply a standard solution\nCustomize with a stylesheet\nggplot2"
-  },
-  {
-    "objectID": "tutorials/workshop_visual_r.html#what-is-ggplot2",
-    "href": "tutorials/workshop_visual_r.html#what-is-ggplot2",
-    "title": "Visualizing Data with R",
-    "section": "What is ggplot2",
-    "text": "What is ggplot2\n\n\nGraphics link data to dimensions of specific aesthetic objects, which are distinguishable by their geometric structure and modifiable in scale and style\nUsers supply the data and request a geometry, leaving others to the software\nLayered grammar of graphics\n\nLayers: components of a graph connected by +\nAesthetics: specified inside layers about how layers appear"
-  },
-  {
-    "objectID": "tutorials/workshop_visual_r.html#elements-of-information-visualization",
-    "href": "tutorials/workshop_visual_r.html#elements-of-information-visualization",
-    "title": "Visualizing Data with R",
-    "section": "Elements of information visualization",
-    "text": "Elements of information visualization\nObjects\n\n\nKnown as \\(geoms\\) in ggplot2 which specifies how the data are presented on the plot\nPoints or texts can represent location: geom_point(), geom_text(), geom_label()\nLines can represent numerical values and relationships: geom_line(), geom_smooth()\nPolygons can represent area or size: geom_rect(), geom_bar()"
-  },
-  {
-    "objectID": "tutorials/workshop_visual_r.html#elements-of-information-visualization-1",
-    "href": "tutorials/workshop_visual_r.html#elements-of-information-visualization-1",
-    "title": "Visualizing Data with R",
-    "section": "Elements of information visualization",
-    "text": "Elements of information visualization\nAesthetics\n\n\nColors: use default colors or brewer palettes ColorBrewer, R palettes and specify fill or color argument\nLine types: specify the linetype argument by an integer or a character (see reference here)\nDot types: specify the shape argument by an integer or a character (see reference here)\nStacked bar plots or histograms: specify the fill argument"
-  },
-  {
-    "objectID": "tutorials/workshop_visual_r.html#elements-of-information-visualization-2",
-    "href": "tutorials/workshop_visual_r.html#elements-of-information-visualization-2",
-    "title": "Visualizing Data with R",
-    "section": "Elements of information visualization",
-    "text": "Elements of information visualization\nComponents\n\nTitle\nLegend\nAnnotations\nLabels\nBackground"
-  },
-  {
-    "objectID": "tutorials/workshop_visual_r.html#steps-to-create-a-ggplot2-graphic",
-    "href": "tutorials/workshop_visual_r.html#steps-to-create-a-ggplot2-graphic",
-    "title": "Visualizing Data with R",
-    "section": "Steps to create a ggplot2 graphic",
-    "text": "Steps to create a ggplot2 graphic\n\n\nEstablish a mapping between data variables and plotting dimensions or elements\nApply the mapping to one or more standardized aesthetic elements\nDraw the resulting set of graphical objects"
-  },
-  {
-    "objectID": "tutorials/workshop_visual_r.html#an-illustration",
-    "href": "tutorials/workshop_visual_r.html#an-illustration",
-    "title": "Visualizing Data with R",
-    "section": "An illustration",
-    "text": "An illustration\nHow did GDP per capita change over time in Oceanian countries?\n\noptions(scipen = 999) # prevent scientific notation like e\nlibrary(gapminder) # load gapminder dataset from gapminder package\nlibrary(ggplot2) # load ggplot2 package for visualization\nlibrary(tidyverse) # load tidyverse package for data wrangling\nstr(gapminder) # examine gapminder dataset\n\ntibble [1,704 x 6] (S3: tbl_df/tbl/data.frame)\n $ country  : Factor w/ 142 levels \"Afghanistan\",..: 1 1 1 1 1 1 1 1 1 1 ...\n $ continent: Factor w/ 5 levels \"Africa\",\"Americas\",..: 3 3 3 3 3 3 3 3 3 3 ...\n $ year     : int [1:1704] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 ...\n $ lifeExp  : num [1:1704] 28.8 30.3 32 34 36.1 ...\n $ pop      : int [1:1704] 8425333 9240934 10267083 11537966 13079460 14880372 12881816 13867957 16317921 22227415 ...\n $ gdpPercap: num [1:1704] 779 821 853 836 740 ...\n\n\n\noceania <- gapminder %>%\n  filter(continent == \"Oceania\")"
-  },
-  {
-    "objectID": "tutorials/workshop_visual_r.html#an-illustration-1",
-    "href": "tutorials/workshop_visual_r.html#an-illustration-1",
-    "title": "Visualizing Data with R",
-    "section": "An illustration",
-    "text": "An illustration\nggplot(oceania, # input the data\n  aes(x = year, \n      y = gdpPercap, \n      color = country,\n      linetype = country)) + # establish aesthetic mappings\n  geom_line(size = 1) + # apply mapping to geom objects\n  ggtitle(\"Life expectancy in Oceanian countries over time\") + # add title\n  labs(x = \"Year\", y = \"GDP per capita\") + # add labels\n  theme_bw() # change background to white background with grey gridlines"
-  },
-  {
-    "objectID": "tutorials/workshop_visual_r.html#an-illustration-2",
-    "href": "tutorials/workshop_visual_r.html#an-illustration-2",
-    "title": "Visualizing Data with R",
-    "section": "An illustration",
-    "text": "An illustration\n\nPlotData\n\n\n\nggplot(oceania, # input the data\n  aes(x = year, \n      y = gdpPercap, \n      color = country,\n      linetype = country)) + # establish aesthetic mappings\n  geom_line(size = 1) + # apply mapping to geom objects\n  ggtitle(\"Life expectancy in Oceanian countries over time\") + # add title\n  labs(x = \"Year\", y = \"GDP per capita\") + # add labels\n  theme_bw() # change background to white background with grey gridlines\n\n\n\n\n\n\n\nknitr::kable(oceania)\n\n\n\n\ncountry\ncontinent\nyear\nlifeExp\npop\ngdpPercap\n\n\n\n\nAustralia\nOceania\n1952\n69.120\n8691212\n10039.60\n\n\nAustralia\nOceania\n1957\n70.330\n9712569\n10949.65\n\n\nAustralia\nOceania\n1962\n70.930\n10794968\n12217.23\n\n\nAustralia\nOceania\n1967\n71.100\n11872264\n14526.12\n\n\nAustralia\nOceania\n1972\n71.930\n13177000\n16788.63\n\n\nAustralia\nOceania\n1977\n73.490\n14074100\n18334.20\n\n\nAustralia\nOceania\n1982\n74.740\n15184200\n19477.01\n\n\nAustralia\nOceania\n1987\n76.320\n16257249\n21888.89\n\n\nAustralia\nOceania\n1992\n77.560\n17481977\n23424.77\n\n\nAustralia\nOceania\n1997\n78.830\n18565243\n26997.94\n\n\nAustralia\nOceania\n2002\n80.370\n19546792\n30687.75\n\n\nAustralia\nOceania\n2007\n81.235\n20434176\n34435.37\n\n\nNew Zealand\nOceania\n1952\n69.390\n1994794\n10556.58\n\n\nNew Zealand\nOceania\n1957\n70.260\n2229407\n12247.40\n\n\nNew Zealand\nOceania\n1962\n71.240\n2488550\n13175.68\n\n\nNew Zealand\nOceania\n1967\n71.520\n2728150\n14463.92\n\n\nNew Zealand\nOceania\n1972\n71.890\n2929100\n16046.04\n\n\nNew Zealand\nOceania\n1977\n72.220\n3164900\n16233.72\n\n\nNew Zealand\nOceania\n1982\n73.840\n3210650\n17632.41\n\n\nNew Zealand\nOceania\n1987\n74.320\n3317166\n19007.19\n\n\nNew Zealand\nOceania\n1992\n76.330\n3437674\n18363.32\n\n\nNew Zealand\nOceania\n1997\n77.550\n3676187\n21050.41\n\n\nNew Zealand\nOceania\n2002\n79.110\n3908037\n23189.80\n\n\nNew Zealand\nOceania\n2007\n80.204\n4115771\n25185.01"
-  },
-  {
-    "objectID": "tutorials/workshop_visual_r.html#information-from-one-variable",
-    "href": "tutorials/workshop_visual_r.html#information-from-one-variable",
-    "title": "Visualizing Data with R",
-    "section": "Information from one variable",
-    "text": "Information from one variable\n\nHistogramsDensity plotsBoxplotsBarplotsLollipop charts\n\n\n\n# show frequencies of a variable\ngapminder %>%\n  filter(year == 1952) %>%\n  ggplot(aes(x = lifeExp)) + \n  geom_histogram(binwidth = 2) +\n  theme_light() +\n  labs(x = \"Life Expectancy\", y = \"Count\", title = \"Life Expectancy in 1952\")\n\n\n\n\n\n\n\n# show frequencies of a variable\ngapminder %>%\n  filter(year == 1952) %>%\n  ggplot(aes(x = lifeExp)) + \n  geom_density(size = 1.5, alpha = 0.2, fill = \"red\") +\n  theme_light() +\n  labs(x = \"Life Expectancy\", y = \"Count\", title = \"Life Expectancy in 1952\")\n\n\n\n\n\n\n\n# show distribution of a variable (median, 1st, 3rd quantiles, outliers)\ngapminder %>% filter(year == 1952, continent==\"Europe\") %>%\n  ggplot(aes(y = lifeExp)) + \n  geom_boxplot(fill = \"grey\", color = \"blue\", outlier.shape = 1) + # adjust aesthetics\n  theme_light() +\n  labs(title = \"Life Expectancy in 1952 (Europe)\", \n       y = \"Life Expectancy\", \n       x = \"\") \n\n\n\n\n\n\n\n# show distribution of a discrete variable \nggplot(gapminder, \n       aes(x = continent,\n           fill = continent)) + # differentiate the filled colors\n  geom_bar() + \n  theme_classic() + \n  labs(y = \"Number of countries\", x = \"Continent\")\n\n\n\n\n\n\n\namericas <- gapminder %>% \n  filter(year == 2007 & continent == \"Americas\") %>% \n  arrange(gdpPercap) %>% \n  mutate(country = factor(country, levels = country))\n\nggplot(americas, aes(x = gdpPercap, y = country)) +\n  geom_segment(aes(x = 0, xend = gdpPercap, \n                   y = country, yend = country), # which is why we need to make country a factor\n               color = \"black\") + \n  geom_point(colour = \"blue\", size = 2, alpha = 0.8) +\n  scale_x_continuous(expand = c(0, 0), \n                     limits = c(0, max(americas$gdpPercap) * 1.1),\n                     labels = scales::dollar) + \n  theme_bw()"
-  },
-  {
-    "objectID": "tutorials/workshop_visual_r.html#information-from-multiple-variables",
-    "href": "tutorials/workshop_visual_r.html#information-from-multiple-variables",
-    "title": "Visualizing Data with R",
-    "section": "Information from multiple variables",
-    "text": "Information from multiple variables\n\nMultiplesLayered density plotsGrouped barplots\n\n\n\ngapminder %>%\n  ggplot(aes(x = lifeExp)) + \n  geom_histogram() + \n  facet_wrap(~ continent, ncol = 3) +\n  labs(title = \"Life expectancy distribution by continent\") +\n  theme_minimal()\n\n\n\n\n\n\n\ngapminder %>%\n  filter(year == 2007 & continent != \"Oceania\") %>%\n  ggplot(aes(x = lifeExp)) + \n  geom_density(aes(fill = continent), size = 0.1, alpha = 0.5) + \n  scale_fill_brewer(palette = \"Set1\") +\n  labs(title = \"Life expectancy distribution in 2007\") +\n  theme_minimal()\n\n\n\n\n\n\n\ngapminder %>% \n  filter(year > 1990) %>%\n  group_by(year, continent) %>%\n  summarise(totalpop = sum(as.double(pop))) %>%\n  ggplot(aes(x = year, y = totalpop, fill = continent)) + \n  geom_col(position = \"dodge\", size = 0.2, alpha = 0.8) + # dodge overlapping objects side by side \n  scale_x_continuous(breaks = seq(1992, 2007, 5), expand = c(0, 0)) +\n  scale_y_continuous(labels = scales::comma, expand = c(0, 0)) +\n  scale_fill_brewer(palette = \"Set1\") +\n  theme_bw()"
-  },
-  {
-    "objectID": "tutorials/workshop_visual_r.html#practices",
-    "href": "tutorials/workshop_visual_r.html#practices",
-    "title": "Visualizing Data with R",
-    "section": "Practices",
-    "text": "Practices\nExercise 1: Make a scatter plot with average GDP per capita across all countries on the y-axis and year on the x-axis.\nExercise 2: Break down the plot from exercise 1 by continent, using colors to distinguish the points and transforming mean GDP per capita on the log scale.\nExercise 3: Make a collection of bar plots faceted by year that compare mean GDP per capita across countries in a given year. Orient the plots to make it easier to read the continent labels.\nExercise 4: What is the relationship between life expectancy and GDP per capita in 2007 by non-Oceanian continents?"
-  },
-  {
-    "objectID": "tutorials/workshop_visual_r.html#solutions",
-    "href": "tutorials/workshop_visual_r.html#solutions",
-    "title": "Visualizing Data with R",
-    "section": "Solutions",
-    "text": "Solutions\n\nSolution 1Solution 2Solution 3Solution 4\n\n\n\ngapminder %>%\n  group_by(year) %>%\n  summarize(meanGDPpc = mean(gdpPercap)) %>%\n  ggplot(aes(x = year, y = meanGDPpc)) +\n  geom_point()\n\n\n\n\n\n\n\ngapminder %>%\n  group_by(year, continent) %>% # aggregate the information by year by continent\n  summarize(meanGDPpc = mean(gdpPercap)) %>%\n  ggplot(aes(x = year, y = meanGDPpc, color = continent)) +\n  geom_point() +\n  scale_y_log10() # apply the log scale to GDP per capita\n\n\n\n\n\n\n\ngapminder %>%\n  group_by(year, continent) %>%\n  summarize(meanGDPpc = mean(gdpPercap)) %>%\n  ggplot(aes(x = continent, y = meanGDPpc)) +\n  geom_col() +\n  facet_wrap(~ year) +\n  coord_flip() # flip the coordinates so that the continent names are visible\n\n\n\n\n\n\n\ngapminder %>%\n  filter(year == 2007 & continent != \"Oceania\") %>% \n  ggplot(aes(x = log(gdpPercap),\n             y = lifeExp,\n             color = continent)) +\n  geom_point(alpha = 0.5) +\n  geom_smooth(method = \"lm\") + \n  facet_wrap(~ continent)"
-  },
-  {
-    "objectID": "tutorials/workshop_visual_r.html#bonus-animations",
-    "href": "tutorials/workshop_visual_r.html#bonus-animations",
-    "title": "Visualizing Data with R",
-    "section": "Bonus: animations!",
-    "text": "Bonus: animations!\nCheck out plotly package\n\nlibrary(plotly)\nanimate_gapminder <- ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +\n  geom_point(aes(size = pop, ids = country, frame = year)) +\n  geom_smooth(se = FALSE, method = \"lm\") +\n  scale_x_log10() + \n  theme_bw() + \n  labs(x = \"GDP per capita\", y = \"Life expectancy\") +\n  theme(legend.position = \"none\") # remove legend\n\nggplotly(animate_gapminder) %>% \n  highlight(\"plotly_hover\") %>%\n  animation_slider(\n    currentvalue = list(prefix = \"Year \", font = list(color=\"black\"))\n  )\n\n\n\n\n\n\n\nCSSCR Workshop"
-  },
-  {
-    "objectID": "dataviz.html",
-    "href": "dataviz.html",
-    "title": "Data Visualization",
-    "section": "",
-    "text": "The Calendar of Gun Violence\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ngreenspace\n\n\n\n\n\n\n\n\n\n\n\nFeb 14, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nRevisiting Tree Equity Gap: Hexbin or Geofacet?\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ngreenspace\n\n\n\n\n\n\n\n\n\n\n\nFeb 13, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nGreen Space for Everyone? Visualizing Tree Equity Gap\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ngreenspace\n\n\n\n\n\n\n\n\n\n\n\nFeb 7, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "tutorials/workshop_word_embedding_r.html#why-using-word-embeddings",
-    "href": "tutorials/workshop_word_embedding_r.html#why-using-word-embeddings",
-    "title": "Word Embeddings",
-    "section": "Why using word embeddings?",
-    "text": "Why using word embeddings?\n\nThe corpus comes from Congressional Record which records all remarks made by senators and representatives on the floor of the US Congress\nUse congressional record for the 114th Congress as an example\n\nTwo variables: speech, speech_id\n67,557 observations"
-  },
-  {
-    "objectID": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-bow",
-    "href": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-bow",
-    "title": "Word Embeddings",
-    "section": "Represent the text using BOW",
-    "text": "Represent the text using BOW\nlibrary(tidytext)\nlibrary(SnowballC)\nlibrary(tidyverse)\n\ndata <- readRDS(\"data114.RDS\")"
-  },
-  {
-    "objectID": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-bow-1",
-    "href": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-bow-1",
-    "title": "Word Embeddings",
-    "section": "Represent the text using BOW",
-    "text": "Represent the text using BOW\nlibrary(tidytext)\nlibrary(SnowballC)\nlibrary(tidyverse)\n\ndata <- readRDS(\"data114.RDS\") %>%\n  unnest_tokens(word, speech) %>%\n  anti_join(get_stopwords()) %>%\n  mutate(stem = wordStem(word))"
-  },
-  {
-    "objectID": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-bow-2",
-    "href": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-bow-2",
-    "title": "Word Embeddings",
-    "section": "Represent the text using BOW",
-    "text": "Represent the text using BOW\nlibrary(tidytext)\nlibrary(SnowballC)\nlibrary(tidyverse)\n\ndata <- readRDS(\"data114.RDS\") %>%\n  unnest_tokens(word, speech) %>%\n  anti_join(get_stopwords()) %>%\n  mutate(stem = wordStem(word)) %>%\n  count(speech_id, stem) %>%\n  bind_tf_idf(stem, speech_id, n) %>%\n  cast_dfm(speech_id, stem, tf_idf)"
-  },
-  {
-    "objectID": "tutorials/workshop_word_embedding_r.html#what-do-we-find",
-    "href": "tutorials/workshop_word_embedding_r.html#what-do-we-find",
-    "title": "Word Embeddings",
-    "section": "What do we find?",
-    "text": "What do we find?\n\nBOW representation is\n\nextremely sparse (99.92% sparse)\nhigh-dimensional (98,235 features)"
-  },
-  {
-    "objectID": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-word-embeddings",
-    "href": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-word-embeddings",
-    "title": "Word Embeddings",
-    "section": "Represent the text using word embeddings",
-    "text": "Represent the text using word embeddings\n\nSource: Rodriguez & Spirling, 2022"
-  },
-  {
-    "objectID": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-word-embeddings-1",
-    "href": "tutorials/workshop_word_embedding_r.html#represent-the-text-using-word-embeddings-1",
-    "title": "Word Embeddings",
-    "section": "Represent the text using word embeddings",
-    "text": "Represent the text using word embeddings\nWhy do we use them?\n\nUnderstand language use\n\nacross time\nacross groups\nstereotype and bias\n\nFeed into downstream NLP implementations"
-  },
-  {
-    "objectID": "tutorials/workshop_word_embedding_r.html#how-to-find-word-embeddings",
-    "href": "tutorials/workshop_word_embedding_r.html#how-to-find-word-embeddings",
-    "title": "Word Embeddings",
-    "section": "How to find word embeddings?",
-    "text": "How to find word embeddings?\n\nSingular Vector Decomposition (SVD)\nNeural network-based techniques\n\nWord2Vec\nGloVe\nlanguage models with transformers such as BERT"
-  },
-  {
-    "objectID": "tutorials/workshop_word_embedding_r.html#implementation-of-svd",
-    "href": "tutorials/workshop_word_embedding_r.html#implementation-of-svd",
-    "title": "Word Embeddings",
-    "section": "Implementation of SVD",
-    "text": "Implementation of SVD\n\nskipgram probabilitiespointwise mutual information (PMI)\n\n\nnested_data <- readRDS(\"data114.RDS\") %>%\n  unnest_tokens(word, speech) %>%\n  anti_join(get_stopwords()) %>%\n  group_by(word) %>%\n  filter(n() >= 50) %>%\n  ungroup() %>%\n  nest(words = c(word))\n  \nslide_windows <- function(tbl, window_size) {\n  skipgrams <- slider::slide(\n    tbl, ~.x, .after = window_size - 1, .step = 1, .complete = T\n  )\n  safe_mutate <- safely(mutate)\n  \n  out <- map2(skipgrams, 1:length(skipgrams), ~safe_mutate(.x, window_id = .y))\n  \n  out %>%\n    transpose() %>%\n    pluck(\"result\") %>%\n    compact() %>%\n    bind_rows()\n}\n\n\nlibrary(widyr) \nlibrary(furrr)\nplan(multisession)\n\npmi <- nested_data %>%\n  mutate(words = future_map(words, slide_windows, 4)) %>%\n  unnest(words) %>%\n  unite(window_id, speech_id, window_id) %>%\n  pairwise_pmi(word, window_id)"
-  },
-  {
-    "objectID": "tutorials/workshop_word_embedding_r.html#explore-word-vectors",
-    "href": "tutorials/workshop_word_embedding_r.html#explore-word-vectors",
-    "title": "Word Embeddings",
-    "section": "Explore word vectors",
-    "text": "Explore word vectors\nThe most similar words to “tax”:\n\n\n\nword_vectors <- pmi %>%\n  widely_svd(item1, item2, pmi, nv = 100, maxit = 1000)\n  \nnearest_neighbors <- function(df, token){\n  df %>% \n    widely(~. %*% (.[token, ]),\n           sort = T,\n           maximum_size = NULL)(item1, dimension, value) %>%\n    select(-item2)\n}\n\nword_vectors %>%\n  nearest_neighbors(\"tax\")"
-  },
-  {
-    "objectID": "tutorials/workshop_word_embedding_r.html#explore-word-vectors-1",
-    "href": "tutorials/workshop_word_embedding_r.html#explore-word-vectors-1",
-    "title": "Word Embeddings",
-    "section": "Explore word vectors",
-    "text": "Explore word vectors\nThe first 6 principal components with top 10 contributing words:\n\n\n\nword_vectors %>%\n  filter(dimension <= 6) %>%\n  group_by(dimension) %>%\n  top_n(10, abs(value)) %>%\n  ungroup() %>%\n  mutate(dimension = as.factor(dimension),\n         item1 = reorder_within(item1, value, dimension)) %>%\n  ggplot(aes(item1, value, fill = dimension)) +\n  geom_col(show.legend = F) +\n  facet_wrap(~ dimension, scales = \"free_y\", ncol = 3) +\n  coord_flip() +\n  scale_x_reordered() + \n  theme_bw()"
-  },
-  {
-    "objectID": "tutorials/workshop_word_embedding_r.html#explore-word-vectors-2",
-    "href": "tutorials/workshop_word_embedding_r.html#explore-word-vectors-2",
-    "title": "Word Embeddings",
-    "section": "Explore word vectors",
-    "text": "Explore word vectors\nDo politicians discuss “tax” in different ways?\n\n\n\nDemocrats\n\n\nRepublicans"
-  },
-  {
-    "objectID": "tutorials/workshop_word_embedding_r.html#implementation-of-glove",
-    "href": "tutorials/workshop_word_embedding_r.html#implementation-of-glove",
-    "title": "Word Embeddings",
-    "section": "Implementation of GloVe",
-    "text": "Implementation of GloVe\n::: panel-tabset #### skipgram probabilities"
-  },
-  {
-    "objectID": "tutorials/workshop_word_embedding_r.html#what-else-should-be-aware-of",
-    "href": "tutorials/workshop_word_embedding_r.html#what-else-should-be-aware-of",
-    "title": "Word Embeddings",
-    "section": "What else should be aware of?",
-    "text": "What else should be aware of?\n\nEmbedding alignment\nBoostrapping"
-  },
-  {
-    "objectID": "tutorials/workshop_word_embedding_r.html#references",
-    "href": "tutorials/workshop_word_embedding_r.html#references",
-    "title": "Word Embeddings",
-    "section": "References",
-    "text": "References\nChris Moody’s tutorial on building word embeddings from scratch\nDmitriy Selivanov’s tutorial on GloVe Word Embeddings\nJulia Silge’s blog post on word vectors with tidy data principles\nChris Bail’s tutorial on word embedings\nHvitfeldt and Silge, 2022. Supervised Machine Learning for Text Analysis in R"
-  },
-  {
-    "objectID": "projects.html",
-    "href": "projects.html",
-    "title": "Projects",
-    "section": "",
-    "text": "Visualizing Public Support for Government Surveillance\n\n\n\n\n\n\n\ncode\n\n\nanalysis\n\n\nvisualization\n\n\n\n\n\n\n\n\n\n\n\nDec 20, 2022\n\n\nZhaowen Guo\n\n\n\n\n\n\nNo matching items"
+    "objectID": "dataviz/geofacet-hexbin/index.html#data-visualization",
+    "href": "dataviz/geofacet-hexbin/index.html#data-visualization",
+    "title": "Revisiting Tree Equity Gap: Hexbin or Geofacet?",
+    "section": "2 Data Visualization",
+    "text": "2 Data Visualization\nThe function facet_geo() plays the magic, which creates the base map of the US that can be integrated with various data representations. By using the argument grid = us_state_grid1[c(-2, -11), ], we can exclude Hawaii and Alaska from the map as there is no data available for these states. If you prefer to have the full state name, you can add the argument label = \"name\".\nAnother thing to keep in mind is that the facet_geo() layer should integrate with a pre-existing data representation. In this example where I am interested in displaying the distribution of tree equity scores, I add geom_density() layer beforehand.\n```{r}\nggplot(data) +\n  geom_density(aes(x = tes), color = \"#466c4b\", fill = \"#7fa074\", alpha = 0.5) +\n  coord_cartesian(clip = \"off\") +\n  facet_geo(vars(state), scales = \"free_y\", grid = us_state_grid1[c(-2, -11), ], label = \"name\") +\n  scale_x_continuous(breaks = seq(0, 100, 20)) +\n  scale_y_continuous(\n    labels = scales::number_format(accuracy = 0.01)) +\n  labs(x = \"\", y = \"\",\n       title = \"ACCESS TO GREEN SPACE\",\n       subtitle = \"Distribution of tree equity scores across census blocks in the US\",\n       caption = str_wrap(\"\n       Tree Equity Score (TES) computes how much tree canopy and surface temperature align with income, \n       employment, race, age and health factors in the US, collected by American Forest | Visualization by Zhaowen Guo\", width = 300)) +\n  theme_void(base_family = \"Pragati Narrow\") +\n  theme(strip.text = element_text(face = \"bold\", color = \"grey20\", size = 30),\n        legend.position = \"none\",\n        axis.text = element_text(color = \"grey40\", size = 30),\n        strip.background = element_blank(),\n        plot.background = element_rect(fill = \"#f5f5f2\", color = NA),\n        plot.margin = margin(40, 15, 20, 15),\n        plot.title = element_text(face = \"bold\", size = 70, margin = margin(l=0, t=5)),\n        plot.subtitle = element_text(lineheight = 1, size = 50, margin(l=0, t=7)),\n        plot.caption = element_text(margin = margin(t=35), color = \"grey20\", size = 30),\n        plot.caption.position = \"plot\")\n\nggsave(\"tree-equity-geofacet.png\", dpi = 320, width = 14, height = 10)\n```"
   },
   {
     "objectID": "dataviz/tree-equity/index.html",
@@ -301,34 +63,6 @@
     "text": "4 Implications\nWhat do we learn from this visualization? The graph clearly illustrates the unequal distribution of green spaces, particularly in states like Ohio and Minnesota, where the gap is much more pronounced. This calls for prompt and effective action to rectify this imbalance."
   },
   {
-    "objectID": "statistics.html",
-    "href": "statistics.html",
-    "title": "Statistics",
-    "section": "",
-    "text": "Revisiting the Monty Hall Problem: The Power of Simulations\n\n\n\n\n\n\n\ncode\n\n\nstatistics\n\n\n\n\n\n\n\n\n\n\n\nFeb 14, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "dataviz/geofacet-hexbin/index.html",
-    "href": "dataviz/geofacet-hexbin/index.html",
-    "title": "Revisiting Tree Equity Gap: Hexbin or Geofacet?",
-    "section": "",
-    "text": "Last week, I introduced how to visualize disparities in tree equity scores using hexbin maps. Hexbin maps are a useful tool for visualizing dense data points by summarizing them in a compact and understandable format. By grouping data points into hexagonal bins, they provide a clear picture of the spatial distribution of the data, enabling the detection of patterns that may be hidden by overplotting.\nAlthough hexagonal bins provide a clean representation of data, they result in information loss regarding the underlying shape of the data. For example, my previous visual using hexbin maps suggests that Ohio has the largest tree equity gap, which is defined as the maximum difference across block-level tree equity scores. However, this does not provide a complete picture. When examining the distribution of tree equity scores across census blocks within each state, it is evident that Ohio has a considerable number of blocks with relatively high levels of tree equity, indicating that Ohio performs well in this regard.\nGeofacet offers a useful alternative to hexbin maps, allowing for the restoration of the original data distributions while preserving the spatial information. By maintaining individual data points, geofacet provides a more detailed representation of data to enable a more nuanced view of spatial relationships.\nIn this blog post, I will walk you through how to visualize tree equity score data using geofacet. All code can be found here."
-  },
-  {
-    "objectID": "dataviz/geofacet-hexbin/index.html#data-collection",
-    "href": "dataviz/geofacet-hexbin/index.html#data-collection",
-    "title": "Revisiting Tree Equity Gap: Hexbin or Geofacet?",
-    "section": "1 Data Collection",
-    "text": "1 Data Collection\nWe follow similar steps of data collection and the only difference is we keep the original variable - tree equity score.\n```{r}\n# prepare a function to read zip urls with shapefiles \nread_shape_URL <- function(URL){\n  cur_tempfile <- tempfile()\n  download.file(url = URL, destfile = cur_tempfile)\n  out_directory <- tempfile()\n  unzip(cur_tempfile, exdir = out_directory)\n  \n  read_sf(dsn = out_directory)\n}\n\n# pull state, tes, priority from each dataframe\ndata_lists <- list()\nfor (i in 1:nrow(states)){\n  state <- states$lower_code[i]\n  print(state)\n  URL <- paste0(\"https://national-tes-data-share.s3.amazonaws.com/national_tes_share/\", state, \".zip.zip\")\n  if (RCurl::url.exists(URL) == T) {\n    map <- read_shape_URL(paste0(\"https://national-tes-data-share.s3.amazonaws.com/national_tes_share/\", state, \".zip.zip\"))\n    data_lists[[i]] <- map %>% select(tes, state, priority)\n  }\n}\ndata <- do.call(rbind, data_lists) %>% na.omit()\n```"
-  },
-  {
-    "objectID": "dataviz/geofacet-hexbin/index.html#data-visualization",
-    "href": "dataviz/geofacet-hexbin/index.html#data-visualization",
-    "title": "Revisiting Tree Equity Gap: Hexbin or Geofacet?",
-    "section": "2 Data Visualization",
-    "text": "2 Data Visualization\nThe function facet_geo() plays the magic, which creates the base map of the US that can be integrated with various data representations. By using the argument grid = us_state_grid1[c(-2, -11), ], we can exclude Hawaii and Alaska from the map as there is no data available for these states. If you prefer to have the full state name, you can add the argument label = \"name\".\nAnother thing to keep in mind is that the facet_geo() layer should integrate with a pre-existing data representation. In this example where I am interested in displaying the distribution of tree equity scores, I add geom_density() layer beforehand.\n```{r}\nggplot(data) +\n  geom_density(aes(x = tes), color = \"#466c4b\", fill = \"#7fa074\", alpha = 0.5) +\n  coord_cartesian(clip = \"off\") +\n  facet_geo(vars(state), scales = \"free_y\", grid = us_state_grid1[c(-2, -11), ], label = \"name\") +\n  scale_x_continuous(breaks = seq(0, 100, 20)) +\n  scale_y_continuous(\n    labels = scales::number_format(accuracy = 0.01)) +\n  labs(x = \"\", y = \"\",\n       title = \"ACCESS TO GREEN SPACE\",\n       subtitle = \"Distribution of tree equity scores across census blocks in the US\",\n       caption = str_wrap(\"\n       Tree Equity Score (TES) computes how much tree canopy and surface temperature align with income, \n       employment, race, age and health factors in the US, collected by American Forest | Visualization by Zhaowen Guo\", width = 300)) +\n  theme_void(base_family = \"Pragati Narrow\") +\n  theme(strip.text = element_text(face = \"bold\", color = \"grey20\", size = 30),\n        legend.position = \"none\",\n        axis.text = element_text(color = \"grey40\", size = 30),\n        strip.background = element_blank(),\n        plot.background = element_rect(fill = \"#f5f5f2\", color = NA),\n        plot.margin = margin(40, 15, 20, 15),\n        plot.title = element_text(face = \"bold\", size = 70, margin = margin(l=0, t=5)),\n        plot.subtitle = element_text(lineheight = 1, size = 50, margin(l=0, t=7)),\n        plot.caption = element_text(margin = margin(t=35), color = \"grey20\", size = 30),\n        plot.caption.position = \"plot\")\n\nggsave(\"tree-equity-geofacet.png\", dpi = 320, width = 14, height = 10)\n```"
-  },
-  {
     "objectID": "dataviz/tree-gunshot/index.html",
     "href": "dataviz/tree-gunshot/index.html",
     "title": "The Calendar of Gun Violence",
@@ -348,6 +82,20 @@
     "title": "The Calendar of Gun Violence",
     "section": "2 Data Visualization",
     "text": "2 Data Visualization\nNow, let’s visualize the data! Interestingly, the part I spent most time upon was making the month names appear above the weekday names, as they were initially positioned the opposite way. To resolve this issue, we have the option to adjust either the strips (weekday names) or the axes (month names). I decided to go for the former route by increasing the bottom parameter with margin(b=25), which enabled the weekday names to move upwards until they were placed above the month names.\n```{r}\n# theme\nfont_add_google(\"Pragati Narrow\")\nshowtext_auto()\n\n\n# customize theme\ntheme_set(theme_minimal(base_family = \"Pragati Narrow\"))\n\ntheme_update(\n  # legend\n  legend.title = element_blank(),\n  legend.position = 'bottom',\n  legend.direction = 'horizontal',\n  legend.key.width = unit(1.5, \"cm\"),\n  legend.text = element_text(color = \"black\",  size=35),\n  legend.box.margin = margin(t = 35),\n  legend.spacing.x = unit(1, \"cm\"),\n  legend.spacing.y = unit(0.5, \"cm\"),\n  \n  # axis\n  axis.text.y = element_blank(),\n  axis.text.x = element_text(vjust = 50),\n  text = element_text(size = 40),\n  strip.text.x = element_text(size = 43, margin = margin(b = 25)),\n  \n  # titles\n  panel.grid.major = element_blank(),\n  panel.grid.minor = element_blank(),\n  plot.margin = margin(20, 50, 20, 50),\n  plot.background = element_rect(fill = \"#f5f5f2\", color = NA), \n  panel.background = element_rect(fill = \"#f5f5f2\", color = NA), \n  \n  #legend.title.align=1,\n  plot.title = element_text(\n    color = \"black\", \n    size = 70, \n    face = \"bold\",\n    margin = margin(t = 10),\n    hjust = 0.5\n  ),\n  plot.subtitle = element_text(\n    color = \"grey10\", \n    size = 45,\n    lineheight = 3,\n    margin = margin(t = 5, b = 30),\n    hjust = 0.5\n  ),\n  plot.title.position = \"plot\",\n  plot.caption.position = \"plot\",\n  plot.caption = element_text(\n    color = \"grey20\", \n    size = 35,\n    lineheight = 0.5, \n    hjust = 0.5,\n    margin = margin(t = 30))\n)\n\n\ngunshot_daily %>%\n  ggplot(aes(x = week_day, y = week)) +\n  geom_tile(aes(fill = shots_range), color = \"white\") + \n  scale_fill_manual(values = MetBrewer::met.brewer(\"Tam\", n=3),\n                    labels = c(\"below 10\", \"10 to 20\", \"over 20\"),\n                    guide = guide_legend(label.position = \"bottom\", nrow = 1)) +\n  facet_wrap(~month_name, scales = \"free\") +\n  scale_y_reverse() +\n  scale_x_discrete(position = \"bottom\") +\n  labs(x = \"\", y = \"\", title = \"GUNSHOT DETECTION CALENDAR\",\n       subtitle = \"Recorded shooting incidents in Washington D.C. during 2021\",\n       caption = str_wrap(\"Data comes from ShotSpotter gunshot detection system. Incidents of probable gunfires and firecrackers are excluded | Visualization by Zhaowen Guo\", width = 300))\n\nggsave(\"dc-gunshot-time.png\", width = 14, height = 14/1.618, units = \"in\")\n```"
+  },
+  {
+    "objectID": "dataviz.html",
+    "href": "dataviz.html",
+    "title": "Data Visualization",
+    "section": "",
+    "text": "The Calendar of Gun Violence\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ngreenspace\n\n\n\n\n\n\n\n\n\n\n\nFeb 14, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nRevisiting Tree Equity Gap: Hexbin or Geofacet?\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ngreenspace\n\n\n\n\n\n\n\n\n\n\n\nFeb 13, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nGreen Space for Everyone? Visualizing Tree Equity Gap\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ngreenspace\n\n\n\n\n\n\n\n\n\n\n\nFeb 7, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Zhaowen Guo",
+    "section": "",
+    "text": "I am a PhD candidate at the University of Washington, where I combine my expertise in both social and data science to develop and enhance metrics using innovative data collection and psychometric techniques.\nI enjoy connecting data from various sources, including administrative data, survey data, text data, image data, and spatial data, to deliver insightful analyses and support impact evaluations. My passion lies in communicating my findings through engaging data visualizations and promoting equity and inclusion in data science by knowledge sharing."
   },
   {
     "objectID": "statistics/simulations/index.html",
@@ -376,5 +124,12 @@
     "title": "Revisiting the Monty Hall Problem: The Power of Simulations",
     "section": "3 Simulations",
     "text": "3 Simulations\nAs you may have noticed, solving the Monty Hall problem requires some effort to overcome our intuition. However, there is a more intuitive way to approach this problem: simulations. Using simulations, we can better understand the probabilities at play and verify the counter-intuitive result of the problem.\nThe basic idea is still to compute and compare the winning probability of switching and not switching, but now let’s play this game 10000 times and compare the relative frequency of winning.\nUsing exactly the same setup where our initial choice is Door 1, the probability of not switching after 10000 iterations of the game is 0.33.\n```{r}\n# The winning probability of sticking to the initial choice\nset.seed(123)\ndoors <- c(1,2,3)\n\ncount <- 0\nfor(i in 1:10000) {\n  car <- sample(doors, 1)\n  initial_choice <- 1\n  if(initial_choice == car){\n    count <- count + 1\n  }\n}\n\np_stick <- count/10000\n```\nA slightly tricky part is specifying which door Monty will reveal. Following the same logic, Monty will choose a door different from both our initial choice and the door with the car, we can write a simple function as below and compute the relative frequency of winning when we switch. The probability is 0.67, twice as larger as 0.33.\n```{r}\n# The winning probability of switching to another choice \nset.seed(123)\nreveal <- function(doors, car, initial_choice) {\n  if(car == initial_choice){\n    reveal <- sample(doors[-c(car,initial_choice)], 1)\n  } else {\n    reveal <- doors[-c(car, initial_choice)]\n  }\n}\n\ncount <- 0\nfor (i in 1:10000) {\n  car <- sample(doors,1)\n  initial_choice <- 1\n  revealed_door <- reveal(doors, car, initial_choice)\n  final_choice <- doors[-c(initial_choice, revealed_door)]\n  if(final_choice == car){\n    count = count + 1\n  }\n}\n\np_switch <- count/10000\n```\nI hope this post has highlighted the usefulness of simulations as a tool to gain a more intuitive understanding of probability concepts. By running simulations of the Monty Hall problem multiple times, we can observe how the probability of winning changes when we switch doors, which can be helpful in building a deeper understanding of the problem. Additionally, simulations can also serve as a good way to verify counter-intuitive results and build confidence in other probability-based solutions."
+  },
+  {
+    "objectID": "statistics.html",
+    "href": "statistics.html",
+    "title": "Statistics",
+    "section": "",
+    "text": "Revisiting the Monty Hall Problem: The Power of Simulations\n\n\n\n\n\n\n\ncode\n\n\nstatistics\n\n\n\n\n\n\n\n\n\n\n\nFeb 14, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\nNo matching items"
   }
 ]
