@@ -32,7 +32,7 @@ website:
         icon: github
         url: "https://github.com/zwguo95"
       - text: Email
-        url: "zwguo@uw.edu"
+        href: mailto:zwguo@uw.edu
         icon: envelope
       - text: Resume
         url: "resume_guo.pdf"
@@ -50,4 +50,3 @@ format:
     code-link: true
     code-fold: show
     code-tools: false
-    code-block-border-left: "#64605f"

@@ -13,7 +13,7 @@ about:
       icon: github
       href: https://github.com/zwguo95
     - text: Contact me
-      href: zwguo@uw.edu
+      href: mailto:zwguo@uw.edu
       icon: envelope
 ---
 
