@@ -7,13 +7,13 @@ about:
   image-width: 15em
   links:
     - text: LinkedIn
-      url: "https://www.linkedin.com/in/zhaowen-guo-20535312a/"
+      href: https://www.linkedin.com/in/zhaowen-guo-20535312a/
       icon: linkedin
     - text: GitHub
       icon: github
-      url: "https://github.com/zwguo95"
+      href: https://github.com/zwguo95
     - text: Contact me
-      url: "zwguo@uw.edu"
+      href: zwguo@uw.edu
       icon: envelope
 ---
 

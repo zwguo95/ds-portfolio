@@ -1,0 +1,23 @@
+---
+title: "A New Approach to Representing Racial Disparities: Moving Beyond Bar Charts"
+date: 02/17/2023
+author:
+  - name: Zhaowen Guo
+    url: "https://www.linkedin.com/in/zhaowen-guo-20535312a/"
+title-block-banner: true
+format:
+  html:
+    theme: flatly
+    code-fold: false
+    code-tools: false
+    toc: false
+    number-sections: false
+link-citations: yes
+categories: [code, visualization]
+image: "tree-equity.png"
+---
+
+
+
+![](tree-equity.png)
+

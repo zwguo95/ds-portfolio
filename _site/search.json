@@ -119,6 +119,34 @@
     "text": "I am a PhD candidate at the University of Washington, where I combine my expertise in both social and data science to develop and enhance metrics using innovative data collection and psychometric techniques.\nI enjoy connecting data from various sources, including administrative data, survey data, text data, image data, and spatial data, to deliver insightful analyses and support impact evaluations. My passion lies in communicating my findings through engaging data visualizations and promoting equity and inclusion in data science by knowledge sharing."
   },
   {
+    "objectID": "statistics/dssg-tracking-poverty/index.html",
+    "href": "statistics/dssg-tracking-poverty/index.html",
+    "title": "Predicting Household Groupings: A Longitudinal Approach",
+    "section": "",
+    "text": "Poverty is a complex issue that is typically measured at the household level, taking into account the resources that are shared among multiple individuals. However, many existing studies rely solely on individual-level survey data to estimate poverty rates. This approach can lead to inaccurate estimates, particularly in cases where individuals within a household have differing levels of access to resources.\nThe use of administrative data is a promising approach to measuring poverty, as it provides a wealth of information on individual addresses. By aggregating information across individuals who are more likely to belong to the same household, we can develop more accurate estimates of poverty and better understand the ways in which poverty affects families and communities.\nIn our 2022 Data Science for Social Good (DSSG) project, we used the Washington Merged Longitudinal Administrative Dataset (WMLAD) to predict household groupings in the Washington State. This database merges administrative data from various state agencies including the Employment Security Department (ESD), Department of Social and Health Services (DSHS), Department of Health (DOH), Secretary of State, Department of Licensing (DOL), and WA State Patrol, covering the period from 2010 to 2017. Each time an individual interacts with any of these agencies, they are assigned an anonymized address code, which is further augmented by an imputation algorithm developed by previous WMLAD users (more details here).\nIn this blog post, I will introduce a longitudinal approach that I proposed for our team to improve the imputed addresses and construct more reliable household groupings. Don’t forget to also check out our presentation and media coverage :)"
+  },
+  {
+    "objectID": "statistics/dssg-tracking-poverty/index.html#scenario-1-lack-of-interactions",
+    "href": "statistics/dssg-tracking-poverty/index.html#scenario-1-lack-of-interactions",
+    "title": "Predicting Household Groupings: A Longitudinal Approach",
+    "section": "Scenario 1: Lack of interactions",
+    "text": "Scenario 1: Lack of interactions\nThis occurs when certain household members, especially children, have less interactions with government agencies than adults, resulting in fewer recorded addresses for imputation. For example, addresses for children may only be recorded when they register to vote or obtain a driver’s license, which implies that the observation of some one-person residences may simply be due to the absence of their children in previous records.\nTo address this circumstance, I recommended adjusting certain one-person residences to reflect their actual co-residence with children. For example, in the scenario illustrated below, a child (purple face) began to co-reside with others (blue face) in month 4, while the address records showing only one person living at that address previously. In such cases, we need to reflect their co-residence accurately."
+  },
+  {
+    "objectID": "statistics/dssg-tracking-poverty/index.html#scenario-2-imputation-error",
+    "href": "statistics/dssg-tracking-poverty/index.html#scenario-2-imputation-error",
+    "title": "Predicting Household Groupings: A Longitudinal Approach",
+    "section": "Scenario 2: Imputation error",
+    "text": "Scenario 2: Imputation error\nAnother pattern that drew my attention was frequent movements into and out of the same place, which may indicate an imputation error.\nA plausible fix was in cases where we observe a person living alone and co-residing with others alternately at the same address, we could adjust the one-person residences to reflect the nearest co-residence that the individual belongs to."
+  },
+  {
+    "objectID": "statistics/dssg-tracking-poverty/index.html#scenario-3-move-in-and-out",
+    "href": "statistics/dssg-tracking-poverty/index.html#scenario-3-move-in-and-out",
+    "title": "Predicting Household Groupings: A Longitudinal Approach",
+    "section": "Scenario 3: Move in and out",
+    "text": "Scenario 3: Move in and out\nThe third scenario is more complex. One-person residences may occur during a transition period when a multi-person residence moves out simultaneously to a new location, but their addresses are not updated accordingly.\nIn cases where we observe distinct co-residence members before and after a one-person residence at a particular address, and the prior co-residence appears again in the future, we adjust the one-person residence to reflect the subsequent co-residence. As depicted in the illustration below, we should only modify one-person residences in month 3 when the co-residence composition in month 2 and month 4 matches.\n\n\nModifying one-person residences that fall under these scenarios did not conclude the analysis, as it could result in duplicates where a person appears at multiple addresses during the same time period. Therefore, we should eliminate duplicates based on recorded addresses, rather than imputed ones, which provide a more reliable indication of the address that the person belongs to.\nHow effective is this algorithm? After implementing the modifications, the percentage of one-person residences decreased from 38% to 31%, bringing it much closer to the census record of 27%. We are currently developing a methodology paper that details this approach along with more real-world data applications. We anticipate that our methodology and resulting household groupings will be beneficial in addressing significant policy questions."
+  },
+  {
     "objectID": "statistics/rasch-hlm/index.html",
     "href": "statistics/rasch-hlm/index.html",
     "title": "Unveilling Model Equivalence: Linking the Rasch Model with the Hierarchical Linear Model",
@@ -159,54 +187,5 @@
     "title": "Statistics",
     "section": "",
     "text": "Revisiting the Monty Hall Problem: The Power of Simulations\n\n\n\n\n\n\n\ncode\n\n\nstatistics\n\n\n\n\n\n\n\n\n\n\n\nFeb 14, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nPredicting Household Groupings: A Longitudinal Approach\n\n\n\n\n\n\n\ncode\n\n\nstatistics\n\n\n\n\n\n\n\n\n\n\n\nDec 15, 2022\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nUnveilling Model Equivalence: Linking the Rasch Model with the Hierarchical Linear Model\n\n\n\n\n\n\n\ncode\n\n\nstatistics\n\n\npsychometrics\n\n\n\n\n\n\n\n\n\n\n\nNov 15, 2022\n\n\nZhaowen Guo\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "statistics/dssg-tracking-poverty/index.html",
-    "href": "statistics/dssg-tracking-poverty/index.html",
-    "title": "Predicting Household Groupings: A Longitudinal Approach",
-    "section": "",
-    "text": "Poverty is a complex issue that is typically measured at the household level, taking into account the resources that are shared among multiple individuals. However, many existing studies rely solely on individual-level survey data to estimate poverty rates. This approach can lead to inaccurate estimates, particularly in cases where individuals within a household have differing levels of access to resources.\nThe use of administrative data is a promising approach to measuring poverty, as it provides a wealth of information on individual addresses. By aggregating information across individuals who are more likely to belong to the same household, we can develop more accurate estimates of poverty and better understand the ways in which poverty affects families and communities.\nIn our 2022 Data Science for Social Good (DSSG) project, we used the Washington Merged Longitudinal Administrative Dataset (WMLAD) to predict household groupings in the Washington State. This database merges administrative data from various state agencies including the Employment Security Department (ESD), Department of Social and Health Services (DSHS), Department of Health (DOH), Secretary of State, Department of Licensing (DOL), and WA State Patrol, covering the period from 2010 to 2017. Each time an individual interacts with any of these agencies, they are assigned an anonymized address code, which is further augmented by an imputation algorithm developed by previous WMLAD users (more details here).\nIn this blog post, I will introduce a longitudinal approach that I proposed for our team to improve the imputed addresses and construct more reliable household groupings. Don’t forget to also check out our presentation and media coverage :)"
-  },
-  {
-    "objectID": "statistics/dssg-tracking-poverty/index.html#scenario-1-lack-of-interactions",
-    "href": "statistics/dssg-tracking-poverty/index.html#scenario-1-lack-of-interactions",
-    "title": "Predicting Household Groupings: A Longitudinal Approach",
-    "section": "Scenario 1: Lack of interactions",
-    "text": "Scenario 1: Lack of interactions\nThis occurs when certain household members, especially children, have less interactions with government agencies than adults, resulting in fewer recorded addresses for imputation. For example, addresses for children may only be recorded when they register to vote or obtain a driver’s license, which implies that the observation of some one-person residences may simply be due to the absence of their children in previous records.\nTo address this circumstance, I recommended adjusting certain one-person residences to reflect their actual co-residence with children. For example, in the scenario illustrated below, a child (purple face) began to co-reside with others (blue face) in month 4, while the address records showing only one person living at that address previously. In such cases, we need to reflect their co-residence accurately."
-  },
-  {
-    "objectID": "statistics/dssg-tracking-poverty/index.html#scenario-2-imputation-error",
-    "href": "statistics/dssg-tracking-poverty/index.html#scenario-2-imputation-error",
-    "title": "Predicting Household Groupings: A Longitudinal Approach",
-    "section": "Scenario 2: Imputation error",
-    "text": "Scenario 2: Imputation error\nAnother pattern that drew my attention was frequent movements into and out of the same place, which may indicate an imputation error.\nA plausible fix was in cases where we observe a person living alone and co-residing with others alternately at the same address, we could adjust the one-person residences to reflect the nearest co-residence that the individual belongs to."
-  },
-  {
-    "objectID": "statistics/dssg-tracking-poverty/index.html#scenario-3-move-in-and-out",
-    "href": "statistics/dssg-tracking-poverty/index.html#scenario-3-move-in-and-out",
-    "title": "Predicting Household Groupings: A Longitudinal Approach",
-    "section": "Scenario 3: Move in and out",
-    "text": "Scenario 3: Move in and out\nThe third scenario is more complex. One-person residences may occur during a transition period when a multi-person residence moves out simultaneously to a new location, but their addresses are not updated accordingly.\nIn cases where we observe distinct co-residence members before and after a one-person residence at a particular address, and the prior co-residence appears again in the future, we adjust the one-person residence to reflect the subsequent co-residence. As depicted in the illustration below, we should only modify one-person residences in month 3 when the co-residence composition in month 2 and month 4 matches.\n\n\nModifying one-person residences that fall under these scenarios did not conclude the analysis, as it could result in duplicates where a person appears at multiple addresses during the same time period. Therefore, we should eliminate duplicates based on recorded addresses, rather than imputed ones, which provide a more reliable indication of the address that the person belongs to.\nHow effective is this algorithm? After implementing the modifications, the percentage of one-person residences decreased from 38% to 31%, bringing it much closer to the census record of 27%. We are currently developing a methodology paper that details this approach along with more real-world data applications. We anticipate that our methodology and resulting household groupings will be beneficial in addressing significant policy questions."
-  },
-  {
-    "objectID": "statistics/dssg-tracking-poverty/index.html#scenario-lack-of-interactions",
-    "href": "statistics/dssg-tracking-poverty/index.html#scenario-lack-of-interactions",
-    "title": "Predicting Household Groupings: A Longitudinal Approach",
-    "section": "1.1 Scenario: Lack of interactions",
-    "text": "1.1 Scenario: Lack of interactions\nThis occurs when certain household members, especially children, have less interactions with government agencies than adults, resulting in fewer recorded addresses for imputation. For example, addresses for children may only be recorded when they register to vote or obtain a driver’s license, which implies that the observation of some one-person residences may simply be due to the absence of their children in previous records.\nTo address this circumstance, I recommended adjusting certain one-person residences to reflect their actual co-residence with children. For example, in the scenario illustrated below, a child (purple face) began to co-reside with others (blue face) in month 4, while the address records showing only one person living at that address previously. In such cases, we need to reflect their co-residence accurately."
-  },
-  {
-    "objectID": "statistics/dssg-tracking-poverty/index.html#scenario-imputation-error",
-    "href": "statistics/dssg-tracking-poverty/index.html#scenario-imputation-error",
-    "title": "Predicting Household Groupings: A Longitudinal Approach",
-    "section": "1.2 Scenario: Imputation error",
-    "text": "1.2 Scenario: Imputation error\nAnother pattern that drew my attention was frequent movements into and out of the same place, which may indicate an imputation error.\nA plausible fix was in cases where we observe a person living alone and co-residing with others alternately at the same address, we could adjust the one-person residences to reflect the nearest co-residence that the individual belongs to."
-  },
-  {
-    "objectID": "statistics/dssg-tracking-poverty/index.html#scenario-move-in-and-out",
-    "href": "statistics/dssg-tracking-poverty/index.html#scenario-move-in-and-out",
-    "title": "Predicting Household Groupings: A Longitudinal Approach",
-    "section": "1.3 Scenario: Move in and out",
-    "text": "1.3 Scenario: Move in and out\nThe third scenario is more complex. One-person residences may occur during a transition period when a multi-person residence moves out simultaneously to a new location, but their addresses are not updated accordingly.\nIn cases where we observe distinct co-residence members before and after a one-person residence at a particular address, and the prior co-residence appears again in the future, we adjust the one-person residence to reflect the subsequent co-residence. As depicted in the illustration below, we should only modify one-person residences in month 3 when the co-residence composition in month 2 and month 4 matches.\n\n\nModifying one-person residences that fall under these scenarios did not conclude the analysis, as it could result in duplicates where a person appears at multiple addresses during the same time period. Therefore, we should eliminate duplicates based on recorded addresses, rather than imputed ones, which provide a more reliable indication of the address that the person belongs to.\nHow effective is this algorithm? After implementing the modifications, the percentage of one-person residences decreased from 38% to 31%, bringing it much closer to the census record of 27%. We are currently developing a methodology paper that details this approach along with more real-world data applications. We anticipate that our methodology and resulting household groupings will be beneficial in addressing significant policy questions."
   }
 ]
