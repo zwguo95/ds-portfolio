@@ -4,7 +4,9 @@ project:
 website:
   title: "Zhaowen Guo"
   favicon: "headshot_guo.jpg"
-    
+  google-analytics: 
+    tracking-id: "G-J1PPVYDT7J"
+    anonymize-ip: true
   search: 
     location: navbar
     type: overlay
