@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhaowen Guo">
-<meta name="dcterms.date" content="2023-02-17">
+<meta name="dcterms.date" content="2023-02-19">
 
-<title>Zhaowen Guo - A New Approach to Representing Racial Disparities: Moving Beyond Bar Charts</title>
+<title>Zhaowen Guo - Visualizing Racial Justice: Moving Beyond Bar Charts</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +22,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -61,6 +124,15 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-J1PPVYDT7J"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-J1PPVYDT7J', { 'anonymize_ip': true});
+</script>
 
 
 </head>
@@ -121,7 +193,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">GitHub</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../zwguo@uw.edu"><i class="bi bi-envelope" role="img">
+    <a class="nav-link" href="mailto:zwguo@uw.edu"><i class="bi bi-envelope" role="img">
 </i> 
  <span class="menu-text">Email</span></a>
   </li>  
@@ -140,7 +212,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">A New Approach to Representing Racial Disparities: Moving Beyond Bar Charts</h1>
+      <h1 class="title">Visualizing Racial Justice: Moving Beyond Bar Charts</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">code</div>
                 <div class="quarto-category">visualization</div>
@@ -161,7 +233,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">February 17, 2023</p>
+        <p class="date">February 19, 2023</p>
       </div>
     </div>
     
@@ -179,7 +251,87 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p><img src="tree-equity.png" class="img-fluid"></p>
+<p>Gun violence disproportionately and overwhelmingly affects communities of color, resulting in significant racial disparities in <a href="https://www.americanprogress.org/article/gun-violence-disproportionately-and-overwhelmingly-hurts-communities-of-color/">exposure to gun violence</a>. To tell stories of racial justice in gun violence, it’s crucial to use compelling visuals. While many reports have relied on <a href="https://americanprogress.org/wp-content/uploads/2018/05/YouthUnderFire-fig3-693.png">bar charts</a> and <a href="https://i1.wp.com/www.brookings.edu/wp-content/uploads/2015/12/Reeves-1215003.png?w=768&amp;crop=0%2C0px%2C100%2C9999px&amp;ssl=1">stacked bar charts</a> to illustrate unequal gun exposure, using them exclusively may not always be visually engaging. In this blog post, we will explore some alternative ways to visualize racial justice in gun violence. My full code can be accessed <a href="racial-disparity.R">here</a>.</p>
+<p>One effective way to display racial disparities in gun violence is using a parliament chart, which is suitable for categorical data in a two-dimensional grid format. Let’s use recorded gunshot incidents in Washington DC in 2021 as an example. After cleaning the data, it is evident that out of the 555 communities in the city, 293 experienced gun violence. Shockingly, over 70% of these communities were African-American, highlighting a clear instance of racial disparity.</p>
+<p>To convey this message using a parliament chart, we can use the <em>ggparliament</em> package which just takes two steps to get our work done. Firstly, we need to create a data frame with the categorical data we want to visualize, which in this case is the number of communities per racial group that have been exposed to gun violence. Next, we can convert this data frame to an appropriate structure for creating a parliament chart using the <em>parliament_data()</em> function. In the second step, we can specify the shape of the parliament chart (circle, semicircle, square, or rectangle), the number of rows to display, and the counts for each category.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>community_gunshot <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">groups =</span> <span class="fu">c</span>(<span class="st">"White Community"</span>, <span class="st">"African-American Community"</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">count =</span> <span class="fu">c</span>(<span class="dv">84</span>, <span class="dv">209</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                                <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"#d39a2d"</span>,<span class="st">"#591c19"</span>))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>community_gunshot_data <span class="ot">&lt;-</span> <span class="fu">parliament_data</span>(<span class="at">election_data =</span> community_gunshot,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">type =</span> <span class="st">"semicircle"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">parl_rows =</span> <span class="dv">6</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">party_seats =</span> community_gunshot<span class="sc">$</span>count)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Once we have completed these two steps, we can then use the data frame with ggplot and add a layer called <em>geom_parliament_seats()</em>. We can also add whatever aesthetics we desire. And voila, our parliament chart is ready to be displayed!</p>
+<p><img src="dc_race.png" class="img-fluid"></p>
+<p>When attempting to replicate this graph by comparing Hispanic/Latino communities to others, an issue arose: there are only five Hispanic/Latino communities out of the 555 communities. If we display the raw counts of communities experiencing gun violence, this could give the false impression that non-Hispanic or non-Latino communities had greater exposure to gun violence. However, in reality, four out of the five Hispanic/Latino communities experienced gun violence. As a result, it is crucial to display proportions rather than raw counts when comparing ethnic communities.</p>
+<p>What alternative visualization options do we have besides using bar charts? One idea that came to mind was using filled icons, such as handguns, with different heights of filled colors to represent the proportions of communities that experienced gun violence. However, implementing this idea was more time-consuming than anticipated. I would appreciate any suggestions on how to streamline this process.</p>
+<p>My approach was to combine the <em>echarts4r</em> and the <em>ggplot</em> workflows. <em>echarts4r</em> is a powerful tool for creating interactive visualizations and includes a handy function called <em>e_pictorial()</em>, which allows us to incorporate any images we want to plot, such as a handgun icon in our case. To use an image, we simply need to provide the path to the svg file.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>icon_path <span class="ot">=</span> <span class="st">"path://M544 64h-16V56C528 42.74 517.3 32 504 32S480 42.74 480 56V64H43.17C19.33 64 0 83.33 0 107.2v89.66C0 220.7 19.33 240 43.17 240c21.26 0 36.61 20.35 30.77 40.79l-40.69 158.4C27.41 459.6 42.76 480 64.02 480h103.8c14.29 0 26.84-9.469 30.77-23.21L226.4 352h94.58c24.16 0 45.5-15.41 53.13-38.28L398.6 240h36.1c8.486 0 16.62-3.369 22.63-9.373L480 208h64c17.67 0 32-14.33 32-32V96C576 78.33 561.7 64 544 64zM328.5 298.6C327.4 301.8 324.4 304 320.9 304H239.1L256 240h92.02L328.5 298.6zM480 160H64V128h416V160z"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>hispanic <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">ethnic =</span> <span class="fu">c</span>(<span class="st">"Hispanic"</span>, <span class="st">"Others"</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">ratio =</span> <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">25</span>), <span class="co"># scale down the numbers 80 and 53</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">path =</span> <span class="fu">c</span>(icon_path,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                               icon_path))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># create a filled image graph</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>hispanic <span class="sc">%&gt;%</span> </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">e_charts</span>(ethnic) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">e_x_axis</span>(<span class="at">splitLine=</span><span class="fu">list</span>(<span class="at">show =</span> <span class="cn">FALSE</span>), </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">axisTick=</span><span class="fu">list</span>(<span class="at">show=</span><span class="cn">FALSE</span>),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">axisLine=</span><span class="fu">list</span>(<span class="at">show=</span><span class="cn">FALSE</span>),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>           <span class="at">axisLabel =</span> <span class="fu">list</span>(<span class="at">show=</span><span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">e_y_axis</span>(<span class="at">max=</span><span class="dv">100</span>, </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>           <span class="at">splitLine=</span><span class="fu">list</span>(<span class="at">show =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>           <span class="at">axisTick=</span><span class="fu">list</span>(<span class="at">show=</span><span class="cn">FALSE</span>),</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>           <span class="at">axisLine=</span><span class="fu">list</span>(<span class="at">show=</span><span class="cn">FALSE</span>),</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>           <span class="at">axisLabel=</span><span class="fu">list</span>(<span class="at">show=</span><span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">e_color</span>(<span class="at">color =</span> <span class="fu">c</span>(<span class="st">'#811e18'</span>,<span class="st">'grey'</span>), <span class="at">background =</span> <span class="st">"#f5f5f2"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">e_pictorial</span>(ratio, <span class="at">symbol =</span> path, <span class="at">z=</span><span class="dv">10</span>, <span class="at">name =</span> <span class="st">""</span>,</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>              <span class="at">symbolBoundingData=</span> <span class="dv">50</span>, <span class="at">symbolClip=</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">e_pictorial</span>(ratio, <span class="at">symbol =</span> path, <span class="at">name=</span> <span class="st">''</span>, </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>              <span class="at">symbolBoundingData=</span> <span class="dv">50</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">e_legend</span>(<span class="at">show =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">e_grid</span>(<span class="at">bottom =</span> <span class="st">"35%"</span>) </span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>However, one drawback is that <em>echarts4r</em> does not work directly with ggplot themes, so I couldn’t adjust the aesthetics to match my other ggplot charts. To work around this, I created a graph with two filled handgun icons and used it as a background image in ggplot. I then added supporting annotations to enhance the visualization.</p>
+<p>To annotate the previously downloaded graph, I used the <em>magick</em> and <em>ggpubr</em> packages, which allowed me to easily add text and other annotations in the style of ggplot. The process involved importing the graph as an image using <em>magick</em>, and then using <em>ggpubr</em> to overlay ggplot-style text annotations on top of the image. To ensure that the annotations were positioned correctly, I specified the appropriate x- and y-coordinates for each annotation.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magick)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>background <span class="ot">&lt;-</span> <span class="fu">image_read</span>(<span class="st">"ethnic-gun.png"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>xaxis <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">xaxis =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span>))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>yaxis <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">yaxis =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span>))</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">background_image</span>(background) <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> xaxis, <span class="fu">aes</span>(<span class="at">x =</span> xaxis, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">label =</span> labels)) <span class="sc">+</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> yaxis, <span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> yaxis, <span class="at">label =</span> labels)) <span class="sc">+</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">""</span>,<span class="at">y=</span><span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#f5f5f2"</span>, <span class="at">color =</span> <span class="cn">NA</span>)) <span class="sc">+</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">0.8</span>, <span class="at">y =</span> <span class="fl">0.8</span>, <span class="at">label =</span> <span class="st">"80% of Hispanic or Latino Communities"</span>,</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">15</span>,  <span class="at">family =</span> <span class="st">"Pragati Narrow"</span>) <span class="sc">+</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">2.1</span>, <span class="at">y =</span> <span class="fl">0.8</span>, <span class="at">label =</span> <span class="st">"53% of Other Communities"</span>,</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">15</span>,  <span class="at">family =</span> <span class="st">"Pragati Narrow"</span>) <span class="sc">+</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">1.45</span>, <span class="at">y =</span> <span class="fl">2.95</span>, <span class="at">label =</span> <span class="st">"COMMUNITY EXPOSURE TO GUN VIOLENCE"</span>,</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">26</span>,  <span class="at">family =</span> <span class="st">"Pragati Narrow"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">1.45</span>, <span class="at">y =</span> <span class="fl">2.82</span>, <span class="at">label =</span> <span class="st">"Communities that experienced inidents of gunshots in 2021"</span>,</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">19</span>,  <span class="at">family =</span> <span class="st">"Pragati Narrow"</span>) <span class="sc">+</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">1.5</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">label =</span> <span class="st">"Data comes from ShotSpotter gunshot detection system. Incidents of probable gunfires and firecrackers are excluded | Visualization by Zhaowen Guo"</span>,</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">12</span>,  <span class="at">family =</span> <span class="st">"Pragati Narrow"</span>,<span class="at">color =</span> <span class="st">"grey20"</span>)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"dc_ethnic.png"</span>, <span class="at">width =</span> <span class="dv">14</span>, <span class="at">height =</span> <span class="dv">14</span><span class="sc">/</span><span class="fl">1.618</span>, <span class="at">units =</span> <span class="st">"in"</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here’s the final output! With this filled icon chart (sometimes referred to as a pictogram chart), it is easy to see that Hispanic/Latino communities are significantly impacted by gun violence compared to other ethnic groups.</p>
+<p><img src="dc_ethnic.png" class="img-fluid"></p>
 
 
 

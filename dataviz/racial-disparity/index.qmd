@@ -1,6 +1,6 @@
 ---
 title: "Visualizing Racial Justice: Moving Beyond Bar Charts"
-date: 02/17/2023
+date: 02/19/2023
 author:
   - name: Zhaowen Guo
     url: "https://www.linkedin.com/in/zhaowen-guo-20535312a/"
