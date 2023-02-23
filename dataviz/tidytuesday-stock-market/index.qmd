@@ -1,5 +1,5 @@
 ---
-title: "TIdyTuesday: Tech Company Stock Prices"
+title: "TidyTuesday: Tech Company Stock Prices"
 date: 02/07/2023
 author:
   - name: Zhaowen Guo

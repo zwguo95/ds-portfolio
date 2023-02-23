@@ -2,8 +2,10 @@
   {
     "listing": "/dataviz.html",
     "items": [
+      "/dataviz/tidytuesday-bob-ross/index.html",
       "/dataviz/racial-disparity/index.html",
       "/dataviz/green-space-gunshot-map/index.html",
+      "/dataviz/tidytuesday-hollywood-age/index.html",
       "/dataviz/tree-gunshot/index.html",
       "/dataviz/geofacet-hexbin/index.html",
       "/dataviz/tidytuesday-stock-market/index.html",

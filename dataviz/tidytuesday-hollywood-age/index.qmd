@@ -1,5 +1,5 @@
 ---
-title: "TIdyTuesday: Hollywood Age Gap"
+title: "TidyTuesday: Hollywood Age Gap"
 date: 02/14/2023
 author:
   - name: Zhaowen Guo

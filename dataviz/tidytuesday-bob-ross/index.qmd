@@ -1,5 +1,5 @@
 ---
-title: "TIdyTuesday: Bob Ross Paintings"
+title: "TidyTuesday: Bob Ross Paintings"
 date: 02/21/2023
 author:
   - name: Zhaowen Guo
