@@ -58,21 +58,21 @@
   {
     "objectID": "dataviz/tidytuesday-bob-ross/index.html",
     "href": "dataviz/tidytuesday-bob-ross/index.html",
-    "title": "TIdyTuesday: Bob Ross Paintings",
+    "title": "TidyTuesday: Bob Ross Paintings",
     "section": "",
     "text": "TidyTuesday is a weekly data project aimed at improving skills in data manipulation, visualization and analysis using R programming language. This week, we are exploring the paintings of Bob Ross featured in the TV show “The Joy of Painting”. Please find my code here!"
   },
   {
     "objectID": "dataviz/tidytuesday-hollywood-age/index.html",
     "href": "dataviz/tidytuesday-hollywood-age/index.html",
-    "title": "TIdyTuesday: Hollywood Age Gap",
+    "title": "TidyTuesday: Hollywood Age Gap",
     "section": "",
     "text": "TidyTuesday is a weekly data project aimed at improving skills in data manipulation, visualization and analysis using R programming language. This week, we are exploring the age gap between movie love interests. Check out my code here!"
   },
   {
     "objectID": "dataviz/tidytuesday-stock-market/index.html",
     "href": "dataviz/tidytuesday-stock-market/index.html",
-    "title": "TIdyTuesday: Tech Company Stock Prices",
+    "title": "TidyTuesday: Tech Company Stock Prices",
     "section": "",
     "text": "TidyTuesday is a weekly data project aimed at improving skills in data manipulation, visualization and analysis using R programming language. This week, we are exploring daily stock prices and volume of 14 different tech companies. You are welcome to review my code here!"
   },
@@ -137,7 +137,7 @@
     "href": "dataviz.html",
     "title": "Data Visualization",
     "section": "",
-    "text": "TIdyTuesday: Bob Ross Paintings\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\n\n\nFeb 21, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nVisualizing Racial Justice: Moving Beyond Bar Charts\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\n\n\n\n\n\n\n\n\n\nFeb 19, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nMapping Green Spaces with OpenStreetMap in R\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ngreenspace\n\n\n\n\n\n\n\n\n\n\n\nFeb 17, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nTIdyTuesday: Hollywood Age Gap\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\n\n\nFeb 14, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nThe Calendar of Gun Violence\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ngreenspace\n\n\n\n\n\n\n\n\n\n\n\nFeb 14, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nRevisiting Tree Equity Gap: Hexbin or Geofacet?\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ngreenspace\n\n\n\n\n\n\n\n\n\n\n\nFeb 13, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nTIdyTuesday: Tech Company Stock Prices\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\n\n\nFeb 7, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nGreen Space for Everyone? Visualizing Tree Equity Gap\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ngreenspace\n\n\n\n\n\n\n\n\n\n\n\nFeb 7, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\nNo matching items"
+    "text": "TidyTuesday: Bob Ross Paintings\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\n\n\nFeb 21, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nVisualizing Racial Justice: Moving Beyond Bar Charts\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\n\n\n\n\n\n\n\n\n\nFeb 19, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nMapping Green Spaces with OpenStreetMap in R\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ngreenspace\n\n\n\n\n\n\n\n\n\n\n\nFeb 17, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nTidyTuesday: Hollywood Age Gap\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\n\n\nFeb 14, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nThe Calendar of Gun Violence\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ngreenspace\n\n\n\n\n\n\n\n\n\n\n\nFeb 14, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nRevisiting Tree Equity Gap: Hexbin or Geofacet?\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ngreenspace\n\n\n\n\n\n\n\n\n\n\n\nFeb 13, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nTidyTuesday: Tech Company Stock Prices\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ntidytuesday\n\n\n\n\n\n\n\n\n\n\n\nFeb 7, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\n  \n\n\n\n\nGreen Space for Everyone? Visualizing Tree Equity Gap\n\n\n\n\n\n\n\ncode\n\n\nvisualization\n\n\ngreenspace\n\n\n\n\n\n\n\n\n\n\n\nFeb 7, 2023\n\n\nZhaowen Guo\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",

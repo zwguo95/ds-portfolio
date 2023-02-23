@@ -46,7 +46,7 @@ format:
       - mystyle.scss
     mainfont: Merriweather
     fontsize: 18px
-    linestretch: 1.5
+    linestretch: 1.7
     page-layout: article
     citations-hover: true
     code-link: true
