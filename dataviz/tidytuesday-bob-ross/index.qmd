@@ -1,0 +1,22 @@
+---
+title: "TIdyTuesday: Bob Ross Paintings"
+date: 02/21/2023
+author:
+  - name: Zhaowen Guo
+    url: "https://www.linkedin.com/in/zhaowen-guo-20535312a/"
+title-block-banner: true
+format:
+  html:
+    theme: flatly
+    code-fold: false
+    code-tools: false
+    toc: false
+    number-sections: false
+link-citations: yes
+categories: [code, visualization, tidytuesday]
+image: "ross-paintings.png"
+---
+
+[TidyTuesday](https://github.com/rfordatascience/tidytuesday) is a weekly data project aimed at improving skills in data manipulation, visualization and analysis using R programming language. [This week](https://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-02-21/readme.md), we are exploring the paintings of Bob Ross featured in the TV show "The Joy of Painting". Please find my code [here](https://github.com/zwguo95/TidyTuesday/tree/main/2023/0221)!
+
+![](ross-paintings.png)
