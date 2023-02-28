@@ -267,8 +267,8 @@ P_i(X_{ij} = 1|\theta_j, b_i) = \frac{e^{(\theta_j - b_i)}}{1 + e^{(\theta_j - b
 <p>Now let’s rewrite the Rasch model into two levels where the level 1 is the item level and level 2 is the person level.</p>
 <p>Applying logit link function, we have <span class="math display">\[
 \begin{aligned}
-log(\frac{p_{ij}}{1 - p_{ij}}) &amp;= \color{red}{\beta_{0j}} + \beta_1X_{1ij} + ...+\beta_{(k-1)j}X_{(k-1)ij} \\
-&amp;= \color{red}{\beta_0j} + \sum_{q=1}^{k-1}\beta_{qj}X_{qij}
+log(\frac{p_{ij}}{1 - p_{ij}}) &amp;= \beta_{0j} + \beta_1X_{1ij} + ...+\beta_{(k-1)j}X_{(k-1)ij} \\
+&amp;= \beta_0j + \sum_{q=1}^{k-1}\beta_{qj}X_{qij}
 \end{aligned}
 \]</span> where q=1,…,k-1 since the dummy variable for the reference item is dropped, <span class="math inline">\(X_ij\)</span> is the <span class="math inline">\(i^{th}\)</span> term dummy indicator for person j, <span class="math inline">\(\beta_{0j}\)</span> is an intercept term of the expected effect of the reference item for person j, and <span class="math inline">\(\beta_{qj}\)</span> is the difference of effect for item q from <span class="math inline">\(\beta_{0j}\)</span>.</p>
 <p>Now let’s turn to level 2, the person level. The basic idea is to introduce randomness to the reference term <span class="math inline">\(\beta_{0j}\)</span> in level 1, which means we want it to vary across persons. We don’t want to introduce randomness to the other <span class="math inline">\(\beta\)</span> terms because items answered by the same person j are interdependent. Therefore, level 2 model can be written as below:</p>

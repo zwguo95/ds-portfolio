@@ -37,8 +37,8 @@ Now let's rewrite the Rasch model into two levels where the level 1 is the item 
 Applying logit link function, we have
 $$
 \begin{aligned}
-log(\frac{p_{ij}}{1 - p_{ij}}) &= \color{red}{\beta_{0j}} + \beta_1X_{1ij} + ...+\beta_{(k-1)j}X_{(k-1)ij} \\
-&= \color{red}{\beta_0j} + \sum_{q=1}^{k-1}\beta_{qj}X_{qij} 
+log(\frac{p_{ij}}{1 - p_{ij}}) &= \beta_{0j} + \beta_1X_{1ij} + ...+\beta_{(k-1)j}X_{(k-1)ij} \\
+&= \beta_0j + \sum_{q=1}^{k-1}\beta_{qj}X_{qij} 
 \end{aligned}
 $$
 where q=1,...,k-1 since the dummy variable for the reference item is dropped, $X_ij$ is the $i^{th}$ term dummy indicator for person j, $\beta_{0j}$ is an intercept term of the expected effect of the reference item for person j, and $\beta_{qj}$ is the difference of effect for item q from $\beta_{0j}$. 
