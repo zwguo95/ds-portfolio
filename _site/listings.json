@@ -17,6 +17,7 @@
     "items": [
       "/statistics/simulations/index.html",
       "/statistics/dssg-tracking-poverty/index.html",
+      "/statistics/bias-variance/index.html",
       "/statistics/rasch-hlm/index.html"
     ]
   }

@@ -13,7 +13,7 @@ format:
     toc: false
     number-sections: false
 link-citations: yes
-categories: [code, statistics]
+categories: [statistics]
 image: "poverty-dssg.jpg"
 ---
 
