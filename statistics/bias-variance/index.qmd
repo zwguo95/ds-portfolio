@@ -153,8 +153,7 @@ E(c^2) &= E(E\hat f(x_0) - \hat f(x_0))^2 \\
 \end{aligned}
 $$ Taken together, it becomes clear that the expected prediction error
 can be decomposed into three parts. The first term $var(\epsilon)$ is
-the irreducible error which comes from the data itself and while the
-others constitute reducible error that we try to minimize.
+the irreducible error and the others constitute the reducible error that we try to minimize.
 
 $$
 E(y_0) - \hat f(x_0))^2 = \color{red}{var(\epsilon)} +  \color{blue}{\text{Bias}^2(\hat f(x_0)) + var(\hat f(x_0))}
