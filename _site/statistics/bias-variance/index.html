@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zhaowen Guo">
-<meta name="dcterms.date" content="2022-11-15">
+<meta name="dcterms.date" content="2022-12-15">
 
 <title>Zhaowen Guo - Explaining the Bias-Variance Tradeoff</title>
 <style>
@@ -171,7 +171,7 @@ gtag('config', 'G-J1PPVYDT7J', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 15, 2022</p>
+        <p class="date">December 15, 2022</p>
       </div>
     </div>
     
@@ -270,7 +270,7 @@ E(b^2) &amp;= E(f(x_0) - E \hat f(x_0))^2 \\
 E(c^2) &amp;= E(E\hat f(x_0) - \hat f(x_0))^2 \\
 &amp;= var(\hat f(x_0))
 \end{aligned}
-\]</span> Taken together, it becomes clear that the expected prediction error can be decomposed into three parts. The first term <span class="math inline">\(var(\epsilon)\)</span> is the irreducible error which comes from the data itself and while the others constitute reducible error that we try to minimize.</p>
+\]</span> Taken together, it becomes clear that the expected prediction error can be decomposed into three parts. The first term <span class="math inline">\(var(\epsilon)\)</span> is the irreducible error and the others constitute the reducible error that we try to minimize.</p>
 <p><span class="math display">\[
 E(y_0) - \hat f(x_0))^2 = \color{red}{var(\epsilon)} +  \color{blue}{\text{Bias}^2(\hat f(x_0)) + var(\hat f(x_0))}
 \]</span></p>

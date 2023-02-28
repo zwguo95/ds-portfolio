@@ -17,4 +17,103 @@ categories: [code, statistics, psychometrics]
 image: "equivalence.png"
 ---
 
-You can find my slides [here](kamata_paper_review.pdf).
+When learning more about statistical modeling, I find it helpful to consider the relationships and connections between different models. This allows me to gain a better understanding of the various approaches to model fitting and their respective advantages and disadvantages. In this blog post, we will explore the connection between two commonly used models in psychometrics: the Rasch model and the hierarchical linear model. For those interested, I have also included links to my [slides](kamata_paper_review.pdf) and [code](rasch_mlm.R). 
+
+The Rasch model, also known as the one-parameter logistic model (1PL), is a statistical model used to analyze responses to rating scale items. It is based on the idea that the probability of a person getting an item correct depends on the person's ability and the difficulty of the item. Mathematically, the Rasch model can be expressed as follows.
+
+$$
+P_i(X_{ij} = 1|\theta_j, b_i) = \frac{e^{(\theta_j - b_i)}}{1 + e^{(\theta_j - b_i)}}
+= \frac{1}{1 + e^{-(\theta_j - b_i)}}
+$$ where i means respondents, j represents items, $X_ij$ refers to response of person j to item i and takes a value of 0 or 1, $\theta_j$ corresponds to ability for person j, and $b_i$ is the difficulty parameter for item i.
+
+Intuitively, we can recover the hierarchical structure in item responses by treating persons as the higher level (level-2) and items as the lower level (level-1). This data structure has two characteristics that our model needs to capture:
+
+-   repeated measures nested within each person
+
+-   interdependent item responses from the same person
+
+Now let's rewrite the Rasch model into two levels where the level 1 is the item level and level 2 is the person level. 
+
+Applying logit link function, we have
+$$
+\begin{aligned}
+log(\frac{p_{ij}}{1 - p_{ij}}) &= \color{red}{\beta_{0j}} + \beta_1X_{1ij} + ...+\beta_{(k-1)j}X_{(k-1)ij} \\
+&= \color{red}{\beta_0j} + \sum_{q=1}^{k-1}\beta_{qj}X_{qij} 
+\end{aligned}
+$$
+where q=1,...,k-1 since the dummy variable for the reference item is dropped, $X_ij$ is the $i^{th}$ term dummy indicator for person j, $\beta_{0j}$ is an intercept term of the expected effect of the reference item for person j, and $\beta_{qj}$ is the difference of effect for item q from $\beta_{0j}$. 
+
+Now let's turn to level 2, the person level. The basic idea is to introduce randomness to the reference term $\beta_{0j}$ in level 1, which means we want it to vary across persons. We don't want to introduce randomness to the other $\beta$ terms because items answered by the same person j are interdependent. Therefore, level 2 model can be written as below:
+
+$$
+\begin{aligned}
+\beta_{0j} &= \gamma_{00} + \color{red}{u_{0j}} \\
+\beta_{1j} &= \gamma_{10} \\
+...\\
+\beta_{(k-1)j} &= \gamma_{(k-1)0}
+\end{aligned}
+$$
+The magic appears when we combine level-1 and level-2 models:
+
+$$
+P_{ij} = \frac{1}{1 + exp{-[\color{red}{u_{0j}} - (\color{blue}{-\gamma_{i0} - \gamma_{00}}})]}
+$$
+which looks equivalent to the Rasch model we saw before
+
+$$
+P_i(X_{ij} = 1 |\theta_j, b_i) = \frac{1}{1 + e^{(-\theta_j - b_i)}} = \frac{1}{1 + exp[-(\color{red}{\theta_j} - \color{blue}{b_i})]}
+$$
+where
+$$
+\theta_j = u_{0j} \\
+b_i = -\gamma_{i0} - \gamma_{00}
+$$
+What can we learn from this model equivalence? One potential application is that we can now apply both the *mirt* package and the *lme4* package, commonly used for fitting hierarchical models, to fit the Rasch model. The following example, which uses simulated LSAT data, demonstrates how this approach can be implemented.
+
+When using the *mirt* package, our item response data is typically organized such that each row represents a respondent, while each column represents a question. We can derive both person and item parameters by employing the following code:
+
+```{{r}}
+# fit a Rasch model
+rasch <- mirt(data  = lsat,
+              model = 1,
+              itemtype = "Rasch",
+              SE = TRUE)
+
+# retrieve item parameter estimates
+rasch_coef <- coef(rasch, IRTpars=TRUE, simplify=TRUE)
+
+# retrieve person parameter estimates
+rasch_fs <- fscores(rasch, full.scores.SE = TRUE)
+```
+
+We can also fit the same model using the *lme4* package, although we must first restore its hierarchical data structure. Specifically, we need to convert the wide-format data into long-format data, where the first column denotes the individuals, the second column denotes the items, and the third column records the item responses.
+
+```{{r}}
+# reshape the data into a long format 
+lsat_long <- lsat %>%
+  mutate(ID = row_number()) %>%
+  pivot_longer(!ID, names_to = "items", values_to = "responses")
+
+# fit the model 
+mlm <- glmer(responses ~ -1 + items + (1|ID), 
+             family = "binomial", 
+             data = lsat_long, 
+             control = control)
+```
+
+We can now compare the estimates of item difficulty between the two approaches. The item difficulty estimates derived via the mirt package, represented by the b parameter, are compared with the fixed effects estimated via the lme4 package. One thing to note here is that fixed effects denote item easiness (because $b_i = \gamma_{i0} - \gamma_{00}$) and thus we need to invert the sign to accurately reflect item difficulty. 
+
+```{{r}}
+# compare item estimates
+coef(summary(mlm))[,1]
+rasch_items$b
+cor(coef(summary(mlm))[,1], rasch_items$b) # -1
+
+# compare person estimates
+unlist(ranef(mlm))
+fscores(rasch)
+cor(unlist(ranef(mlm)), fscores(rasch)) # 1
+
+```
+
+For more details, please refer to [Kamata (2001)](https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1745-3984.2001.tb01117.x) which provides further insight into how this model equivalence can be extended to a third level. 
