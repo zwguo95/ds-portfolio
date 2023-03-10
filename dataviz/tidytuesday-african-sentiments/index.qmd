@@ -1,5 +1,5 @@
 ---
-title: "TidyTuesday: Numbat Sightings in Australia"
+title: "TidyTuesday: African Language Sentiments"
 date: 02/28/2023
 author:
   - name: Zhaowen Guo

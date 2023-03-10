@@ -2,66 +2,70 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://quartopub.com/sites/zhaowenguo/zhaowen-guo/about.html</loc>
-    <lastmod>2023-02-28T19:36:50.709Z</lastmod>
+    <lastmod>2023-03-10T04:07:50.065Z</lastmod>
   </url>
   <url>
     <loc>https://quartopub.com/sites/zhaowenguo/zhaowen-guo/dataviz/geofacet-hexbin/index.html</loc>
-    <lastmod>2023-02-28T19:36:51.526Z</lastmod>
+    <lastmod>2023-03-10T04:07:51.127Z</lastmod>
   </url>
   <url>
     <loc>https://quartopub.com/sites/zhaowenguo/zhaowen-guo/dataviz/green-space-gunshot-map/index.html</loc>
-    <lastmod>2023-02-28T19:36:52.379Z</lastmod>
+    <lastmod>2023-03-10T04:07:52.136Z</lastmod>
   </url>
   <url>
     <loc>https://quartopub.com/sites/zhaowenguo/zhaowen-guo/dataviz/racial-disparity/index.html</loc>
-    <lastmod>2023-02-28T19:36:53.192Z</lastmod>
+    <lastmod>2023-03-10T04:07:53.373Z</lastmod>
+  </url>
+  <url>
+    <loc>https://quartopub.com/sites/zhaowenguo/zhaowen-guo/dataviz/tidytuesday-african-sentiments/index.html</loc>
+    <lastmod>2023-03-10T04:07:54.172Z</lastmod>
   </url>
   <url>
     <loc>https://quartopub.com/sites/zhaowenguo/zhaowen-guo/dataviz/tidytuesday-bob-ross/index.html</loc>
-    <lastmod>2023-02-28T19:36:53.778Z</lastmod>
+    <lastmod>2023-03-10T04:07:54.912Z</lastmod>
   </url>
   <url>
     <loc>https://quartopub.com/sites/zhaowenguo/zhaowen-guo/dataviz/tidytuesday-hollywood-age/index.html</loc>
-    <lastmod>2023-02-28T19:36:54.428Z</lastmod>
+    <lastmod>2023-03-10T04:07:55.686Z</lastmod>
   </url>
   <url>
     <loc>https://quartopub.com/sites/zhaowenguo/zhaowen-guo/dataviz/tidytuesday-stock-market/index.html</loc>
-    <lastmod>2023-02-28T19:36:55.115Z</lastmod>
+    <lastmod>2023-03-10T04:07:56.416Z</lastmod>
   </url>
   <url>
     <loc>https://quartopub.com/sites/zhaowenguo/zhaowen-guo/dataviz/tree-equity/index.html</loc>
-    <lastmod>2023-02-28T19:36:56.038Z</lastmod>
+    <lastmod>2023-03-10T04:07:57.394Z</lastmod>
   </url>
   <url>
     <loc>https://quartopub.com/sites/zhaowenguo/zhaowen-guo/dataviz/tree-gunshot/index.html</loc>
-    <lastmod>2023-02-28T19:36:56.962Z</lastmod>
+    <lastmod>2023-03-10T04:07:58.303Z</lastmod>
   </url>
   <url>
     <loc>https://quartopub.com/sites/zhaowenguo/zhaowen-guo/dataviz.html</loc>
-    <lastmod>2023-02-28T19:36:58.309Z</lastmod>
+    <lastmod>2023-03-10T04:07:59.463Z</lastmod>
   </url>
   <url>
     <loc>https://quartopub.com/sites/zhaowenguo/zhaowen-guo/index.html</loc>
-    <lastmod>2023-02-28T19:36:59.515Z</lastmod>
+    <lastmod>2023-03-10T04:08:00.065Z</lastmod>
   </url>
   <url>
     <loc>https://quartopub.com/sites/zhaowenguo/zhaowen-guo/statistics/bias-variance/index.html</loc>
-    <lastmod>2023-02-28T19:37:00.761Z</lastmod>
+    <lastmod>2023-03-10T04:08:00.855Z</lastmod>
   </url>
   <url>
     <loc>https://quartopub.com/sites/zhaowenguo/zhaowen-guo/statistics/dssg-tracking-poverty/index.html</loc>
-    <lastmod>2023-02-28T19:37:01.859Z</lastmod>
+    <lastmod>2023-03-10T04:08:01.655Z</lastmod>
   </url>
   <url>
     <loc>https://quartopub.com/sites/zhaowenguo/zhaowen-guo/statistics/rasch-hlm/index.html</loc>
-    <lastmod>2023-02-28T19:37:02.885Z</lastmod>
+    <lastmod>2023-03-10T04:08:02.526Z</lastmod>
   </url>
   <url>
     <loc>https://quartopub.com/sites/zhaowenguo/zhaowen-guo/statistics/simulations/index.html</loc>
-    <lastmod>2023-02-28T19:37:04.043Z</lastmod>
+    <lastmod>2023-03-10T04:08:03.318Z</lastmod>
   </url>
   <url>
     <loc>https://quartopub.com/sites/zhaowenguo/zhaowen-guo/statistics.html</loc>
-    <lastmod>2023-02-28T19:37:05.308Z</lastmod>
+    <lastmod>2023-03-10T04:08:04.132Z</lastmod>
   </url>
 </urlset>
