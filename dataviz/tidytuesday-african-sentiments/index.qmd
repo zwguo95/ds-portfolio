@@ -1,0 +1,22 @@
+---
+title: "TidyTuesday: Numbat Sightings in Australia"
+date: 02/28/2023
+author:
+  - name: Zhaowen Guo
+    url: "https://www.linkedin.com/in/zhaowen-guo-20535312a/"
+title-block-banner: true
+format:
+  html:
+    theme: flatly
+    code-fold: false
+    code-tools: false
+    toc: false
+    number-sections: false
+link-citations: yes
+categories: [code, visualization, tidytuesday]
+image: "african-sentiments.png"
+---
+
+[TidyTuesday](https://github.com/rfordatascience/tidytuesday) is a weekly data project aimed at improving skills in data manipulation, visualization and analysis using R programming language. [This week](https://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-02-28/readme.md), we are exploring the African language sentiments. I experimented with a different way to represent proportion by using a measuring cup! I adjusted the positioning and size of the cup so that the actual proportion aligned with the markings on the cup. Please find my code [here](https://github.com/zwguo95/TidyTuesday/tree/main/2023/0228)!
+
+![](african-sentiments.png)
