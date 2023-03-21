@@ -1,0 +1,24 @@
+---
+title: "Visualizing Game Time"
+date: 03/10/2023
+author:
+  - name: Zhaowen Guo
+    url: "https://www.linkedin.com/in/zhaowen-guo-20535312a/"
+title-block-banner: true
+format:
+  html:
+    theme: flatly
+    code-fold: false
+    code-tools: false
+    toc: false
+    number-sections: false
+link-citations: yes
+categories: [code, visualization]
+image: "switch_plot.png"
+---
+
+
+
+This post records the time we spent with each other. I also used the *camcorder* package to record my coding processes with this [gif](switch.gif). 
+
+![](switch_plot.png)
