@@ -37,8 +37,12 @@ website:
         href: mailto:zwguo@uw.edu
         icon: envelope
       - text: Resume
-        url: "resume_guo.pdf"
         icon: file-earmark-person
+        menu: 
+          - text: Resume
+            href: resume/resume_guo.pdf
+          - text: CV
+            href: resume/cv_guo.pdf
 
 format:
   html:
