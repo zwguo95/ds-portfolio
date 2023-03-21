@@ -2,6 +2,8 @@
   {
     "listing": "/dataviz.html",
     "items": [
+      "/dataviz/tidytuesday-drug-market/index.html",
+      "/dataviz/switch-games/index.html",
       "/dataviz/tidytuesday-african-sentiments/index.html",
       "/dataviz/tidytuesday-bob-ross/index.html",
       "/dataviz/racial-disparity/index.html",
