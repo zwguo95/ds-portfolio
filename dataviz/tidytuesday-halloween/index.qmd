@@ -1,0 +1,26 @@
+---
+title: "Getting Spooky with R"
+date: 10/31/2023
+author:
+  - name: Zhaowen Guo
+    url: "https://www.linkedin.com/in/zhaowen-guo-20535312a/"
+title-block-banner: true
+format:
+  html:
+    theme: flatly
+    code-fold: false
+    code-tools: false
+    toc: false
+    number-sections: false
+link-citations: yes
+categories: [code, visualization, tidytuesday]
+image: "spooky_wa.png"
+---
+
+
+
+Data source comes from The Shadowlands Haunted Place Index. 
+
+[TidyTuesday](https://github.com/rfordatascience/tidytuesday) is a weekly data project aimed at improving skills in data manipulation, visualization and analysis using R programming language. [This week](https://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-02-07/readme.md), we are exploring daily stock prices and volume of 14 different tech companies. You are welcome to review my code [here](https://github.com/zwguo95/TidyTuesday/tree/main/2023/0207)!
+
+![](spooky_wa.png)
