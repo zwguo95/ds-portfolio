@@ -25,6 +25,8 @@ website:
             href: tutorials/word_embeddings.html
           - text: Visualizing Data with R
             href: tutorials/data_visualization.html
+          - text: Visualizing Survey Data with R
+            href: tutorials/survey_data_visualization.html
     
     right:
       - text: LinkedIn
