@@ -12,7 +12,7 @@ format:
     code-tools: false
     toc: false
     number-sections: false
-link-citations: yes
+link-citations: true
 categories: [statistics, machine learning]
 image: "reducible-irreducible-errors.JPG"
 editor: 
