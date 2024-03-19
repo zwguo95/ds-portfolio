@@ -18,6 +18,7 @@ image: "svd_youtube.jpg"
 ---
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(irlba)
 library(kableExtra)
 library(tidyverse)
 ```
@@ -146,10 +147,12 @@ system.time({
 system.time({
   pca_res <- prcomp(sparse_matrix)
 })
+```
 
+```{r}
 # Compute top 10 rank approximations
 system.time({
-  svd_result <- irlba::irlba(sparse_matrix, nv = 10)
+  svd_result <- irlba(sparse_matrix, nv = 10)
 })
 
 system.time({
@@ -157,9 +160,10 @@ system.time({
 })
 ```
 
+
 ## Application: Impute Missing Values
 
-One popular application of SVD is to impute missing values. Without keeping all singular values and vectors, we can only retain the first d largest singular values to approximate the matrix A. The intuition is that the approximated matrix $A_d$ being a dense matrix that captures the primary structure and patterns in the original data.
+One popular application of SVD is to impute missing values. Without keeping all singular values and vectors, we can just retain the first d largest singular values to approximate the matrix A. The intuition is that the approximated matrix $A_d$ being a dense matrix that captures the primary structure and patterns in the original data.
 
 This procedure is also called lower-rank approximation, which can be implemented in the following steps:
 
