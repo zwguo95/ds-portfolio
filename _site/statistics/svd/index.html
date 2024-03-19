@@ -189,7 +189,7 @@ gtag('config', 'G-J1PPVYDT7J', { 'anonymize_ip': true});
       <h1 class="title">The Power of Singular Vector Decomposition: A Beginner’s Guide</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">code</div>
-                <div class="quarto-category">statistics</div>
+                <div class="quarto-category">machine learning</div>
               </div>
                   </div>
   </div>
@@ -358,33 +358,35 @@ X = UDV^T
 <span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-   0.02    0.00    0.59 </code></pre>
+   0.19    0.00    0.58 </code></pre>
 </div>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="va">pca_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">sparse_matrix</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-   0.09    0.00    0.83 </code></pre>
+   0.34    0.00    0.72 </code></pre>
 </div>
+</div>
+<div class="cell">
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Compute top 10 rank approximations</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
-<span>  <span class="va">svd_result</span> <span class="op">&lt;-</span> <span class="fu">irlba</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/irlba/man/irlba.html">irlba</a></span><span class="op">(</span><span class="va">sparse_matrix</span>, nv <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span>  <span class="va">svd_result</span> <span class="op">&lt;-</span> <span class="fu">irlba</span><span class="op">(</span><span class="va">sparse_matrix</span>, nv <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-   0.02    0.02    0.80 </code></pre>
+   0.02    0.00    0.03 </code></pre>
 </div>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="va">pca_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">sparse_matrix</span>, rank. <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-   0.00    0.00    0.66 </code></pre>
+   0.39    0.00    0.61 </code></pre>
 </div>
 </div>
 </section></section><section id="application-impute-missing-values" class="level2"><h2 class="anchored" data-anchor-id="application-impute-missing-values">Application: Impute Missing Values</h2>
-<p>One popular application of SVD is to impute missing values. Without keeping all singular values and vectors, we can only retain the first d largest singular values to approximate the matrix A. The intuition is that the approximated matrix <span class="math inline">\(A_d\)</span> being a dense matrix that captures the primary structure and patterns in the original data.</p>
+<p>One popular application of SVD is to impute missing values. Without keeping all singular values and vectors, we can just retain the first d largest singular values to approximate the matrix A. The intuition is that the approximated matrix <span class="math inline">\(A_d\)</span> being a dense matrix that captures the primary structure and patterns in the original data.</p>
 <p>This procedure is also called lower-rank approximation, which can be implemented in the following steps:</p>
 <ul>
 <li><p>Matrix approximation: fill in NAs with an initial guess (e.g.&nbsp;column means, zeros) and apply SVD with rank d, meaning that we only keep top d singular values and vectors</p></li>
