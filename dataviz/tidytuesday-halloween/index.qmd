@@ -13,14 +13,13 @@ format:
     toc: false
     number-sections: false
 link-citations: true
-categories: [code, visualization, tidytuesday]
+categories: [code, visualization]
 image: "spooky_wa.png"
 ---
 
+With its storied past and varied terrains, Washington state brims not just with scenic beauty but also with enigmatic tales. As the Halloween spirit beckons, let's delve into these mysteries with an exploration of the Shadowlands Haunted Place Index, which catalogs the supposed spectral hot-spots of Washington based on narrative accounts and local legend.
 
+For visual presentation, this is my first time creating a beeswarm plot - a fresh twist on traditional scatter plots. This involves situating various haunted locations along a spectrum of fear, scored from 0 to 1, as determined by a basic sentiment analysis. The beeswarm plot revealed some standout points of intense fear sentiment: notably, the DoubleTree Hotel in Spokane and the Civil War Cemetery in Seattle topped the charts as the most chilling locales! For the curious and the brave, I've made my code available [here](haunted_places.R).
 
-Data source comes from The Shadowlands Haunted Place Index. 
-
-[TidyTuesday](https://github.com/rfordatascience/tidytuesday) is a weekly data project aimed at improving skills in data manipulation, visualization and analysis using R programming language. [This week](https://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-02-07/readme.md), we are exploring daily stock prices and volume of 14 different tech companies. You are welcome to review my code [here](https://github.com/zwguo95/TidyTuesday/tree/main/2023/0207)!
 
 ![](spooky_wa.png)

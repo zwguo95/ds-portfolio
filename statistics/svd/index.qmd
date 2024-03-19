@@ -13,7 +13,7 @@ format:
     toc: false
     number-sections: false
 link-citations: true
-categories: [code, statistics]
+categories: [code, machine learning]
 image: "svd_youtube.jpg"
 ---
 
