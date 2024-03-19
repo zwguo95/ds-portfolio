@@ -1,7 +1,18 @@
 [
   {
+    "listing": "/statistics.html",
+    "items": [
+      "/statistics/svd/index.html",
+      "/statistics/simulations/index.html",
+      "/statistics/bias-variance/index.html",
+      "/statistics/dssg-tracking-poverty/index.html",
+      "/statistics/rasch-hlm/index.html"
+    ]
+  },
+  {
     "listing": "/dataviz.html",
     "items": [
+      "/dataviz/tidytuesday-halloween/index.html",
       "/dataviz/tidytuesday-drug-market/index.html",
       "/dataviz/tidytuesday-african-sentiments/index.html",
       "/dataviz/tidytuesday-bob-ross/index.html",
@@ -12,15 +23,6 @@
       "/dataviz/geofacet-hexbin/index.html",
       "/dataviz/tidytuesday-stock-market/index.html",
       "/dataviz/tree-equity/index.html"
-    ]
-  },
-  {
-    "listing": "/statistics.html",
-    "items": [
-      "/statistics/simulations/index.html",
-      "/statistics/bias-variance/index.html",
-      "/statistics/dssg-tracking-poverty/index.html",
-      "/statistics/rasch-hlm/index.html"
     ]
   }
 ]

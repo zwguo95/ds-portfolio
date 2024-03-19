@@ -1,0 +1,352 @@
+---
+title: "The Power of Singular Vector Decomposition: A Beginner's Guide"
+date: 03/17/2024
+author:
+  - name: Zhaowen Guo
+    url: "https://www.linkedin.com/in/zhaowen-guo-20535312a/"
+title-block-banner: true
+format:
+  html:
+    theme: flatly
+    code-fold: false
+    code-tools: false
+    toc: false
+    number-sections: false
+link-citations: true
+categories: [code, statistics]
+image: "svd_youtube.jpg"
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(kableExtra)
+library(tidyverse)
+```
+
+SVD is not nearly as famous as it should be. --- Gilbert Strang
+
+SVD is a great 1-stop shop for data analysis. --- Daniela Witten
+
+## Introduction
+
+Singular Vector Decomposition (SVD) is a matrix factorization technique that has become a cornerstone in the field of machine learning (ML). It not only allows for efficiently calculating the inverse of a matrix (if it exists) by multiplying the inverse of each decomposed simpler matrices, but also opens the door to a wide array of applications in ML and beyond.
+
+In what follows, I will start by the definition and properties of SVD, and establish its connection with Principal Component Analysis (PCA). Then I will demonstrate different applications of SVD in ML, including but not limited to missing value imputation and latent feature extraction.
+
+### Definition and properties of SVD
+
+SVD decomposes a data matrix $X_{m \times n}$ into three matrices $U_{m\times r}$, $D_{r\times r}$, and $V_{n\times r}$, regardless of the characteristics of the original matrix.
+
+$$
+X = UDV^T
+$$ where
+
+-   U and V are orthogonal matrices ($U^T U = I$ and $V^T V = I$), which are called [left singular vector]{style="text-decoration:underline"}, and [right singular vector]{style="text-decoration:underline"}, respectively
+-   D is a diagonal matrix with non-negative and decreasing elements, which are called [singular values]{style="text-decoration:underline"}
+
+Let's first check dimensions of the resulting matrices after applying SVD to a toy matrix X.
+
+```{r}
+# Define a matrix
+X <- matrix(c(1:12),
+            nrow = 4,
+            ncol = 3,
+            byrow = T)
+
+# Apply SVD
+svd_result <- svd(X)
+
+# Extract U, D, and V matrices
+U <- svd_result$u
+D <- diag(svd_result$d)
+V <- svd_result$v
+print(paste0("The dimension for U matrix: ", dim(U)[1], " X ", dim(U)[2]))
+print(paste0("The dimension for D matrix: ", dim(D)[1], " X ", dim(D)[2]))
+print(paste0("The dimension for V matrix: ", dim(V)[1], " X ", dim(V)[2]))
+```
+
+We can then check matrix properties of SVD. As we can observe, matrices U and V are orthogonal, and matrix D is diagonal.
+
+```{r}
+# Check properties of U and V (orthogonal matrix)
+is_orthogonal <- function(A){
+  A_T <- t(A)
+  dot_product_1 <- A %*% A_T
+  dot_product_2 <- A_T %*% A
+  identity_matrix_1 <- diag(nrow(A))
+  identity_matrix_2 <- diag(ncol(A))
+  
+  result <- isTRUE(all.equal(dot_product_1, identity_matrix_1)) +
+            isTRUE(all.equal(dot_product_2, identity_matrix_2)) # all.equal checks "nearly equal"
+  
+  return(result>=1)
+}
+
+is_orthogonal(U) # TRUE
+is_orthogonal(V) # TRUE
+
+# Check properties of D
+diag(D) # diagonal values (or singular values in this case)
+D[!row(D) == col(D)] # off-diagonal values are 0
+```
+
+### Connection between SVD and PCA
+
+Now, knowing that SVD can be used to approximate any matrix, it's an opportune moment to revisit Principal Component Analysis (PCA), an unsupervised ML method that we might be more familiar with. As we will see, [SVD on a de-meaned (centered) data matrix is the same as PCA]{style="text-decoration:underline"}.
+
+Recall that PCA seeks to find principal components, or the direction in the feature space with maximum variance in the data.
+
+```{r}
+# Center the data matrix (column means are 0)
+X_centered <- scale(X, center = T, scale = T)
+colMeans(X_centered) # check if centered
+
+# Apply SVD to the centered data matrix
+svd_result <- svd(X_centered)
+
+# Apply PCA to the data
+pca_result <- prcomp(X, scale. = T)
+```
+
+As we can see, columns of the right singular vector V correspond to principal components extracted from PCA, and SVD also yields less elapsed time than PCA. A key advantage of SVD is that it does not require a preliminary step of constructing a covariance as PCA does, providing greater computational efficiency in extracting principal components.
+
+This efficiency becomes particularly prominent when handling
+
+-   High-dimensional datasets: when a data matrix possess too many features, the computational cost for constructing its covariance matrix can be huge
+
+-   Full-rank data matrix: when the data matrix is full-rank, it often implies that many singular values will be non-negligible, and many principal components will be needed to reconstruct the original matrix
+
+```{r}
+print(svd_result$v) # right singular vectors
+print(pca_result$rotation) # principal components
+```
+
+```{r}
+# Construct a high-dimensional and sparse data matrix
+n_rows <- 1000
+n_cols <- 500
+
+sparse_matrix <- matrix(0, nrow = n_rows, ncol = n_cols)
+
+# Manually add some non-zero elements to mimic sparsity
+set.seed(123)
+non_zero_elements <- 200
+for (i in 1:non_zero_elements) {
+  row_index <- sample(n_rows, 1)
+  col_index <- sample(n_cols, 1)
+  sparse_matrix[row_index, col_index] <- runif(1)
+}
+```
+
+```{r}
+# Compute every possible rank approximations
+system.time({
+  svd_result <- svd(sparse_matrix)
+})
+
+system.time({
+  pca_res <- prcomp(sparse_matrix)
+})
+
+# Compute top 10 rank approximations
+system.time({
+  svd_result <- irlba::irlba(sparse_matrix, nv = 10)
+})
+
+system.time({
+  pca_res <- prcomp(sparse_matrix, rank. = 10)
+})
+```
+
+## Application: Impute Missing Values
+
+One popular application of SVD is to impute missing values. Without keeping all singular values and vectors, we can only retain the first d largest singular values to approximate the matrix A. The intuition is that the approximated matrix $A_d$ being a dense matrix that captures the primary structure and patterns in the original data.
+
+This procedure is also called lower-rank approximation, which can be implemented in the following steps:
+
+-   Matrix approximation: fill in NAs with an initial guess (e.g. column means, zeros) and apply SVD with rank d, meaning that we only keep top d singular values and vectors
+
+-   Missingness imputation: use the approximated matrix $A_d$ to fill in NAs in the original matrix
+
+Let's use the following example for illustration:
+
+We start by creating a toy data matrix A and call it our ground truth matrix. Then we manually add sparsity by replacing certain elements with NAs.
+
+```{r}
+# Create a toy dataset (sparse matrix)
+set.seed(123)
+A <- matrix(sample(c(NA, 1:5), 25, replace = T), 5, 5)
+ground_truth_matrix <- A
+A[c(2, 8, 10, 14, 20)] <- NA
+```
+
+```{r}
+A
+ground_truth_matrix
+```
+
+Next, we apply SVD with varying d, which indicates the number of singular values/vectors.
+
+```{r}
+# Define svd
+impute_svd <- function(matrix, d){
+  
+  # fill in missingness with column means
+  column_means <- colMeans(matrix, na.rm = T)
+  matrix_filled <- matrix
+  na_indices <- is.na(matrix)
+  matrix_filled[na_indices] <- column_means[col(matrix)[na_indices]]
+  
+  # perform svd
+  svd_res <- svd(matrix_filled)
+  svd_res$d <- c(svd_res$d[1:d], rep(0, length(svd_res$d) - d))
+  
+  # reconstruct the matrix
+  approx_matrix <- svd_res$u %*% diag(svd_res$d) %*% t(svd_res$v)
+  imputed_vals <- approx_matrix
+  imputed_vals[!is.na(matrix)] <- NA
+  return(imputed_vals)
+}
+```
+
+We can use the approximated matrix $A_d$ to reconstruct the original matrix and impute missing values. We can evaluate the performance of missingness imputation by mean squared error (MSE).
+
+```{r}
+# Construct the metric MSE
+mse <- function(predicted, truth) {
+  mean((predicted - truth)^2, na.rm = TRUE)
+}
+
+# Display MSE for different d values (rank, or number of dimensions to define the reduced matrix)
+svd_errors <- numeric(5)
+for (d in 1:5) {
+  imputed_values <- impute_svd(A, d)
+  svd_errors[d] <- mse(imputed_values, ground_truth_matrix)
+}
+```
+
+How does SVD perform? As a baseline, consider a simple approach by replacing missing values with column means. It seems that rank-2 approximation is an optimal choice, which yields the lowest MSE. However, it's important to note that it is not always the case that SVD approximation would outperform simple column mean imputation. We might need to consider other matrix decomposition techniques for missingness imputation, such as Non-negative Matrix Factorization (NMF), Alternating Least Squares (ALS), etc..
+
+```{r}
+# Create baseline imputation from column means
+na_indices <- is.na(A)
+colmean_matrix <- A
+colmean_matrix[na_indices] <- colMeans(A, na.rm = T)[col(A)[na_indices]]
+colmean_errors <- mse(colmean_matrix[na_indices], ground_truth_matrix[na_indices])
+
+# Report comparison of performance
+comparison <- tibble("Method" = c("Column Means", 
+                                  "Rank-1 Approximation",
+                                  "Rank-2 Approximation",
+                                  "Rank-3 Approximation",
+                                  "Rank-4 Approximation",
+                                  "Rank-5 Approximation"),
+                     "MSE" = c(colmean_errors, svd_errors))
+
+comparison %>%
+  kbl() %>%
+  kable_styling()
+```
+
+In line with the idea of missingness imputation, SVD can also be leveraged to enhance recommendation systems! The goal is to predict unknown preferences or ratings of users for items (e.g. movies, products, or services) based on existing ratings. A notable example is [Netflix Prize competition](https://en.wikipedia.org/wiki/Netflix_Prize#:~:text=On%20September%2021%2C%202009%2C%20the,for%20predicting%20ratings%20by%2010.06%25.), where Netflix offered \$1 million award to anyone who could improve the accuracy of its movie recommendation system by 10%. The [winning team](https://www.asc.ohio-state.edu/statistics/dmsl/GrandPrize2009_BPC_BigChaos.pdf) just used SVD, along with techniques that incorporate other metadata, achieving a 10.06% improvement!
+
+## Application: Topic Modeling
+
+SVD is a powerful and generalizable technique that provides us another perspective on topic modeling. We begin by first transforming documents into a document-term matrix, where each row represents a document, each column reflects a term, and each cell denotes frequency. To refine this step further, we can also apply Term Frequency-Inverse Document Frequency [(TF-IDF)](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) to reweigh the cell values, adjusting for the uniqueness of each term for a given document.
+
+SVD can then be perceived as decomposing a document-term matrix $X_{m \times n}$ into
+
+-   $U_{m \times r}$: document-topic matrix
+
+-   $D_{r \times r}$: diagonal elements represent topic importance
+
+-   $V_{n \times r}$: term-topic matrix
+
+For topic modeling, a crucial hyperparameter that requires tuning is the number of topics (often denoted by k). In the context of SVD, the idea is equivalent to selecting the top k singular values and their corresponding singular vectors in order to approximate the original data matrix.
+
+```{r,message=FALSE,warning=FALSE}
+# Construct a document-term matrix
+library(tidytext)
+library(tm)
+documents <- tibble(
+  doc_id = 1:8,
+  text = c("The sky is blue and beautiful.",
+           "Love this blue and beautiful sky!",
+           "The quick brown fox jumps over the lazy dog.",
+           "A king's breakfast has sausages, ham, bacon, eggs, toast, and beans",
+           "I love green eggs, ham, sausages, and bacon!",
+           "The brown fox is quick and the blue dog is lazy!",
+           "The sky is very blue and the sky is very beautiful today",
+           "The dog is lazy but the brown fox is quick!")
+)
+
+tidy_documents <- documents %>%
+  unnest_tokens(word, text) %>%
+  anti_join(stop_words)
+
+dtm <- tidy_documents %>%
+  count(doc_id, word) %>%
+  cast_dtm(doc_id, word, n)
+```
+
+```{r}
+# Apply SVD and examine each decomposed matrix
+svd_result <- svd(as.matrix(dtm))
+
+k <- 2 # choose k=2 for simplicity
+Uk <- svd_result$u[, 1:k]
+Dk <- svd_result$d[1:k]
+Vk <- svd_result$v[, 1:k]
+```
+
+As we can see, the decomposed $U_k$ matrix captures documents by topics.
+
+```{r}
+Us <- tibble(`Document ID` = 1:8,
+             `Topic 1` = Uk[,1],
+             `Topic 2` = Uk[,2])
+Us %>%
+  kbl() %>%
+  kable_styling()
+```
+
+The singular values are stored in the following matrix $D_k$, which correspond to how important each topic is.
+
+```{r}
+D_matrix <- diag(Dk)
+rownames(D_matrix) <- c("Topic 1", "Topic 2")
+colnames(D_matrix) <- c("Topic 1", "Topic 2")
+
+D_matrix %>%
+  kbl() %>%
+  kable_styling()
+```
+
+The $V_k$ matrix represents terms by topics.
+
+```{r}
+terms <- colnames(dtm)
+V_matrix <- tibble(`Term` = terms,
+                   `Topic 1` = Vk[,1],
+                   `Topic 2` = Vk[,2])
+
+V_matrix %>%
+  kbl() %>%
+  kable_styling()
+```
+
+Now, we can examine top 5 terms associated with each topic.
+
+```{r}
+top_terms <- apply(Vk, 2, function(x) terms[order(abs(x), decreasing = TRUE)[1:5]])
+print(top_terms)
+```
+
+Beyond what has been discussed, some other cool applications of SVD in NLP include: information retrieval via [Latent Semantic Analysis](https://link.springer.com/chapter/10.1007/978-981-99-3243-6_45) and word co-occurrence detection in [word embeddings](https://smltar.com/embeddings.html) and other downstream tasks (e.g. [text classification](https://ideas.repec.org/p/sek/iacpro/0702094.html)). Feel free to explore!
+
+**References and additional resources:**
+
+-   A wonderful twitter [thread](https://twitter.com/WomenInStat/status/1285612667839885312) on SVD by Daniela Witten (a nice summary can be found [here](https://www.govindgnair.com/post/svd-is-almost-all-you-need/))
+
+-   A cool geometric [interpretation](https://www.youtube.com/watch?v=vSczTbgc8Rc) of SVD
+
+-   A nice [tutorial](https://www.youtube.com/watch?v=lRZ4aMaXPBI&list=PLtmWHNX-gukKocXQOkQjuVxglSDYWsSh9&index=3) illustrating the connection between SVD and topic modeling using Python
