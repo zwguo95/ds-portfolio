@@ -13,8 +13,8 @@ format:
     toc: false
     number-sections: false
 link-citations: true
-categories: [code, machine learning]
-image: "svd_youtube.jpg"
+categories: [code, machine learning, natural language processing]
+image: "svd_bipartite.png"
 ---
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -23,9 +23,9 @@ library(kableExtra)
 library(tidyverse)
 ```
 
-SVD is not nearly as famous as it should be. --- Gilbert Strang
+> SVD is not nearly as famous as it should be. --- Gilbert Strang
 
-SVD is a great 1-stop shop for data analysis. --- Daniela Witten
+> SVD is a great 1-stop shop for data analysis. --- Daniela Witten
 
 ## Introduction
 

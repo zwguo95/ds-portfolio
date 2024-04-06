@@ -2,6 +2,7 @@
   {
     "listing": "/statistics.html",
     "items": [
+      "/statistics/web-scraping/index.html",
       "/statistics/svd/index.html",
       "/statistics/simulations/index.html",
       "/statistics/bias-variance/index.html",
