@@ -128,7 +128,7 @@ The process includes the following steps:
 
 When setting up RSelenium, I found it helpful to (1) place the web browser driver (I used chromedriver.exe) in the same folder as the script, which makes it easier for R to locate and initiate the web browser; and (2) set `chromever = NULL`, which enables automatically detecting the appropriate version of the web driver installed.
 
-![](load-more-button.png){width="662"}
+![](load-more-button.png){fig-align="center" width="662"}
 
 The following code initiates a Chrome web browser session, navigate to the webpage of interest, and click a button to load more content. `remDr` (remote driver object) is used to interact with the web browser - to identify the button from the CSS selector and simulate a click action. As before, we can inspect the button and find its class, as depicted in the screenshot above.
 
