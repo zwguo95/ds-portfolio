@@ -13,6 +13,7 @@
   {
     "listing": "/dataviz.html",
     "items": [
+      "/dataviz/media-coverage-ai-sentiment/index.html",
       "/dataviz/tidytuesday-halloween/index.html",
       "/dataviz/tidytuesday-drug-market/index.html",
       "/dataviz/tidytuesday-african-sentiments/index.html",
