@@ -1,0 +1,20 @@
+---
+title: "Mapping Green Spaces with OpenStreetMap in R"
+date: 04/20/2024
+author:
+  - name: Zhaowen Guo
+    url: "https://www.linkedin.com/in/zhaowen-guo-20535312a/"
+title-block-banner: true
+format:
+  html:
+    theme: flatly
+    code-fold: false
+    code-tools: false
+    toc: false
+    number-sections: false
+link-citations: true
+categories: [code, visualization, text data]
+image: "emotion_detection.png"
+---
+
+

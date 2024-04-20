@@ -13,7 +13,7 @@ format:
     toc: false
     number-sections: false
 link-citations: true
-categories: [code, visualization, greenspace]
+categories: [code, visualization, spatial data]
 image: "tree-equity-geofacet.png"
 ---
 
