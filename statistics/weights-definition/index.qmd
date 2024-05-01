@@ -1,5 +1,5 @@
 ---
-title: "Understanding Weights in Statistics: What Do People Often Get Wrong?"
+title: "Weights in Statistics: What Do People Often Get Wrong?"
 date: 04/30/2024
 author:
   - name: Zhaowen Guo
@@ -17,55 +17,118 @@ categories: [code, survey methodology]
 image: "sample_population.png"
 ---
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-library(irlba)
-library(kableExtra)
-library(tidyverse)
-```
-
 > Survey weighting is a mess. --- Andrew Gelman
 
-
+Recently, many clients have come to us with questions about weights -- how to create weighted statistics? how to conduct weighted regressions? When I ask about the specific weights they're referring to, many seem unsure. This confusion underscores the complexity of discussions surrounding weights. Motivated by these encounters, I started looking into different types of weights, and what weighting can and cannot do. In this blog post, I will address common misconceptions surrounding these questions and hopefully bring clarity to how weights should be understood and used in statistical practices.
 
 ## There exists more than one type of weight
+
+The first common misconception is that when people talk about weights in statistics, they are all pointing to the same concept. This is not the case, as highlighted in the insightful discussions by [Thomas Lumley](https://notstatschat.rbind.io/2020/08/04/weights-in-statistics/) and [Andrew Gelman](https://statmodeling.stat.columbia.edu/2021/01/17/weights-in-statistics/). Building upon their work, I will provide visual and code demonstrations below to illustrate the differences between various types of weights.
+
+![Types of Weights in Statistics](weights_types.png)
+
+Lumley and Gelman identify four primary types of weights in statistics: sampling weights, precision weights, frequency weights, and importance weights, which are highlighted in yellow boxes in this graph. I included alternative names that are commonly used to describe each type of weights.
+
+What does a weight of 100 mean for each type of weights? 
+
+- A \textbf{sampling weight} of 100 indicates that the observation represents 100 individuals in the population. Alternatively, the probability that this observation was selected from the population to the sample is 1/100. This helps to ensure the sample is representative of the population.
+
+-   A \textbf{precision weight} of 100 means that the observation's variance is 100 times less than that of an observation with a precision weight of 1. This weighting is used to enhance the estimation efficiency like OLS, where typically each observation is equally weighted. By using precision weights, observations with lower variance (and thus higher precision) have a greater influence on determining the line of best fit.
+
+-   A \textbf{frequency weight} of 100 suggests that there are 100 identical observations in the sample. To save space and processing power, only one value is used to represent these observations.
+
+Importance weights are different from the other types. Lumley provides a good example related to [dual-frame sampling](https://notstatschat.rbind.io/2024/04/19/importance-weights/). When your sample comes from two overlapping sampling frames, it's crucial to property account for individuals who appear in both frames to prevent double-counting. In such cases, importance weights are applied to adjust for the overlap, typically by dividing the original sampling weights by 2 of those duplicated individuals.
+
+Additionally, I introduced a fifth category -- adjustment weights -- marked in an orange box. Adjustment weights are often used to rectify discrepancies between the sample and the population, addressing issues such as respondent attrition and non-response through techniques like post-stratification and raking. You might also have heard of terms like ["longitudinal weights" or "cross-sectional weights"](https://www.understandingsociety.ac.uk/documentation/mainstage/user-guides/main-survey-user-guide/longitudinal-and-cross-sectional-weights/#:~:text=Unlike%20in%20a%20cross%2Dsectional,used%20cross%2Dsectionally%20years%20later.) which often appeared in public health research. These terms fall under the umbrella of adjustment weights. While adjustment weights typically complement sampling weights, they can extend to non-probability samples as well.
+
+Below I turn to each type of weight using the California Academic Performance Index data from the `survey` package. We'll work with the `apistrat` dataset, a stratified random sample of 200 schools where sampling weights are included (`pw`). Our goal is to analyze the relationship between academic performance in the year 2000 (`api00`) and percentage of economically disadvantaged students (`meals`).
+
+### Sampling weights
+
+We incorporate sampling weights `pw` into our survey design, which serves as the foundation for further analysis.
 
 ```{r, message=FALSE, warning=FALSE}
 library(survey)
 library(tidyverse)
+data(api)
+
+# Set options to adjust for potential issues with single primary sampling units (PSUs)
 options(survey.lonely.psu = "adjust")
 options(survey.adjust.domain.lonely = TRUE)
 
-data(api)
-strat.design <- svydesign(id =~ 1,
-                          strata = ~stype,
+# Define the survey design
+strat.design <- svydesign(id =~ 1, # no clustering (all data has equal PSU)
+                          strata = ~stype, # stratification variable
                           weights = ~pw, # sampling weights
-                          data = apistrat,
-                          fpc = ~fpc)
+                          data = apistrat)
 
-ols <- glm(api00 ~ ell + meals + mobility, data = apistrat)
-precision_weights <- 1 / glm(abs(ols$residuals) ~ ols$fitted.values)$fitted.values^2
-ols_precision_weights <- glm(api00 ~ ell + meals + mobility, data = apistrat, weights = precision_weights)
-ols_sampling_weights <- svyglm(api00 ~ ell + meals + mobility, design = strat.design)
-summary(ols)
+# Run a linear regression with sampling weights
+ols_sampling_weights <- svyglm(api00 ~ meals, design = strat.design)
 summary(ols_sampling_weights)
+```
+
+### Precision weights
+
+We manually create precision weights and incorporate them in the `weights=` argument in the `glm()` function. The basic idea is that if the variance is heteroscedastic (unequal across observations) and depends linearly on the fitted values, we could use the inverse of these fitted values as weights. Alternatively, if we already have an estimate of the variance for each observation from prior knowledge or experimental design, we could also directly use those values to compute the inverse variance weights.
+
+```{r}
+# Fit a traditional OLS model
+ols <- glm(api00 ~ meals, data = apistrat)
+
+# Estimate variance (assuming variance of residuals might depend on the magnitude of fitted values)
+ols_var <- glm(I(residuals(ols)^2) ~ fitted(ols), data = apistrat)
+
+# Compute precision weights as the inverse of the estimated variance
+precision_weights <- 1 / fitted(ols_var)
+
+# Fit the weighted least squares model
+ols_precision_weights <- glm(api00 ~ meals, data = apistrat, weights = precision_weights)
 summary(ols_precision_weights)
 ```
 
-Let's assume we decide to create frequency weights based on a scenario where the number of students per school is used as the frequency weight
-```{r}
+### Frequency weights
+
+Assuming we want to store data at the student level rather than the school level, we could generate frequency weights that represent the number of students in each school, and run our analysis on the uncompressed data.
+
+```{r, warning=FALSE}
 set.seed(123)
-apistrat$frequency_weights <- sample(50:400, size = nrow(apistrat), replace = TRUE)
+
+# For simplicity, assume the number of students per school ranges from 1 to 3
+apistrat$frequency_weights <- sample(1:3, size = nrow(apistrat), replace = TRUE)
+
+# Construct individual-level dataset
+apistrat_individual <- apistrat %>%
+  uncount(weights = frequency_weights, .id = "cds")
+
+# Run a linear model on the uncompressed data
+ols_frequency_weights <- glm(api00 ~ meals, data = apistrat_individual)
+summary(ols_frequency_weights)
 ```
 
-Analytical weights are equivalent to rescaling frequency weights to make them add to the sample size. 
+
+
+
+```{r}
+data <- data.frame(id = 1:5,
+                   Q1 = c(2,4,1,3,5),
+                   Q2 = c(3,3,2,5,5),
+                   Q3 = c(1,4,5,5,2))
+data <- data %>%
+  mutate(weight = ifelse(id == 3 | id == 4, 1.5, 1)) %>%
+  mutate(
+    across(.cols = Q1:Q3, .fns = ~ .x * weight, .names = "{.col}_weighted")
+  )
+
+mean(data$Q1)
+mean(data$Q1_weighted)
+ 
+```
+
+## Non-probability samples can also produce accurate estimates with careful weighting
 
 ## Weighting does not solve everything
 
-
 ## Unweighted data can be preferred to weighted data
-
-
-## Non-probability samples can also produce accurate estimates with careful weighting
 
 
 
