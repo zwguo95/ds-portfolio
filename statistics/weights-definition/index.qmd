@@ -1,0 +1,78 @@
+---
+title: "Understanding Weights in Statistics: What Do People Often Get Wrong?"
+date: 04/30/2024
+author:
+  - name: Zhaowen Guo
+    url: "https://www.linkedin.com/in/zhaowen-guo-20535312a/"
+title-block-banner: true
+format:
+  html:
+    theme: flatly
+    code-fold: false
+    code-tools: false
+    toc: false
+    number-sections: false
+link-citations: true
+categories: [code, survey methodology]
+image: "sample_population.png"
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(irlba)
+library(kableExtra)
+library(tidyverse)
+```
+
+> Survey weighting is a mess. --- Andrew Gelman
+
+
+
+## There exists more than one type of weight
+
+```{r, message=FALSE, warning=FALSE}
+library(survey)
+library(tidyverse)
+options(survey.lonely.psu = "adjust")
+options(survey.adjust.domain.lonely = TRUE)
+
+data(api)
+strat.design <- svydesign(id =~ 1,
+                          strata = ~stype,
+                          weights = ~pw, # sampling weights
+                          data = apistrat,
+                          fpc = ~fpc)
+
+ols <- glm(api00 ~ ell + meals + mobility, data = apistrat)
+precision_weights <- 1 / glm(abs(ols$residuals) ~ ols$fitted.values)$fitted.values^2
+ols_precision_weights <- glm(api00 ~ ell + meals + mobility, data = apistrat, weights = precision_weights)
+ols_sampling_weights <- svyglm(api00 ~ ell + meals + mobility, design = strat.design)
+summary(ols)
+summary(ols_sampling_weights)
+summary(ols_precision_weights)
+```
+
+Let's assume we decide to create frequency weights based on a scenario where the number of students per school is used as the frequency weight
+```{r}
+set.seed(123)
+apistrat$frequency_weights <- sample(50:400, size = nrow(apistrat), replace = TRUE)
+```
+
+Analytical weights are equivalent to rescaling frequency weights to make them add to the sample size. 
+
+## Weighting does not solve everything
+
+
+## Unweighted data can be preferred to weighted data
+
+
+## Non-probability samples can also produce accurate estimates with careful weighting
+
+
+
+**References and additional resources:**
+
+-   A wonderful twitter [thread](https://twitter.com/WomenInStat/status/1285612667839885312) on SVD by Daniela Witten (a nice summary can be found [here](https://www.govindgnair.com/post/svd-is-almost-all-you-need/))
+
+-   A cool geometric [interpretation](https://www.youtube.com/watch?v=vSczTbgc8Rc) of SVD
+
+-   A nice [tutorial](https://www.youtube.com/watch?v=lRZ4aMaXPBI&list=PLtmWHNX-gukKocXQOkQjuVxglSDYWsSh9&index=3) illustrating the connection between SVD and topic modeling using Python
