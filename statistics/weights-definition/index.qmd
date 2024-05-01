@@ -29,9 +29,9 @@ The first common misconception is that when people talk about weights in statist
 
 Lumley and Gelman identify four primary types of weights in statistics: sampling weights, precision weights, frequency weights, and importance weights, which are highlighted in yellow boxes in this graph. I included alternative names that are commonly used to describe each type of weights.
 
-What does a weight of 100 mean for each type of weights? 
+What does a weight of 100 mean for each type of weights?
 
-- A \textbf{sampling weight} of 100 indicates that the observation represents 100 individuals in the population. Alternatively, the probability that this observation was selected from the population to the sample is 1/100. This helps to ensure the sample is representative of the population.
+-   A \textbf{sampling weight} of 100 indicates that the observation represents 100 individuals in the population. Alternatively, the probability that this observation was selected from the population to the sample is 1/100. This helps to ensure the sample is representative of the population.
 
 -   A \textbf{precision weight} of 100 means that the observation's variance is 100 times less than that of an observation with a precision weight of 1. This weighting is used to enhance the estimation efficiency like OLS, where typically each observation is equally weighted. By using precision weights, observations with lower variance (and thus higher precision) have a greater influence on determining the line of best fit.
 
@@ -105,8 +105,29 @@ ols_frequency_weights <- glm(api00 ~ meals, data = apistrat_individual)
 summary(ols_frequency_weights)
 ```
 
+## Non-probability samples hold promise when paired with careful weighting
 
+Another misconception is that many tend to hold a dismissive stance towards non-probability sampling, including American Association of Public Opinion Research ([AAPOR](https://www.washingtonpost.com/news/monkey-cage/wp/2014/08/04/modern-polling-requires-both-sampling-and-adjustment/?next_url=https://www.washingtonpost.com/news/monkey-cage/wp/2014/08/04/modern-polling-requires-both-sampling-and-adjustment/)) in 2014. A frequently cited example of non-probability sampling's pitfalls is the 1936 Literary Digest poll, which incorrectly predicted the outcome of the presidential election due to its unrepresentative sample.
 
+![1936 Literary Digest](literary_digest.jpg)
+
+However, the benefit of probability samples might not come true for every project. In scenarios where response rates are extremely low, a probability sample might not offer more accuracy than a non-probability convenience sample. Moreover, the application of weighting techniques can significantly enhance the accuracy of non-probability samples, making them viable for reliable estimates.
+
+Selecting appropriate variables for weighting is crucial. For instance, Lohr and Brick's 2017 [analysis](https://gwern.net/doc/statistics/bias/2017-lohr.pdf) demonstrated that using voter data from the 1932 election to weight the Literary Digest's sample would have accurately predicted Roosevelt's victory in the 1936 election.
+
+Identifying a suitable auxiliary variable for weighting is not always straightforward. Gelman's [project](https://www.washingtonpost.com/news/monkey-cage/wp/2014/04/09/tracking-public-opinion-with-biased-polls/) using an opt-in poll from the Xbox gaming platform before the 2012 presidential election. This sample was unrepresentative, skewed towards younger and more male respondents. Gelman and his team chose to use party ID to reweight the data. Partisanship is not often used for weighting because it varies over time and is not readily available from census data where demographic variables are often chosen for weighting. Despite these challenges, the results are impressive -- the adjusted estimates aligned well with forecasts from leading poll analysts!
+
+when you have really low response rates, the probability sample might not differ much from a non-probability convience sample. Moreover, many weighting techniques come into play that could make the non-probability produce accurate and reliable estimates. The magic sparks on which variable you choose to weight your sample. For the Literary Digest example, Lohr and Brick (2017) finds that if votes cast in 1932 was used to weight the results, the poll would have predicted a majority of electoral votes for Roosevelt in 1936.
+
+positive example of statistical adjustments
+
+opt-in samples or other convience samples, use weighting to correct for lack of representativeness, Gelman's xbox project, using opt-in poll from the Xbox gaming platform during the month or so before the 2012 presidential election - Gelman uses party ID to reweight the data, determining which variables to incorporate to weight on is tricky and can be controversial, Gelman uses party ID to reweight the xbox data because this is not fixed and cannot be pulled from census like other demographic characteristics.
+
+The Literary Digest example
+
+## Weighting does not solve everything
+
+Weighting is not a solution to every problem.
 
 ```{r}
 data <- data.frame(id = 1:5,
@@ -124,15 +145,17 @@ mean(data$Q1_weighted)
  
 ```
 
-## Non-probability samples can also produce accurate estimates with careful weighting
-
-## Weighting does not solve everything
-
 ## Unweighted data can be preferred to weighted data
 
+To weight or not to weight, here are some considerations:
 
+**References:**
 
-**References and additional resources:**
+-   Andrew Gelman and David Rothschild, 2014. "Modern polling needs innovation, not traditionalism". The Washington Post.
+
+-   Andrew Gelman, 2014. "Tracking public opinion with biased polls". The Washington Post.
+
+-   Sharon L. Lohr and J. Michael Brick, 2017. "Roosevelt Predicted to Win: Revisiting the 1936 Literary Digest Poll". Statistical, Politics and Policy, 8(1): 65-84.
 
 -   A wonderful twitter [thread](https://twitter.com/WomenInStat/status/1285612667839885312) on SVD by Daniela Witten (a nice summary can be found [here](https://www.govindgnair.com/post/svd-is-almost-all-you-need/))
 
