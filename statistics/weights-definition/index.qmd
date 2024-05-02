@@ -67,7 +67,7 @@ ols_sampling_weights <- svyglm(api00 ~ meals, design = srs.design)
 
 ### Precision weights
 
-We manually create precision weights and incorporate them in the `weights=` argument in the `glm()` function. The basic idea is that if the variance is heteroscedastic (unequal across observations) and depends linearly on the fitted values, we could use the inverse of these fitted values as weights. Alternatively, if we already have an estimate of the variance for each observation from prior knowledge or experimental design, we could also directly use those values to compute the inverse variance weights.
+We can manually create precision weights and incorporate them in the `weights=` argument from the `glm()` function. The basic idea is that if the variance is heteroscedastic (unequal across observations) and depends linearly on the fitted values, we could use the inverse of these fitted values as weights. Alternatively, if we already have an estimate of the variance for each observation from prior knowledge, we could also directly use those values to compute the inverse variance weights.
 
 ```{r}
 # Fit a traditional OLS model
@@ -103,24 +103,24 @@ ols_frequency_weights <- glm(api00 ~ meals, data = apisrs_individual)
 
 ### Adjustment weights
 
-Assume that our data is from a simple random sample
+Assume that we under-sampled middle schools and high schools, and we want to correct this imbalance and ensure our sample mirrors the known population breakdown by school types, this is where adjustment weights come into play. 
 
 ```{r}
 # Assume we know population totals for each school type
 pop_totals <- data.frame(
   stype = c("E", "M", "H"),
-  Freq = c(5000, 3000, 2000)  # hypothetical population sizes for Elementary, Middle, High
+  Freq = c(500, 300, 200)  # hypothetical population sizes for Elementary, Middle, High
 )
 
 # Post-stratification
 post_design <- postStratify(srs.design, strata = ~stype, population = pop_totals)
 
-# Extract the post-stratified weights
-adjusted_weights <- weights(post_design)
-
-# Update the original design with new weights
-srs.design.updated <- update(srs.design, weights = adjusted_weights)
+# Run a linear model with the updated design
+ols_adjustment_weights <- svyglm(api00 ~ meals, design = post_design)
 ```
+
+It is worth noting that adjustment weights are still useful even when we don't have sampling weights. For example, in respondent-driven sampling, where the selection probability of each respondent is unknown and individuals with larger social networks are likely over-represented, we could improve sample representativeness using adjustment weights that are inversely proportional to the number of social connections for each respondent.
+
 
 ## Non-probability samples hold promise when paired with careful weighting
 
@@ -134,13 +134,22 @@ Selecting appropriate variables for weighting is crucial. For instance, Lohr and
 
 Identifying a suitable auxiliary variable for weighting is not always straightforward. Gelman's [project](https://www.washingtonpost.com/news/monkey-cage/wp/2014/04/09/tracking-public-opinion-with-biased-polls/) using an opt-in poll from the Xbox gaming platform before the 2012 presidential election. This sample was unrepresentative, skewed towards younger and more male respondents. Gelman and his team chose to use party ID to reweight the data. Partisanship is not often used for weighting because it varies over time and is not readily available from census data where demographic variables are often chosen for weighting. Despite these challenges, the results are impressive -- the adjusted estimates aligned well with forecasts from leading poll analysts!
 
-## Weighting does not solve everything
+## Weighting in regressions also needs careful considerations
 
-Despite the amazing power that weighting can bring in, it is not a solution to every problem.
+When analyzing survey data, sampling weights and adjustment weights are often discussed. A key question that arises is: when do we need to incorporate weights? One general consensus is that the need for weights depends on the research purpose: weights become more crucial when estimating population descriptive statistics but less so when examining the relationship between predictors and the outcome. 
 
-## Unweighted data can be preferred to weighted data
+However, even in regression analyses, there are circumstances where unweighted data may be preferred to weighted, and vice versa. Below are some important considerations for deciding whether to incorporate weights:
 
-To weight or not to weight, here are some considerations:
+-   Relationship between weights and the outcome (Y)
+
+  -   If the sampling weights are dependent on the outcome (Y), such as in [case-control sampling](https://sphweb.bumc.bu.edu/otlt/mph-modules/ep/ep713_case-control/ep713_case-control_print.html), we should incorporate weights. For instance, if high values of Y are more likely to be sampled, omitting weights could introduce bias.
+
+-   Relationship between weights and the predictors (X)
+
+  -   When sampling weights are a function of the predictors (X) included in the model and does not depend on outcome (Y), unweighted model estimates are often preferable. These estimates tend to be unbiased, consistent, and exhibit smaller standard errors compared to their weighted counterparts.
+
+  -   Even when weights are associated with the outcome (Y), [some researchers](https://journals.sagepub.com/doi/10.1177/0049124194023002004) still recommend first re-specifying the model to ensure that weights depend solely on the predictors (X). If this re-specification is feasible and effective, using the unweighted model is again preferred.
+
 
 **References:**
 
@@ -148,8 +157,16 @@ To weight or not to weight, here are some considerations:
 
 -   Andrew Gelman, 2014. "Tracking public opinion with biased polls". The Washington Post.
 
+-   Andrew Gelman, 2007. "Struggles with Survey Weighting and Regression Modeling". Statistical Science, 22(2): 153-164.
+
+-   Gary Solon, Steven J. Haider, and Jeffrey M. Wooldridge, 2015. "What Are We Weighting For?". The Journal of Human Resources, 50(2): 301-316.
+
 -   Sharon L. Lohr and J. Michael Brick, 2017. "Roosevelt Predicted to Win: Revisiting the 1936 Literary Digest Poll". Statistical, Politics and Policy, 8(1): 65-84.
 
--   Thomas Lumley, 2024. "[Importance weights](https://notstatschat.rbind.io/2024/04/19/importance-weights/)"
+-   Thomas Lumley, 2024. "[Importance weights](https://notstatschat.rbind.io/2024/04/19/importance-weights/)".
 
--   Thomas Lumley, 2020. "[Weights in statistics](https://notstatschat.rbind.io/2020/08/04/weights-in-statistics/)"
+-   Thomas Lumley, 2020. "[Weights in statistics](https://notstatschat.rbind.io/2020/08/04/weights-in-statistics/)".
+
+-   Christopher Winship and Larry Radbill, 1994. "Sampling Weights and Regression Analysis". Sociological Methods & Research.
+
+
