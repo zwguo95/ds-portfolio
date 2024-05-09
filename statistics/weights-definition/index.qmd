@@ -21,7 +21,7 @@ image: "sample_population.png"
 
 Recently, many clients have come to us with questions about weights -- how to create weighted statistics? how to conduct weighted regressions? When I ask about the specific weights they're referring to, many seem unsure. This confusion underscores the complexity of discussions surrounding weights. Motivated by these encounters, I started looking into different types of weights, and what weighting can and cannot do. In this blog post, I will address common misconceptions surrounding these questions and hopefully bring clarity to how weights should be understood and used in statistical practices.
 
-## There exists more than one type of weight
+## There exists more than one type of weights
 
 The first common misconception is that when people talk about weights in statistics, they are all pointing to the same concept. This is not the case, as highlighted in the insightful discussions by [Thomas Lumley](https://notstatschat.rbind.io/2020/08/04/weights-in-statistics/) and [Andrew Gelman](https://statmodeling.stat.columbia.edu/2021/01/17/weights-in-statistics/). Building upon their work, I will provide visual and code demonstrations below to illustrate the differences between various types of weights.
 
@@ -37,7 +37,7 @@ What does a weight of 100 mean for each type of weights?
 
 -   A \textbf{frequency weight} of 100 suggests that there are 100 identical observations in the sample. To save space and processing power, only one value is used to represent these observations.
 
-Importance weights are different from the other types. Lumley provides a good example related to [dual-frame sampling](https://notstatschat.rbind.io/2024/04/19/importance-weights/). When your sample comes from two overlapping sampling frames, it's crucial to property account for individuals who appear in both frames to prevent double-counting. In such cases, importance weights are applied to adjust for the overlap, typically by dividing the original sampling weights by 2 of those duplicated individuals.
+Importance weights are different from the other types. Lumley provides a good example related to [dual-frame sampling](https://notstatschat.rbind.io/2024/04/19/importance-weights/). When your sample comes from two overlapping sampling frames, it's crucial to properly account for individuals who appear in both frames to prevent double-counting. In such cases, importance weights are applied to adjust for the overlap, typically by dividing the original sampling weights by 2 of those duplicated individuals.
 
 Additionally, I introduced a fifth category -- adjustment weights -- marked in an orange box. Adjustment weights are often used to rectify discrepancies between the sample and the population, addressing issues such as respondent attrition and non-response through techniques like post-stratification and raking. You might also have heard of terms like ["longitudinal weights" or "cross-sectional weights"](https://www.understandingsociety.ac.uk/documentation/mainstage/user-guides/main-survey-user-guide/longitudinal-and-cross-sectional-weights/#:~:text=Unlike%20in%20a%20cross%2Dsectional,used%20cross%2Dsectionally%20years%20later.) which often appeared in public health research. These terms fall under the umbrella of adjustment weights. While adjustment weights typically complement sampling weights, they can extend to non-probability samples as well.
 
@@ -79,7 +79,7 @@ ols_var <- glm(I(residuals(ols)^2) ~ fitted(ols), data = apisrs)
 # Compute precision weights as the inverse of the estimated variance
 precision_weights <- 1 / fitted(ols_var)
 
-# Fit the weighted least squares model
+# Fit the weighted least squares model with precision weights
 ols_precision_weights <- glm(api00 ~ meals, data = apisrs, weights = precision_weights)
 ```
 
@@ -103,7 +103,7 @@ ols_frequency_weights <- glm(api00 ~ meals, data = apisrs_individual)
 
 ### Adjustment weights
 
-Assume that we under-sampled middle schools and high schools, and we want to correct this imbalance and ensure our sample mirrors the known population breakdown by school types, this is where adjustment weights come into play. 
+Assume that we under-sampled middle schools and high schools, and we want to correct this imbalance and ensure our sample mirrors the known population breakdown by school types, this is where adjustment weights come into play.
 
 ```{r}
 # Assume we know population totals for each school type
@@ -121,35 +121,35 @@ ols_adjustment_weights <- svyglm(api00 ~ meals, design = post_design)
 
 It is worth noting that adjustment weights are still useful even when we don't have sampling weights. For example, in respondent-driven sampling, where the selection probability of each respondent is unknown and individuals with larger social networks are likely over-represented, we could improve sample representativeness using adjustment weights that are inversely proportional to the number of social connections for each respondent.
 
-
 ## Non-probability samples hold promise when paired with careful weighting
 
-Another misconception is that many tend to hold a dismissive stance towards non-probability sampling, including American Association of Public Opinion Research ([AAPOR](https://www.washingtonpost.com/news/monkey-cage/wp/2014/08/04/modern-polling-requires-both-sampling-and-adjustment/?next_url=https://www.washingtonpost.com/news/monkey-cage/wp/2014/08/04/modern-polling-requires-both-sampling-and-adjustment/)) in 2014. A frequently cited example of non-probability sampling's pitfalls is the 1936 Literary Digest poll, which incorrectly predicted the outcome of the presidential election due to its unrepresentative sample.
+Another misconception is that many tend to hold a dismissive stance towards non-probability sampling, including American Association of Public Opinion Research ([AAPOR](https://www.washingtonpost.com/news/monkey-cage/wp/2014/08/04/modern-polling-requires-both-sampling-and-adjustment/?next_url=https://www.washingtonpost.com/news/monkey-cage/wp/2014/08/04/modern-polling-requires-both-sampling-and-adjustment/)) in 2014. A frequently cited example of non-probability sampling's pitfalls is the 1936 Literary Digest poll, which incorrectly predicted the outcome of the 1936 U.S. presidential election due to its unrepresentative sample of the magazine's subscribers.
 
 ![1936 Literary Digest](literary_digest.jpg)
 
 However, the benefit of probability samples might not come true for every project. In scenarios where response rates are extremely low, a probability sample might not offer more accuracy than a non-probability convenience sample. Moreover, the application of weighting techniques can significantly enhance the accuracy of non-probability samples, making them viable for reliable estimates.
 
-Selecting appropriate variables for weighting is crucial. For instance, Lohr and Brick's 2017 [analysis](https://gwern.net/doc/statistics/bias/2017-lohr.pdf) demonstrated that using voter data from the 1932 election to weight the Literary Digest's sample would have accurately predicted Roosevelt's victory in the 1936 election.
+Selecting appropriate variables for weighting then becomes crucial. An ideal auxiliary vector should (1) strongly predict the outcome of interest, (2) strongly predict the probability of responding, and (3) correspond to domains of interest (Caughey et al., 2020). For instance, Lohr and Brick's 2017 [analysis](https://gwern.net/doc/statistics/bias/2017-lohr.pdf) demonstrated that using voter data from the 1932 election to weight the Literary Digest's sample could have accurately predicted Roosevelt's victory in the 1936 election.
 
-Identifying a suitable auxiliary variable for weighting is not always straightforward. Gelman's [project](https://www.washingtonpost.com/news/monkey-cage/wp/2014/04/09/tracking-public-opinion-with-biased-polls/) using an opt-in poll from the Xbox gaming platform before the 2012 presidential election. This sample was unrepresentative, skewed towards younger and more male respondents. Gelman and his team chose to use party ID to reweight the data. Partisanship is not often used for weighting because it varies over time and is not readily available from census data where demographic variables are often chosen for weighting. Despite these challenges, the results are impressive -- the adjusted estimates aligned well with forecasts from leading poll analysts!
+It's also worth mentioning that a well-chosen auxiliary vector can potentially reduce **both** bias and variance (Little and Vartivarian, 2005), especially when the first two conditions above are met. If achieving both is not possible, it's generally better to prioritize the former (outcome) over the latter (probability of response).
 
-## Weighting in regressions also needs careful considerations
+Nonetheless, identifying a suitable auxiliary vector for weighting is not always straightforward. Consider Gelman's [project](https://www.washingtonpost.com/news/monkey-cage/wp/2014/04/09/tracking-public-opinion-with-biased-polls/) which used an opt-in poll from the Xbox gaming platform before the 2012 presidential election. This sample was unrepresentative, skewing towards younger and more male respondents. Gelman and his team chose to use party ID to reweight the data. Partisanship is not often used for weighting because it varies over time and is not readily available from census data where demographic variables are often included for weighting. Despite these challenges, the results are impressive -- the adjusted estimates aligned well with forecasts from leading poll analysts!
 
-When analyzing survey data, sampling weights and adjustment weights are often discussed. A key question that arises is: when do we need to incorporate weights? One general consensus is that the need for weights depends on the research purpose: weights become more crucial when estimating population descriptive statistics but less so when examining the relationship between predictors and the outcome. 
+## Weighting in regressions still needs careful considerations
+
+When analyzing survey data, sampling weights and adjustment weights are often discussed. A key question that arises is: when do we need to incorporate weights? One general consensus is that the need for weights depends on the research purpose: weights become more crucial when estimating population descriptive statistics but less so when examining the relationship between predictors and the outcome.
 
 However, even in regression analyses, there are circumstances where unweighted data may be preferred to weighted, and vice versa. Below are some important considerations for deciding whether to incorporate weights:
 
 -   Relationship between weights and the outcome (Y)
 
-  -   If the sampling weights are dependent on the outcome (Y), such as in [case-control sampling](https://sphweb.bumc.bu.edu/otlt/mph-modules/ep/ep713_case-control/ep713_case-control_print.html), we should incorporate weights. For instance, if high values of Y are more likely to be sampled, omitting weights could introduce bias.
+    -   If the sampling weights are dependent on the outcome (Y), such as in [case-control sampling](https://sphweb.bumc.bu.edu/otlt/mph-modules/ep/ep713_case-control/ep713_case-control_print.html), we should incorporate weights. For instance, if high values of Y are more likely to be sampled, omitting weights could introduce bias.
 
 -   Relationship between weights and the predictors (X)
 
-  -   When sampling weights are a function of the predictors (X) included in the model and does not depend on outcome (Y), unweighted model estimates are often preferable. These estimates tend to be unbiased, consistent, and exhibit smaller standard errors compared to their weighted counterparts.
+    -   When sampling weights are a function of the predictors (X) included in the model and does not depend on outcome (Y), unweighted model estimates are often preferable. These estimates tend to be unbiased, consistent, and exhibit smaller standard errors compared to their weighted counterparts.
 
-  -   Even when weights are associated with the outcome (Y), [some researchers](https://journals.sagepub.com/doi/10.1177/0049124194023002004) still recommend first re-specifying the model to ensure that weights depend solely on the predictors (X). If this re-specification is feasible and effective, using the unweighted model is again preferred.
-
+    -   Even when weights are associated with the outcome (Y), [some researchers](https://journals.sagepub.com/doi/10.1177/0049124194023002004) still recommend first re-specifying the model to ensure that weights depend solely on the predictors (X). If this re-specification is feasible and effective, using the unweighted model is again preferred.
 
 **References:**
 
@@ -158,6 +158,8 @@ However, even in regression analyses, there are circumstances where unweighted d
 -   Andrew Gelman, 2014. "Tracking public opinion with biased polls". The Washington Post.
 
 -   Andrew Gelman, 2007. "Struggles with Survey Weighting and Regression Modeling". Statistical Science, 22(2): 153-164.
+
+-   Devin Caughey, Adam J. Berinsky, Sara Chatfield, Erin Hartman, Eric Schikler, and Jasjeet S. Sekhon, 2020. "Target Estimation and Adjustment Weighting for Survey Nonresponse and Sampling Bias". Cambridge University Press.
 
 -   Gary Solon, Steven J. Haider, and Jeffrey M. Wooldridge, 2015. "What Are We Weighting For?". The Journal of Human Resources, 50(2): 301-316.
 
@@ -168,5 +170,3 @@ However, even in regression analyses, there are circumstances where unweighted d
 -   Thomas Lumley, 2020. "[Weights in statistics](https://notstatschat.rbind.io/2020/08/04/weights-in-statistics/)".
 
 -   Christopher Winship and Larry Radbill, 1994. "Sampling Weights and Regression Analysis". Sociological Methods & Research.
-
-
