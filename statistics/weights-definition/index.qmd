@@ -131,7 +131,7 @@ However, the benefit of probability samples might not come true for every projec
 
 Selecting appropriate variables for weighting then becomes crucial. An ideal auxiliary vector should (1) strongly predict the outcome of interest, (2) strongly predict the probability of responding, and (3) correspond to domains of interest (Caughey et al., 2020). For instance, Lohr and Brick's 2017 [analysis](https://gwern.net/doc/statistics/bias/2017-lohr.pdf) demonstrated that using voter data from the 1932 election to weight the Literary Digest's sample could have accurately predicted Roosevelt's victory in the 1936 election.
 
-It's also worth mentioning that a well-chosen auxiliary vector can potentially reduce **both** bias and variance (Little and Vartivarian, 2005), especially when the first two conditions above are met. If achieving both is not possible, it's generally better to prioritize the former (outcome) over the latter (probability of response).
+It's also worth mentioning that a well-chosen auxiliary vector can potentially reduce ***both*** bias and variance (Little and Vartivarian, 2005), especially when the first two conditions above are met. If achieving both is not possible, it's generally better to prioritize the former (outcome) over the latter (probability of response).
 
 Nonetheless, identifying a suitable auxiliary vector for weighting is not always straightforward. Consider Gelman's [project](https://www.washingtonpost.com/news/monkey-cage/wp/2014/04/09/tracking-public-opinion-with-biased-polls/) which used an opt-in poll from the Xbox gaming platform before the 2012 presidential election. This sample was unrepresentative, skewing towards younger and more male respondents. Gelman and his team chose to use party ID to reweight the data. Partisanship is not often used for weighting because it varies over time and is not readily available from census data where demographic variables are often included for weighting. Despite these challenges, the results are impressive -- the adjusted estimates aligned well with forecasts from leading poll analysts!
 
@@ -162,6 +162,8 @@ However, even in regression analyses, there are circumstances where unweighted d
 -   Devin Caughey, Adam J. Berinsky, Sara Chatfield, Erin Hartman, Eric Schikler, and Jasjeet S. Sekhon, 2020. "Target Estimation and Adjustment Weighting for Survey Nonresponse and Sampling Bias". Cambridge University Press.
 
 -   Gary Solon, Steven J. Haider, and Jeffrey M. Wooldridge, 2015. "What Are We Weighting For?". The Journal of Human Resources, 50(2): 301-316.
+
+-   Roderick J. Little and Sonya Vartivarian, 2005. "Does Weighting for Nonresponse Increase the Variance of Survey Means?". Survey Methodology, 31: 161-168.
 
 -   Sharon L. Lohr and J. Michael Brick, 2017. "Roosevelt Predicted to Win: Revisiting the 1936 Literary Digest Poll". Statistical, Politics and Policy, 8(1): 65-84.
 

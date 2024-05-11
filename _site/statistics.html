@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -48,12 +48,7 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -62,7 +57,6 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -110,42 +104,15 @@ gtag('config', 'G-J1PPVYDT7J', { 'anonymize_ip': true});
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
+      <div class="navbar-brand-container">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Zhaowen Guo</span>
     </a>
@@ -157,32 +124,32 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Home</span></a>
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./statistics.html" aria-current="page"> 
-<span class="menu-text">Statistics</span></a>
+    <a class="nav-link active" href="./statistics.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Statistics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./dataviz.html"> 
-<span class="menu-text">Data Visualization</span></a>
+    <a class="nav-link" href="./dataviz.html" rel="" target="">
+ <span class="menu-text">Data Visualization</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">Tutorials</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
         <li>
-    <a class="dropdown-item" href="./tutorials/word_embeddings.html">
+    <a class="dropdown-item" href="./tutorials/word_embeddings.html" rel="" target="">
  <span class="dropdown-text">Word Embeddings with R</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./tutorials/data_visualization.html">
+    <a class="dropdown-item" href="./tutorials/data_visualization.html" rel="" target="">
  <span class="dropdown-text">Visualizing Data with R</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./tutorials/survey_data_visualization.html">
+    <a class="dropdown-item" href="./tutorials/survey_data_visualization.html" rel="" target="">
  <span class="dropdown-text">Visualizing Survey Data with R</span></a>
   </li>  
     </ul>
@@ -190,41 +157,41 @@ window.Quarto = {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="https://www.linkedin.com/in/zhaowen-guo-20535312a/"> <i class="bi bi-linkedin" role="img">
+    <a class="nav-link" href="https://www.linkedin.com/in/zhaowen-guo-20535312a/" rel="" target=""><i class="bi bi-linkedin" role="img">
 </i> 
-<span class="menu-text">LinkedIn</span></a>
+ <span class="menu-text">LinkedIn</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://github.com/zwguo95"> <i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/zwguo95" rel="" target=""><i class="bi bi-github" role="img">
 </i> 
-<span class="menu-text">GitHub</span></a>
+ <span class="menu-text">GitHub</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="mailto:zwguo@uw.edu"> <i class="bi bi-envelope" role="img">
+    <a class="nav-link" href="mailto:zwguo@uw.edu" rel="" target=""><i class="bi bi-envelope" role="img">
 </i> 
-<span class="menu-text">Email</span></a>
+ <span class="menu-text">Email</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resume" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resume" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
       <i class="bi bi-file-earmark-person" role="img">
 </i> 
  <span class="menu-text">Resume</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-resume">    
         <li>
-    <a class="dropdown-item" href="./resume/resume_guo.pdf">
+    <a class="dropdown-item" href="./resume/resume_guo.pdf" rel="" target="">
  <span class="dropdown-text">Resume</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./resume/cv_guo.pdf">
+    <a class="dropdown-item" href="./resume/cv_guo.pdf" rel="" target="">
  <span class="dropdown-text">CV</span></a>
   </li>  
     </ul>
   </li>
 </ul>
-          </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
+          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -237,7 +204,7 @@ window.Quarto = {
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
       
     
@@ -261,22 +228,21 @@ window.Quarto = {
 
 
 
-
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="code,survey methodology" data-listing-date-sort="1714460400000" data-listing-file-modified-sort="1714769729677" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1700">
+<div class="quarto-post image-right" data-index="0" data-categories="code,survey methodology" data-listing-date-sort="1714460400000" data-listing-file-modified-sort="1715403865798" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10">
 <div class="thumbnail">
-<p><a href="./statistics/weights-definition/index.html" class="no-external"></a></p><a href="./statistics/weights-definition/index.html" class="no-external">
-<p><img src="./statistics/weights-definition/sample_population.png" class="thumbnail-image" style="height: 10em;"></p>
-</a><p><a href="./statistics/weights-definition/index.html" class="no-external"></a></p>
+<p><a href="./statistics/weights-definition/index.html"> <img src="./statistics/weights-definition/sample_population.png" class="thumbnail-image" style="height: 10em;"> </a></p>
 </div>
 <div class="body">
+<a href="./statistics/weights-definition/index.html">
 <h3 class="no-anchor listing-title">
-<a href="./statistics/weights-definition/index.html" class="no-external">Weights in Statistics: What Do People Often Get Wrong?</a>
+Weights in Statistics: What Do People Often Get Wrong?
 </h3>
 <div class="listing-subtitle">
-<a href="./statistics/weights-definition/index.html" class="no-external"></a>
+
 </div>
+</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('code'); return false;">
 code
@@ -285,12 +251,14 @@ code
 survey methodology
 </div>
 </div>
+<a href="./statistics/weights-definition/index.html">
 <div class="listing-description">
-<a href="./statistics/weights-definition/index.html" class="no-external">Survey weighting is a mess. — Andrew Gelman</a>
+Survey weighting is a mess. — Andrew Gelman
 </div>
+</a>
 </div>
 <div class="metadata">
-<a href="./statistics/weights-definition/index.html" class="no-external">
+<a href="./statistics/weights-definition/index.html">
 <div class="listing-date">
 Apr 30, 2024
 </div>
@@ -300,19 +268,19 @@ Zhaowen Guo
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="machine learning,natural language processing" data-listing-date-sort="1714201200000" data-listing-file-modified-sort="1714492011835" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2062">
+<div class="quarto-post image-right" data-index="1" data-categories="machine learning,natural language processing" data-listing-date-sort="1714201200000" data-listing-file-modified-sort="1714448881379" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11">
 <div class="thumbnail">
-<p><a href="./statistics/nlp-ai-news/index.html" class="no-external"></a></p><a href="./statistics/nlp-ai-news/index.html" class="no-external">
-<p><img src="./statistics/nlp-ai-news/big_tech.png" class="thumbnail-image" style="height: 10em;"></p>
-</a><p><a href="./statistics/nlp-ai-news/index.html" class="no-external"></a></p>
+<p><a href="./statistics/nlp-ai-news/index.html"> <img src="./statistics/nlp-ai-news/big_tech.png" class="thumbnail-image" style="height: 10em;"> </a></p>
 </div>
 <div class="body">
+<a href="./statistics/nlp-ai-news/index.html">
 <h3 class="no-anchor listing-title">
-<a href="./statistics/nlp-ai-news/index.html" class="no-external">Hype or Harm: Examining Media Coverage of AI</a>
+Hype or Harm: Examining Media Coverage of AI
 </h3>
 <div class="listing-subtitle">
-<a href="./statistics/nlp-ai-news/index.html" class="no-external"></a>
+
 </div>
+</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('machine learning'); return false;">
 machine learning
@@ -321,12 +289,14 @@ machine learning
 natural language processing
 </div>
 </div>
+<a href="./statistics/nlp-ai-news/index.html">
 <div class="listing-description">
-<a href="./statistics/nlp-ai-news/index.html" class="no-external">Artificial Intelligence (AI) and Large Language Models (LLMs) have become buzzwords, sparking significant media attention. I found myself intrigued by how AI is portrayed in…</a>
+Artificial Intelligence (AI) and Large Language Models (LLMs) have become buzzwords, sparking significant media attention. I found myself intrigued by how AI is portrayed in…
 </div>
+</a>
 </div>
 <div class="metadata">
-<a href="./statistics/nlp-ai-news/index.html" class="no-external">
+<a href="./statistics/nlp-ai-news/index.html">
 <div class="listing-date">
 Apr 27, 2024
 </div>
@@ -336,19 +306,19 @@ Zhaowen Guo
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="code,natural language processing" data-listing-date-sort="1712300400000" data-listing-file-modified-sort="1713974856326" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1495">
+<div class="quarto-post image-right" data-index="2" data-categories="code,natural language processing" data-listing-date-sort="1712300400000" data-listing-file-modified-sort="1712380211198" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
 <div class="thumbnail">
-<p><a href="./statistics/web-scraping/index.html" class="no-external"></a></p><a href="./statistics/web-scraping/index.html" class="no-external">
-<p><img src="./statistics/web-scraping/web-scraping.png" class="thumbnail-image" style="height: 10em;"></p>
-</a><p><a href="./statistics/web-scraping/index.html" class="no-external"></a></p>
+<p><a href="./statistics/web-scraping/index.html"> <img src="./statistics/web-scraping/web-scraping.png" class="thumbnail-image" style="height: 10em;"> </a></p>
 </div>
 <div class="body">
+<a href="./statistics/web-scraping/index.html">
 <h3 class="no-anchor listing-title">
-<a href="./statistics/web-scraping/index.html" class="no-external">Scraping Dynamic Websites with R: An Example from Media Bias Data</a>
+Scraping Dynamic Websites with R: An Example from Media Bias Data
 </h3>
 <div class="listing-subtitle">
-<a href="./statistics/web-scraping/index.html" class="no-external"></a>
+
 </div>
+</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('code'); return false;">
 code
@@ -357,12 +327,14 @@ code
 natural language processing
 </div>
 </div>
+<a href="./statistics/web-scraping/index.html">
 <div class="listing-description">
-<a href="./statistics/web-scraping/index.html" class="no-external">In my recent analysis of how news headlines on artificial intelligence (AI) vary across media outlets with different ideological leanings, I stumbled upon an interesting data…</a>
+In my recent analysis of how news headlines on artificial intelligence (AI) vary across media outlets with different ideological leanings, I stumbled upon an interesting data…
 </div>
+</a>
 </div>
 <div class="metadata">
-<a href="./statistics/web-scraping/index.html" class="no-external">
+<a href="./statistics/web-scraping/index.html">
 <div class="listing-date">
 Apr 5, 2024
 </div>
@@ -372,19 +344,19 @@ Zhaowen Guo
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="code,machine learning,natural language processing" data-listing-date-sort="1710658800000" data-listing-file-modified-sort="1713974856322" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2079">
+<div class="quarto-post image-right" data-index="3" data-categories="code,machine learning,natural language processing" data-listing-date-sort="1710658800000" data-listing-file-modified-sort="1712352636089" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11">
 <div class="thumbnail">
-<p><a href="./statistics/svd/index.html" class="no-external"></a></p><a href="./statistics/svd/index.html" class="no-external">
-<p><img src="./statistics/svd/svd_bipartite.png" class="thumbnail-image" style="height: 10em;"></p>
-</a><p><a href="./statistics/svd/index.html" class="no-external"></a></p>
+<p><a href="./statistics/svd/index.html"> <img src="./statistics/svd/svd_bipartite.png" class="thumbnail-image" style="height: 10em;"> </a></p>
 </div>
 <div class="body">
+<a href="./statistics/svd/index.html">
 <h3 class="no-anchor listing-title">
-<a href="./statistics/svd/index.html" class="no-external">The Power of Singular Vector Decomposition: A Beginner’s Guide</a>
+The Power of Singular Vector Decomposition: A Beginner’s Guide
 </h3>
 <div class="listing-subtitle">
-<a href="./statistics/svd/index.html" class="no-external"></a>
+
 </div>
+</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('code'); return false;">
 code
@@ -396,12 +368,14 @@ machine learning
 natural language processing
 </div>
 </div>
+<a href="./statistics/svd/index.html">
 <div class="listing-description">
-<a href="./statistics/svd/index.html" class="no-external">SVD is not nearly as famous as it should be. — Gilbert Strang</a>
+SVD is not nearly as famous as it should be. — Gilbert Strang
 </div>
+</a>
 </div>
 <div class="metadata">
-<a href="./statistics/svd/index.html" class="no-external">
+<a href="./statistics/svd/index.html">
 <div class="listing-date">
 Mar 17, 2024
 </div>
@@ -411,19 +385,19 @@ Zhaowen Guo
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="code,statistics" data-listing-date-sort="1676361600000" data-listing-file-modified-sort="1710953076154" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1105">
+<div class="quarto-post image-right" data-index="4" data-categories="code,statistics" data-listing-date-sort="1676361600000" data-listing-file-modified-sort="1709326239308" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
 <div class="thumbnail">
-<p><a href="./statistics/simulations/index.html" class="no-external"></a></p><a href="./statistics/simulations/index.html" class="no-external">
-<p><img src="./statistics/simulations/monty-hall-wiki.png" class="thumbnail-image" style="height: 10em;"></p>
-</a><p><a href="./statistics/simulations/index.html" class="no-external"></a></p>
+<p><a href="./statistics/simulations/index.html"> <img src="./statistics/simulations/monty-hall-wiki.png" class="thumbnail-image" style="height: 10em;"> </a></p>
 </div>
 <div class="body">
+<a href="./statistics/simulations/index.html">
 <h3 class="no-anchor listing-title">
-<a href="./statistics/simulations/index.html" class="no-external">Revisiting the Monty Hall Problem: The Power of Simulations</a>
+Revisiting the Monty Hall Problem: The Power of Simulations
 </h3>
 <div class="listing-subtitle">
-<a href="./statistics/simulations/index.html" class="no-external"></a>
+
 </div>
+</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('code'); return false;">
 code
@@ -432,12 +406,14 @@ code
 statistics
 </div>
 </div>
+<a href="./statistics/simulations/index.html">
 <div class="listing-description">
-<a href="./statistics/simulations/index.html" class="no-external">Named after the host of the popular game show “Let’s Make a Deal,” the Monty Hall problem is a classic example of how our intuition can sometimes lead us astray when it…</a>
+Named after the…
 </div>
+</a>
 </div>
 <div class="metadata">
-<a href="./statistics/simulations/index.html" class="no-external">
+<a href="./statistics/simulations/index.html">
 <div class="listing-date">
 Feb 14, 2023
 </div>
@@ -447,19 +423,19 @@ Zhaowen Guo
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="statistics,machine learning" data-listing-date-sort="1671091200000" data-listing-file-modified-sort="1710953076149" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="716">
+<div class="quarto-post image-right" data-index="5" data-categories="statistics,machine learning" data-listing-date-sort="1671091200000" data-listing-file-modified-sort="1709326227308" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<p><a href="./statistics/bias-variance/index.html" class="no-external"></a></p><a href="./statistics/bias-variance/index.html" class="no-external">
-<p><img src="./statistics/bias-variance/reducible-irreducible-errors.JPG" class="thumbnail-image" style="height: 10em;"></p>
-</a><p><a href="./statistics/bias-variance/index.html" class="no-external"></a></p>
+<p><a href="./statistics/bias-variance/index.html"> <img src="./statistics/bias-variance/reducible-irreducible-errors.JPG" class="thumbnail-image" style="height: 10em;"> </a></p>
 </div>
 <div class="body">
+<a href="./statistics/bias-variance/index.html">
 <h3 class="no-anchor listing-title">
-<a href="./statistics/bias-variance/index.html" class="no-external">Explaining the Bias-Variance Tradeoff</a>
+Explaining the Bias-Variance Tradeoff
 </h3>
 <div class="listing-subtitle">
-<a href="./statistics/bias-variance/index.html" class="no-external"></a>
+
 </div>
+</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('statistics'); return false;">
 statistics
@@ -468,12 +444,14 @@ statistics
 machine learning
 </div>
 </div>
+<a href="./statistics/bias-variance/index.html">
 <div class="listing-description">
-<a href="./statistics/bias-variance/index.html" class="no-external">In order to assess the model performance on a given dataset, we need to measure how closely its predictions align with the actual data. In regression settings, we often use <em>m…</em></a>
+In order to assess the model performance on a given dataset, we need to measure how closely its predictions align with the actual data. In regression settings, we often use <em>mean squared error…</em>
 </div>
+</a>
 </div>
 <div class="metadata">
-<a href="./statistics/bias-variance/index.html" class="no-external">
+<a href="./statistics/bias-variance/index.html">
 <div class="listing-date">
 Dec 15, 2022
 </div>
@@ -483,30 +461,32 @@ Zhaowen Guo
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="statistics" data-listing-date-sort="1671091200000" data-listing-file-modified-sort="1710953076149" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="781">
+<div class="quarto-post image-right" data-index="6" data-categories="statistics" data-listing-date-sort="1671091200000" data-listing-file-modified-sort="1709326257213" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
 <div class="thumbnail">
-<p><a href="./statistics/dssg-tracking-poverty/index.html" class="no-external"></a></p><a href="./statistics/dssg-tracking-poverty/index.html" class="no-external">
-<p><img src="./statistics/dssg-tracking-poverty/poverty-dssg.jpg" class="thumbnail-image" style="height: 10em;"></p>
-</a><p><a href="./statistics/dssg-tracking-poverty/index.html" class="no-external"></a></p>
+<p><a href="./statistics/dssg-tracking-poverty/index.html"> <img src="./statistics/dssg-tracking-poverty/poverty-dssg.jpg" class="thumbnail-image" style="height: 10em;"> </a></p>
 </div>
 <div class="body">
+<a href="./statistics/dssg-tracking-poverty/index.html">
 <h3 class="no-anchor listing-title">
-<a href="./statistics/dssg-tracking-poverty/index.html" class="no-external">Predicting Household Groupings: A Longitudinal Approach</a>
+Predicting Household Groupings: A Longitudinal Approach
 </h3>
 <div class="listing-subtitle">
-<a href="./statistics/dssg-tracking-poverty/index.html" class="no-external"></a>
+
 </div>
+</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('statistics'); return false;">
 statistics
 </div>
 </div>
+<a href="./statistics/dssg-tracking-poverty/index.html">
 <div class="listing-description">
-<a href="./statistics/dssg-tracking-poverty/index.html" class="no-external">Poverty is a complex issue that is typically measured at the household level, taking into account the resources that are shared among multiple individuals. However, many…</a>
+Poverty is a complex issue that is typically measured at the household level, taking into account the resources that are shared among multiple individuals. However, many…
 </div>
+</a>
 </div>
 <div class="metadata">
-<a href="./statistics/dssg-tracking-poverty/index.html" class="no-external">
+<a href="./statistics/dssg-tracking-poverty/index.html">
 <div class="listing-date">
 Dec 15, 2022
 </div>
@@ -516,19 +496,19 @@ Zhaowen Guo
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="code,statistics,psychometrics" data-listing-date-sort="1668499200000" data-listing-file-modified-sort="1710953076153" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="856">
+<div class="quarto-post image-right" data-index="7" data-categories="code,statistics,psychometrics" data-listing-date-sort="1668499200000" data-listing-file-modified-sort="1709326248314" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
 <div class="thumbnail">
-<p><a href="./statistics/rasch-hlm/index.html" class="no-external"></a></p><a href="./statistics/rasch-hlm/index.html" class="no-external">
-<p><img src="./statistics/rasch-hlm/equivalence.png" class="thumbnail-image" style="height: 10em;"></p>
-</a><p><a href="./statistics/rasch-hlm/index.html" class="no-external"></a></p>
+<p><a href="./statistics/rasch-hlm/index.html"> <img src="./statistics/rasch-hlm/equivalence.png" class="thumbnail-image" style="height: 10em;"> </a></p>
 </div>
 <div class="body">
+<a href="./statistics/rasch-hlm/index.html">
 <h3 class="no-anchor listing-title">
-<a href="./statistics/rasch-hlm/index.html" class="no-external">Unveilling Model Equivalence: Linking the Rasch Model with the Hierarchical Linear Model</a>
+Unveilling Model Equivalence: Linking the Rasch Model with the Hierarchical Linear Model
 </h3>
 <div class="listing-subtitle">
-<a href="./statistics/rasch-hlm/index.html" class="no-external"></a>
+
 </div>
+</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('code'); return false;">
 code
@@ -540,12 +520,14 @@ statistics
 psychometrics
 </div>
 </div>
+<a href="./statistics/rasch-hlm/index.html">
 <div class="listing-description">
-<a href="./statistics/rasch-hlm/index.html" class="no-external">When learning more about statistical modeling, I find it helpful to consider the relationships and connections between different models. This allows me to gain a better…</a>
+When learning more about statistical modeling, I find it helpful to consider the relationships and connections between different models. This allows me to gain a better…
 </div>
+</a>
 </div>
 <div class="metadata">
-<a href="./statistics/rasch-hlm/index.html" class="no-external">
+<a href="./statistics/rasch-hlm/index.html">
 <div class="listing-date">
 Nov 15, 2022
 </div>
@@ -639,9 +621,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -651,17 +634,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -674,125 +648,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -836,7 +691,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -862,32 +716,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -948,7 +776,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-
 
 
 

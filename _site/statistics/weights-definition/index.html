@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.3.433">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Zhaowen Guo">
 <meta name="dcterms.date" content="2024-04-30">
@@ -21,7 +21,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -77,12 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -91,7 +86,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -107,8 +101,8 @@ gtag('config', 'G-J1PPVYDT7J', { 'anonymize_ip': true});
 <body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Zhaowen Guo</span>
     </a>
@@ -120,32 +114,32 @@ gtag('config', 'G-J1PPVYDT7J', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
 <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
-<span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../statistics.html"> 
-<span class="menu-text">Statistics</span></a>
+    <a class="nav-link" href="../../statistics.html" rel="" target="">
+ <span class="menu-text">Statistics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../dataviz.html"> 
-<span class="menu-text">Data Visualization</span></a>
+    <a class="nav-link" href="../../dataviz.html" rel="" target="">
+ <span class="menu-text">Data Visualization</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">Tutorials</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">
 <li>
-    <a class="dropdown-item" href="../../tutorials/word_embeddings.html">
+    <a class="dropdown-item" href="../../tutorials/word_embeddings.html" rel="" target="">
  <span class="dropdown-text">Word Embeddings with R</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../tutorials/data_visualization.html">
+    <a class="dropdown-item" href="../../tutorials/data_visualization.html" rel="" target="">
  <span class="dropdown-text">Visualizing Data with R</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../tutorials/survey_data_visualization.html">
+    <a class="dropdown-item" href="../../tutorials/survey_data_visualization.html" rel="" target="">
  <span class="dropdown-text">Visualizing Survey Data with R</span></a>
   </li>  
     </ul>
@@ -153,41 +147,41 @@ gtag('config', 'G-J1PPVYDT7J', { 'anonymize_ip': true});
 </ul>
 <ul class="navbar-nav navbar-nav-scroll ms-auto">
 <li class="nav-item">
-    <a class="nav-link" href="https://www.linkedin.com/in/zhaowen-guo-20535312a/"> <i class="bi bi-linkedin" role="img">
+    <a class="nav-link" href="https://www.linkedin.com/in/zhaowen-guo-20535312a/" rel="" target=""><i class="bi bi-linkedin" role="img">
 </i> 
-<span class="menu-text">LinkedIn</span></a>
+ <span class="menu-text">LinkedIn</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://github.com/zwguo95"> <i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/zwguo95" rel="" target=""><i class="bi bi-github" role="img">
 </i> 
-<span class="menu-text">GitHub</span></a>
+ <span class="menu-text">GitHub</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="mailto:zwguo@uw.edu"> <i class="bi bi-envelope" role="img">
+    <a class="nav-link" href="mailto:zwguo@uw.edu" rel="" target=""><i class="bi bi-envelope" role="img">
 </i> 
-<span class="menu-text">Email</span></a>
+ <span class="menu-text">Email</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resume" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resume" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
       <i class="bi bi-file-earmark-person" role="img">
 </i> 
  <span class="menu-text">Resume</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-resume">
 <li>
-    <a class="dropdown-item" href="../../resume/resume_guo.pdf">
+    <a class="dropdown-item" href="../../resume/resume_guo.pdf" rel="" target="">
  <span class="dropdown-text">Resume</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../resume/cv_guo.pdf">
+    <a class="dropdown-item" href="../../resume/cv_guo.pdf" rel="" target="">
  <span class="dropdown-text">CV</span></a>
   </li>  
     </ul>
 </li>
 </ul>
-</div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+<div class="quarto-navbar-tools">
 </div>
+          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
@@ -229,11 +223,11 @@ gtag('config', 'G-J1PPVYDT7J', { 'anonymize_ip': true});
 <p>Survey weighting is a mess. — Andrew Gelman</p>
 </blockquote>
 <p>Recently, many clients have come to us with questions about weights – how to create weighted statistics? how to conduct weighted regressions? When I ask about the specific weights they’re referring to, many seem unsure. This confusion underscores the complexity of discussions surrounding weights. Motivated by these encounters, I started looking into different types of weights, and what weighting can and cannot do. In this blog post, I will address common misconceptions surrounding these questions and hopefully bring clarity to how weights should be understood and used in statistical practices.</p>
-<section id="there-exists-more-than-one-type-of-weight" class="level2"><h2 class="anchored" data-anchor-id="there-exists-more-than-one-type-of-weight">There exists more than one type of weight</h2>
+<section id="there-exists-more-than-one-type-of-weights" class="level2"><h2 class="anchored" data-anchor-id="there-exists-more-than-one-type-of-weights">There exists more than one type of weights</h2>
 <p>The first common misconception is that when people talk about weights in statistics, they are all pointing to the same concept. This is not the case, as highlighted in the insightful discussions by <a href="https://notstatschat.rbind.io/2020/08/04/weights-in-statistics/">Thomas Lumley</a> and <a href="https://statmodeling.stat.columbia.edu/2021/01/17/weights-in-statistics/">Andrew Gelman</a>. Building upon their work, I will provide visual and code demonstrations below to illustrate the differences between various types of weights.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="weights_types.png" class="img-fluid figure-img"></p>
-<figcaption>Types of Weights in Statistics</figcaption></figure>
+<figcaption class="figure-caption">Types of Weights in Statistics</figcaption></figure>
 </div>
 <p>Lumley and Gelman identify four primary types of weights in statistics: sampling weights, precision weights, frequency weights, and importance weights, which are highlighted in yellow boxes in this graph. I included alternative names that are commonly used to describe each type of weights.</p>
 <p>What does a weight of 100 mean for each type of weights?</p>
@@ -242,7 +236,7 @@ gtag('config', 'G-J1PPVYDT7J', { 'anonymize_ip': true});
 <li><p>A of 100 means that the observation’s variance is 100 times less than that of an observation with a precision weight of 1. This weighting is used to enhance the estimation efficiency like OLS, where typically each observation is equally weighted. By using precision weights, observations with lower variance (and thus higher precision) have a greater influence on determining the line of best fit.</p></li>
 <li><p>A of 100 suggests that there are 100 identical observations in the sample. To save space and processing power, only one value is used to represent these observations.</p></li>
 </ul>
-<p>Importance weights are different from the other types. Lumley provides a good example related to <a href="https://notstatschat.rbind.io/2024/04/19/importance-weights/">dual-frame sampling</a>. When your sample comes from two overlapping sampling frames, it’s crucial to property account for individuals who appear in both frames to prevent double-counting. In such cases, importance weights are applied to adjust for the overlap, typically by dividing the original sampling weights by 2 of those duplicated individuals.</p>
+<p>Importance weights are different from the other types. Lumley provides a good example related to <a href="https://notstatschat.rbind.io/2024/04/19/importance-weights/">dual-frame sampling</a>. When your sample comes from two overlapping sampling frames, it’s crucial to properly account for individuals who appear in both frames to prevent double-counting. In such cases, importance weights are applied to adjust for the overlap, typically by dividing the original sampling weights by 2 of those duplicated individuals.</p>
 <p>Additionally, I introduced a fifth category – adjustment weights – marked in an orange box. Adjustment weights are often used to rectify discrepancies between the sample and the population, addressing issues such as respondent attrition and non-response through techniques like post-stratification and raking. You might also have heard of terms like <a href="https://www.understandingsociety.ac.uk/documentation/mainstage/user-guides/main-survey-user-guide/longitudinal-and-cross-sectional-weights/#:~:text=Unlike%20in%20a%20cross%2Dsectional,used%20cross%2Dsectionally%20years%20later.">“longitudinal weights” or “cross-sectional weights”</a> which often appeared in public health research. These terms fall under the umbrella of adjustment weights. While adjustment weights typically complement sampling weights, they can extend to non-probability samples as well.</p>
 <p>Below I turn to each type of weight using the California Academic Performance Index data from the <code>survey</code> package. We’ll work with the <code>apisrs</code> dataset, a simple random sample of 200 schools where sampling weights are included (<code>pw</code>). Our goal is to analyze the relationship between academic performance in the year 2000 (<code>api00</code>) and percentage of economically disadvantaged students (<code>meals</code>).</p>
 <section id="sampling-weights" class="level3"><h3 class="anchored" data-anchor-id="sampling-weights">Sampling weights</h3>
@@ -276,7 +270,7 @@ gtag('config', 'G-J1PPVYDT7J', { 'anonymize_ip': true});
 <span><span class="co"># Compute precision weights as the inverse of the estimated variance</span></span>
 <span><span class="va">precision_weights</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">ols_var</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Fit the weighted least squares model</span></span>
+<span><span class="co"># Fit the weighted least squares model with precision weights</span></span>
 <span><span class="va">ols_precision_weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">api00</span> <span class="op">~</span> <span class="va">meals</span>, data <span class="op">=</span> <span class="va">apisrs</span>, weights <span class="op">=</span> <span class="va">precision_weights</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="frequency-weights" class="level3"><h3 class="anchored" data-anchor-id="frequency-weights">Frequency weights</h3>
@@ -311,29 +305,39 @@ gtag('config', 'G-J1PPVYDT7J', { 'anonymize_ip': true});
 </div>
 <p>It is worth noting that adjustment weights are still useful even when we don’t have sampling weights. For example, in respondent-driven sampling, where the selection probability of each respondent is unknown and individuals with larger social networks are likely over-represented, we could improve sample representativeness using adjustment weights that are inversely proportional to the number of social connections for each respondent.</p>
 </section></section><section id="non-probability-samples-hold-promise-when-paired-with-careful-weighting" class="level2"><h2 class="anchored" data-anchor-id="non-probability-samples-hold-promise-when-paired-with-careful-weighting">Non-probability samples hold promise when paired with careful weighting</h2>
-<p>Another misconception is that many tend to hold a dismissive stance towards non-probability sampling, including American Association of Public Opinion Research (<a href="https://www.washingtonpost.com/news/monkey-cage/wp/2014/08/04/modern-polling-requires-both-sampling-and-adjustment/?next_url=https://www.washingtonpost.com/news/monkey-cage/wp/2014/08/04/modern-polling-requires-both-sampling-and-adjustment/">AAPOR</a>) in 2014. A frequently cited example of non-probability sampling’s pitfalls is the 1936 Literary Digest poll, which incorrectly predicted the outcome of the presidential election due to its unrepresentative sample.</p>
+<p>Another misconception is that many tend to hold a dismissive stance towards non-probability sampling, including American Association of Public Opinion Research (<a href="https://www.washingtonpost.com/news/monkey-cage/wp/2014/08/04/modern-polling-requires-both-sampling-and-adjustment/?next_url=https://www.washingtonpost.com/news/monkey-cage/wp/2014/08/04/modern-polling-requires-both-sampling-and-adjustment/">AAPOR</a>) in 2014. A frequently cited example of non-probability sampling’s pitfalls is the 1936 Literary Digest poll, which incorrectly predicted the outcome of the 1936 U.S. presidential election due to its unrepresentative sample of the magazine’s subscribers.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="literary_digest.jpg" class="img-fluid figure-img"></p>
-<figcaption>1936 Literary Digest</figcaption></figure>
+<figcaption class="figure-caption">1936 Literary Digest</figcaption></figure>
 </div>
 <p>However, the benefit of probability samples might not come true for every project. In scenarios where response rates are extremely low, a probability sample might not offer more accuracy than a non-probability convenience sample. Moreover, the application of weighting techniques can significantly enhance the accuracy of non-probability samples, making them viable for reliable estimates.</p>
-<p>Selecting appropriate variables for weighting is crucial. For instance, Lohr and Brick’s 2017 <a href="https://gwern.net/doc/statistics/bias/2017-lohr.pdf">analysis</a> demonstrated that using voter data from the 1932 election to weight the Literary Digest’s sample would have accurately predicted Roosevelt’s victory in the 1936 election.</p>
-<p>Identifying a suitable auxiliary variable for weighting is not always straightforward. Gelman’s <a href="https://www.washingtonpost.com/news/monkey-cage/wp/2014/04/09/tracking-public-opinion-with-biased-polls/">project</a> using an opt-in poll from the Xbox gaming platform before the 2012 presidential election. This sample was unrepresentative, skewed towards younger and more male respondents. Gelman and his team chose to use party ID to reweight the data. Partisanship is not often used for weighting because it varies over time and is not readily available from census data where demographic variables are often chosen for weighting. Despite these challenges, the results are impressive – the adjusted estimates aligned well with forecasts from leading poll analysts!</p>
-</section><section id="weighting-in-regressions-also-needs-careful-considerations" class="level2"><h2 class="anchored" data-anchor-id="weighting-in-regressions-also-needs-careful-considerations">Weighting in regressions also needs careful considerations</h2>
+<p>Selecting appropriate variables for weighting then becomes crucial. An ideal auxiliary vector should (1) strongly predict the outcome of interest, (2) strongly predict the probability of responding, and (3) correspond to domains of interest (Caughey et al., 2020). For instance, Lohr and Brick’s 2017 <a href="https://gwern.net/doc/statistics/bias/2017-lohr.pdf">analysis</a> demonstrated that using voter data from the 1932 election to weight the Literary Digest’s sample could have accurately predicted Roosevelt’s victory in the 1936 election.</p>
+<p>It’s also worth mentioning that a well-chosen auxiliary vector can potentially reduce <strong>both</strong> bias and variance (Little and Vartivarian, 2005), especially when the first two conditions above are met. If achieving both is not possible, it’s generally better to prioritize the former (outcome) over the latter (probability of response).</p>
+<p>Nonetheless, identifying a suitable auxiliary vector for weighting is not always straightforward. Consider Gelman’s <a href="https://www.washingtonpost.com/news/monkey-cage/wp/2014/04/09/tracking-public-opinion-with-biased-polls/">project</a> which used an opt-in poll from the Xbox gaming platform before the 2012 presidential election. This sample was unrepresentative, skewing towards younger and more male respondents. Gelman and his team chose to use party ID to reweight the data. Partisanship is not often used for weighting because it varies over time and is not readily available from census data where demographic variables are often included for weighting. Despite these challenges, the results are impressive – the adjusted estimates aligned well with forecasts from leading poll analysts!</p>
+</section><section id="weighting-in-regressions-still-needs-careful-considerations" class="level2"><h2 class="anchored" data-anchor-id="weighting-in-regressions-still-needs-careful-considerations">Weighting in regressions still needs careful considerations</h2>
 <p>When analyzing survey data, sampling weights and adjustment weights are often discussed. A key question that arises is: when do we need to incorporate weights? One general consensus is that the need for weights depends on the research purpose: weights become more crucial when estimating population descriptive statistics but less so when examining the relationship between predictors and the outcome.</p>
 <p>However, even in regression analyses, there are circumstances where unweighted data may be preferred to weighted, and vice versa. Below are some important considerations for deciding whether to incorporate weights:</p>
 <ul>
-<li><p>Relationship between weights and the outcome (Y)</p></li>
-<li><p>If the sampling weights are dependent on the outcome (Y), such as in <a href="https://sphweb.bumc.bu.edu/otlt/mph-modules/ep/ep713_case-control/ep713_case-control_print.html">case-control sampling</a>, we should incorporate weights. For instance, if high values of Y are more likely to be sampled, omitting weights could introduce bias.</p></li>
-<li><p>Relationship between weights and the predictors (X)</p></li>
+<li>
+<p>Relationship between weights and the outcome (Y)</p>
+<ul>
+<li>If the sampling weights are dependent on the outcome (Y), such as in <a href="https://sphweb.bumc.bu.edu/otlt/mph-modules/ep/ep713_case-control/ep713_case-control_print.html">case-control sampling</a>, we should incorporate weights. For instance, if high values of Y are more likely to be sampled, omitting weights could introduce bias.</li>
+</ul>
+</li>
+<li>
+<p>Relationship between weights and the predictors (X)</p>
+<ul>
 <li><p>When sampling weights are a function of the predictors (X) included in the model and does not depend on outcome (Y), unweighted model estimates are often preferable. These estimates tend to be unbiased, consistent, and exhibit smaller standard errors compared to their weighted counterparts.</p></li>
 <li><p>Even when weights are associated with the outcome (Y), <a href="https://journals.sagepub.com/doi/10.1177/0049124194023002004">some researchers</a> still recommend first re-specifying the model to ensure that weights depend solely on the predictors (X). If this re-specification is feasible and effective, using the unweighted model is again preferred.</p></li>
+</ul>
+</li>
 </ul>
 <p><strong>References:</strong></p>
 <ul>
 <li><p>Andrew Gelman and David Rothschild, 2014. “Modern polling needs innovation, not traditionalism”. The Washington Post.</p></li>
 <li><p>Andrew Gelman, 2014. “Tracking public opinion with biased polls”. The Washington Post.</p></li>
 <li><p>Andrew Gelman, 2007. “Struggles with Survey Weighting and Regression Modeling”. Statistical Science, 22(2): 153-164.</p></li>
+<li><p>Devin Caughey, Adam J. Berinsky, Sara Chatfield, Erin Hartman, Eric Schikler, and Jasjeet S. Sekhon, 2020. “Target Estimation and Adjustment Weighting for Survey Nonresponse and Sampling Bias”. Cambridge University Press.</p></li>
 <li><p>Gary Solon, Steven J. Haider, and Jeffrey M. Wooldridge, 2015. “What Are We Weighting For?”. The Journal of Human Resources, 50(2): 301-316.</p></li>
 <li><p>Sharon L. Lohr and J. Michael Brick, 2017. “Roosevelt Predicted to Win: Revisiting the 1936 Literary Digest Poll”. Statistical, Politics and Policy, 8(1): 65-84.</p></li>
 <li><p>Thomas Lumley, 2024. “<a href="https://notstatschat.rbind.io/2024/04/19/importance-weights/">Importance weights</a>”.</p></li>
@@ -421,9 +425,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -433,17 +438,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -456,125 +452,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -618,7 +495,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -644,32 +520,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
