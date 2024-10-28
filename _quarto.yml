@@ -23,8 +23,6 @@ website:
         menu: 
           - text: Word Embeddings with R
             href: tutorials/word_embeddings.html
-          - text: Visualizing Data with R
-            href: tutorials/data_visualization.html
           - text: Visualizing Survey Data with R
             href: tutorials/survey_data_visualization.html
     
@@ -36,7 +34,7 @@ website:
         icon: github
         url: "https://github.com/zwguo95"
       - text: Email
-        href: mailto:zwguo@uw.edu
+        href: mailto:zg234@georgetown.edu
         icon: envelope
       - text: Resume
         icon: file-earmark-person

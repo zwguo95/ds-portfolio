@@ -1,6 +1,9 @@
 ---
 title: "Zhaowen Guo"
 image: headshot_guo.jpg
+format:
+  html:
+    css: styles.css
 about:
   template: jolla
   image-shape: round
@@ -13,12 +16,27 @@ about:
       icon: github
       href: https://github.com/zwguo95
     - text: Contact me
-      href: mailto:zwguo@uw.edu
+      href: mailto:zg234@georegetown.edu
       icon: envelope
 ---
 
+<div class="main-content">
 
-I am a PhD candidate at the University of Washington, where I combine my expertise in both social and data science to develop and enhance metrics using experimental and observational data, along with psychometric and NLP techniques. 
+I am a **social and data scientist** interested in the intersection of experimental design, survey methodology, and machine learning. My research focuses on developing metrics for social constructs using innovative data collection and evaluating the impact of digital interventions on civic behavior and public opinion. I work with diverse data sources—including administrative, survey, text, and spatial data—and collaborate widely with government agencies and tech companies.
 
-I enjoy connecting data from various sources, including administrative data, survey data, text data, image data, and spatial data, to deliver insightful analyses and support impact evaluations. My passion lies in communicating my findings through engaging data visualizations and promoting equity and inclusion in data science by knowledge sharing. 
+Currently, I am a postdoctoral researcher at the [Better Government Lab](https://mccourt.georgetown.edu/better-government-lab/), Georgetown University.
 
+<!-- Horizontal Rule -->
+<hr class="divider">
+
+<!-- Skills Section -->
+<div class="skills-section">
+  <span class="skill" id="experimental-design">Experimental Design</span>
+  <span class="skill" id="survey-methodology">Survey Methodology</span>  
+  <span class="skill" id="machine-learning">Machine Learning</span>  
+  <span class="skill" id="causal-inference">Causal Inference</span>
+  <span class="skill" id="nlp">Natural Language Processing</span>
+  <span class="skill" id="data-visualization">Data Visualization</span>
+</div>
+
+</div>
