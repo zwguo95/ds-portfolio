@@ -218,7 +218,10 @@ gtag('config', 'G-J1PPVYDT7J', { 'anonymize_ip': true});
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content"><p>Experimental designs sometimes require randomization at the cluster level, where groups of individuals—rather than individuals themselves—are assigned to treatment or control. This approach is often necessary when the intervention naturally applies at the cluster level (e.g., policy changes targeting schools, hospitals, or workplaces) or when participants within a cluster lack independence (e.g., students within the same classroom or employees within the same company).</p>
 <p>We encountered this exact challenge in designing a randomized controlled trial (RCT) with caseworkers. Earlier pilot studies revealed that caseworkers within the same agency often communicate during experiments, making it difficult to ensure compliance with their assigned treatment. To address this, we shifted from individual-level to agency-level randomization.</p>
-<p>However, this introduced a new challenge: the wide variation in agency caseworker counts makes random assignment prone to substantial imbalances. Since statistical power is typically maximized when treatment and control arms have similar sizes, the key question becomes: how can we allocate agencies to treatment and control groups to achieve balanced caseworker counts? In this blog post, I’ll share my exploration of strategies—including alternate assignment, greedy algorithms, and the largest differencing method—for achieving balance in cluster randomization.</p>
+<p>However, this introduced a new challenge: the wide variation in agency caseworker counts makes random assignment prone to substantial imbalances. Since statistical power is typically maximized when treatment and control arms have similar sizes, the key question becomes: how can we allocate agencies to treatment and control groups to achieve balanced caseworker counts?</p>
+<p>This question boils down to a classic two-way partition problem: dividing a list of numbers (in this case, agency caseworker counts) into two groups such that the sums of the groups are as close as possible. This problem arises in many contexts, such as splitting workloads across teams or, in our case, creating balanced treatment and control groups in an RCT.</p>
+<p>Solving this problem exactly is difficult because it is NP-hard, meaning that finding an exact solution becomes exponentially harder as the dataset grows. Approximate algorithms provide a practical alternative. These methods use simple heuristics to produce solutions quickly, without evaluating every possible combination. While they don’t guarantee a perfect split, they often achieve results that are “good enough” for most real-world applications. Additionally, approximate solutions can serve as upper bounds to help exact algorithms prune the search space, making the process more efficient.</p>
+<p>In this blog post, I’ll share my exploration of approximate algorithms for solving this problem, including methods like alternate assignment, greedy algorithms, and the largest differencing method.</p>
 <section id="alternate-assignment" class="level1"><h1>Alternate Assignment</h1>
 <p>The alternate assignment method is straightforward: agencies are first sorted by their caseworker counts, and then alternately assigned to treatment and control groups. This process ensures that both groups receive a mix of agencies with varying sizes and thus to prevent extreme imbalances.</p>
 <p>Let’s consider six agencies with caseworker counts: <span class="math display">\[
@@ -234,7 +237,7 @@ S = \{50,30,40,10,20,5\}
 </ul>
 </li>
 </ul>
-<p>This method is easy to implement and generally ensures reasonably balanced groups. However, it struggles when the data contains clusters or extreme outliers. For example, with S = {45,44,43,5,4,3}, the clustering of similar values (e.g.&nbsp;45,44,43) results in imbalances between the treatment and control groups. Similarly, in datasets with extreme outliers, a few very large values can dominate the totals in one group.</p>
+<p>This method is easy to implement and generally ensures reasonably balanced groups. However, it struggles when the data contains clusters or extreme outliers. For example, with S = {45, 44, 43, 5, 4, 3}, the clustering of similar values (e.g.&nbsp;45, 44, 43) results in imbalances between the treatment and control groups. Similarly, in datasets with extreme outliers, a few very large values can dominate the totals in one group.</p>
 </section><section id="greedy-algorithm" class="level1"><h1>Greedy Algorithm</h1>
 <p>The greedy algorithm attempts to minimize the difference in caseworker counts between treatment and control groups by iteratively assigning each agency to the group with the smaller current total.</p>
 <p>Using the same example: <span class="math display">\[
@@ -331,15 +334,19 @@ S = \{2,8,11,12,17,18\}
 </li>
 </ul>
 <p>The LDM approach ensures that the largest contributors to imbalance are addressed first, effectively distributing dominant values across the treatment and control groups.</p>
-</section><section id="comparison" class="level1"><h1>Comparison</h1>
+</section><section id="method-comparison" class="level1"><h1>Method Comparison</h1>
 <p>To systematically evaluate methods for achieving balance, I conducted a simulation analysis using different synthetic datasets. For each simulation, a random subset of a given number of agencies (clusters) was selected among 50 agencies, and these agencies were assigned to treatment and control groups to minimize the difference in caseworker totals between the groups. This process was repeated 500 times for each subset size.</p>
 <p>Specifically, I considered three types of data structures: (1) <strong>clustered data</strong>, where caseworker counts are concentrated in two distinct clusters of high and low values; (2) <strong>dispersed data</strong>, where caseworker counts are evenly spread across a wide range; and (3) <strong>skewed data</strong>, where a few agencies have very large caseworker counts while most have smaller counts. The distributions of these datasets are displayed below.</p>
 <p><img src="data_generation.png" class="img-fluid"></p>
 <p>The graphs below summarize the simulation results. As expected, random assignment without accounting for the variation in caseworker counts among agencies results in highly imbalanced samples, producing the largest mean absolute differences between groups. Among the three data types, the <strong>Greedy Algorithm</strong> consistently performs the best to create groups where caseworker counts are relatively similar. For <strong>dispersed</strong> and <strong>clustered</strong> data, both the Greedy Algorithm and LDM perform comparably well. However, for <strong>skewed data</strong>, LDM performs much worse than Greedy, suggesting its limitations in handling datasets with extreme outliers.</p>
-<p><img src="clustered_data.png" class="img-fluid"></p>
-<p><img src="dispersed_data.png" class="img-fluid"></p>
-<p><img src="skewed_data.png" class="img-fluid"></p>
-<p>Below is the R code implementation of these treatment assignment approaches.</p>
+<p><img src="method_comparison.png" class="img-fluid"></p>
+<p>Some key takeaways from my exploration</p>
+<ul>
+<li><p>Greedy algorithm and LDM are often good enough to achieve balanced groups efficiently, though LDM struggles with skewed data</p></li>
+<li><p>Approximate vs.&nbsp;exact algorithms presents a trade-off between accuracy and computational efficiency</p></li>
+<li><p>Simulate for our specific data to identify the best method based on our specific priorities (e.g.&nbsp;accuracy, computational efficiency)</p></li>
+</ul>
+<p>Below is the R code implementation of these treatment assignment approaches. For those who are interested, this <a href="complete_greedy.R">script</a> implements the complete greedy algorithm to find the perfect split between treatment and control groups.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Baseline: Random Assignment</span></span>
 <span><span class="va">random_assignment</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span></span>

@@ -21,7 +21,13 @@ Experimental designs sometimes require randomization at the cluster level, where
 
 We encountered this exact challenge in designing a randomized controlled trial (RCT) with caseworkers. Earlier pilot studies revealed that caseworkers within the same agency often communicate during experiments, making it difficult to ensure compliance with their assigned treatment. To address this, we shifted from individual-level to agency-level randomization.
 
-However, this introduced a new challenge: the wide variation in agency caseworker counts makes random assignment prone to substantial imbalances. Since statistical power is typically maximized when treatment and control arms have similar sizes, the key question becomes: how can we allocate agencies to treatment and control groups to achieve balanced caseworker counts? In this blog post, I'll share my exploration of strategies---including alternate assignment, greedy algorithms, and the largest differencing method---for achieving balance in cluster randomization.
+However, this introduced a new challenge: the wide variation in agency caseworker counts makes random assignment prone to substantial imbalances. Since statistical power is typically maximized when treatment and control arms have similar sizes, the key question becomes: how can we allocate agencies to treatment and control groups to achieve balanced caseworker counts?
+
+This question boils down to a classic two-way partition problem: dividing a list of numbers (in this case, agency caseworker counts) into two groups such that the sums of the groups are as close as possible. This problem arises in many contexts, such as splitting workloads across teams or, in our case, creating balanced treatment and control groups in an RCT.
+
+Solving this problem exactly is difficult because it is NP-hard, meaning that finding an exact solution becomes exponentially harder as the dataset grows. Approximate algorithms provide a practical alternative. These methods use simple heuristics to produce solutions quickly, without evaluating every possible combination. While they don't guarantee a perfect split, they often achieve results that are "good enough" for most real-world applications. Additionally, approximate solutions can serve as upper bounds to help exact algorithms prune the search space, making the process more efficient.
+
+In this blog post, I'll share my exploration of approximate algorithms for solving this problem, including methods like alternate assignment, greedy algorithms, and the largest differencing method.
 
 # Alternate Assignment
 
@@ -49,6 +55,7 @@ Using the same example:
 $$
 S = \{50,30,40,10,20,5\}
 $$
+
 
 -   Caseworker counts will first be sorted in descending order: {50, 40, 30, 20, 10, 5}
 
@@ -134,7 +141,7 @@ $$
 
 The LDM approach ensures that the largest contributors to imbalance are addressed first, effectively distributing dominant values across the treatment and control groups.
 
-# Comparison 
+# Method Comparison
 
 To systematically evaluate methods for achieving balance, I conducted a simulation analysis using different synthetic datasets. For each simulation, a random subset of a given number of agencies (clusters) was selected among 50 agencies, and these agencies were assigned to treatment and control groups to minimize the difference in caseworker totals between the groups. This process was repeated 500 times for each subset size.
 
@@ -144,14 +151,19 @@ Specifically, I considered three types of data structures: (1) **clustered data*
 
 The graphs below summarize the simulation results. As expected, random assignment without accounting for the variation in caseworker counts among agencies results in highly imbalanced samples, producing the largest mean absolute differences between groups. Among the three data types, the **Greedy Algorithm** consistently performs the best to create groups where caseworker counts are relatively similar. For **dispersed** and **clustered** data, both the Greedy Algorithm and LDM perform comparably well. However, for **skewed data**, LDM performs much worse than Greedy, suggesting its limitations in handling datasets with extreme outliers.
 
-![](clustered_data.png)
+![](method_comparison.png)
 
-![](dispersed_data.png)
+Some key takeaways from my exploration
 
-![](skewed_data.png)
+-   Greedy algorithm and LDM are often good enough to achieve balanced groups efficiently, though LDM struggles with skewed data
+
+-   Approximate vs. exact algorithms presents a trade-off between accuracy and computational efficiency
+
+-   Simulate for our specific data to identify the best method based on our specific priorities (e.g. accuracy, computational efficiency)
+
+Here's the R code implementation of these treatment assignment approaches. For those interested in exploring exact solutions, this [script](complete_greedy.R) implements the complete greedy algorithm to find the perfect split between treatment and control groups.
 
 
-Below is the R code implementation of these treatment assignment approaches.
 ```{r}
 # Baseline: Random Assignment
 random_assignment <- function(data) {
@@ -221,4 +233,5 @@ largest_differencing_partition <- function(data) {
   
   return(list(Treatment = treatment_df, Control = control_df))
 }
+
 ```
