@@ -2,6 +2,7 @@
   {
     "listing": "/statistics.html",
     "items": [
+      "/statistics/data-partition/index.html",
       "/statistics/weights-definition/index.html",
       "/statistics/nlp-ai-news/index.html",
       "/statistics/web-scraping/index.html",
