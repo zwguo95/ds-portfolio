@@ -2,6 +2,7 @@
   {
     "listing": "/statistics.html",
     "items": [
+      "/statistics/understand-ci/index.html",
       "/statistics/sequential-testing/index.html",
       "/statistics/data-partition/index.html",
       "/statistics/weights-definition/index.html",

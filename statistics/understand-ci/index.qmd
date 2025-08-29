@@ -1,0 +1,389 @@
+---
+title: "Overlap but Significant: Understanding and Communicating Treatment Effects"
+date: 8/27/2025
+author:
+  - name: Zhaowen Guo
+    url: "https://www.linkedin.com/in/zhaowen-guo-20535312a/"
+title-block-banner: true
+format:
+  html:
+    theme: flatly
+    code-fold: true
+    code-tools: false
+    toc: false
+    number-sections: false
+link-citations: true
+categories: [code, statistics, experimental design]
+image: "overlapped-ci.png"
+---
+
+# The paradox
+
+At a recent talk, I presented RCT results using the graph below, showing weighted and unweighted group means with 95% confidence intervals (CIs) for control and treatment. An audience raised an interesting question, "If the error bars overlap, how can the treatment be significant?"
+
+![](overlapped-ci.png)
+
+It can indeed feel paradoxical at the moment because the picture invites a common heuristic: *non-overlapping 95% CIs ⇒ statistically significant*. Many people then assume the converse where *overlapping 95% CIs ⇒ not significant*. But does the converse really hold? When we see overlap, does it naturally rule out a real treatment effect?
+
+# Why overlap $\neq$ no effect
+
+To probe this intuition, I first simulated two-arm experiments under a modest true effect. For each trial, I drew treatment and control samples, computed 95% CIs for each group mean, and then tested the difference in means. I then tracked two outcomes: (1) cases where the group CIs overlapped and the treatment effect was significant, and (2) cases where, given overlap, the effect was still significant---a direct check on the "*overlap ⇒ not significant"* intuition.
+
+In 5,000 simulated trials (n=40 per arm, true effect $\delta$ = 0.1), I found that the two 95% CIs overlapped and the effect was significant in 22% of runs; among the overlapped cases, 25% still yielded a significant effect. Overlap, in other words, does not guarantee "no effect".
+
+```{r}
+#| eval: false
+
+library(purrr)
+library(tidyverse)
+set.seed(123)
+
+signed_norm_overlap <- function(ci1, ci2) {
+  avgw <- (diff(ci1) + diff(ci2)) / 2
+  (min(ci1[2], ci2[2]) - max(ci1[1], ci2[1])) / avgw
+}
+
+sim_once <- function(n = 40, delta = 0.1, sd = 1, alpha = 0.05, welch = TRUE) {
+  yc <- rnorm(n, 0, sd)
+  yt <- rnorm(n, delta, sd)
+
+  mC  <- mean(yc);  mT  <- mean(yt)
+  seC <- sd(yc) / sqrt(n); seT <- sd(yt) / sqrt(n)
+
+  tcrit <- qt(1 - alpha/2, df = n - 1)
+  ciC <- c(mC - tcrit*seC, mC + tcrit*seC)
+  ciT <- c(mT - tcrit*seT, mT + tcrit*seT)
+
+  overlap <- signed_norm_overlap(ciC, ciT)
+
+  p <- t.test(yt, yc, var.equal = !welch)$p.value
+
+  data.frame(overlap = overlap, p = p)
+}
+
+summarize_rates <- function(B = 3000, n = 40, delta = 0.1, sd = 1, alpha = 0.05, welch = TRUE) {
+  df <- do.call(
+    rbind,
+    replicate(B, sim_once(n, delta, sd, alpha, welch), simplify = FALSE)
+  )
+
+  overlap_flag <- df$overlap > 0        
+  sig_flag     <- df$p < alpha        
+
+  # 1) P(overlap & significant)
+  k1 <- sum(overlap_flag & sig_flag); N1 <- nrow(df)
+  ci1 <- suppressWarnings(prop.test(k1, N1)$conf.int)
+  rate_uncond <- k1 / N1
+
+  # 2) P(significant | overlap)
+  N2 <- sum(overlap_flag)
+  if (N2 > 0) {
+    k2 <- sum(sig_flag[overlap_flag])
+    rate_cond <- k2 / N2
+    ci2 <- suppressWarnings(prop.test(k2, N2)$conf.int)
+  } else {
+    rate_cond <- NA_real_; ci2 <- c(NA_real_, NA_real_)
+  }
+
+  data.frame(
+    n = n,
+    delta = delta,
+    sd = sd,
+    snr = delta / sd,
+    B = B,
+    rate_overlap_sig_uncond = rate_uncond,
+    ci_uncond_lo = ci1[1], ci_uncond_hi = ci1[2],
+    rate_sig_given_overlap  = rate_cond,
+    ci_cond_lo = ci2[1], ci_cond_hi = ci2[2],
+    prop_overlap = N2 / N1
+  )
+}
+
+results <- summarize_rates(B = 5000, n = 40, delta = 0.1)
+```
+
+Analytically, this actually makes sense. Per-group CIs capture the uncertainty around each mean, but the hypothesis test targets the uncertainty of their ***difference***. For two independent groups with equal standard errors (SE), the standard error of the difference is
+
+$$
+SE_\Delta = \sqrt{SE^2_T + SE^2_C} = \sqrt{2} SE
+$$
+
+For a two-sided test at 5% significance level, we reject the null hypothesis when the estimated difference satisfies
+
+$$
+|\hat \Delta| > 1.96 \times \sqrt{2} SE \approx 2.77 SE
+$$
+
+whereas non-overlapping 95% CIs would require
+
+$$
+|\hat \Delta| > 2 \times 1.96SE = 3.92 SE > 2.77 SE
+$$
+
+So there still exists a band in between---large enough to reject the null, but not large enough to prevent interval overlap. That's the window where both statements are true: the group CIs overlap, yet the treatment effect is significant.
+
+# When it can happen
+
+This naturally raises the next question: under what conditions are we more---or less---likely to observe overlapping 95% CIs still mean a real effect? We can first think about this analytically.
+
+Let the 95% CI half-widths for the two group means be
+
+$$
+h_T = 1.96 \times SE_T \\
+h_C = 1.96 \times SE_C \\
+d = |\hat \Delta| = |\hat \mu_T - \hat \mu_C|
+$$
+
+We observe a significant difference (two-sided test at 5% significance level) when
+
+$$ d > 1.96 \times SE_\Delta, \space SE_\Delta = \sqrt{SE_T^2 + SE_C^2} $$
+
+and non-overlapping 95% CIs when
+
+$$ d > h_T + h_C = 1.96 \times (SE_T + SE_C) $$
+
+Then "significant while overlapping" happens when
+
+$$
+1.96 \times SE_\Delta < d < 1.96 \times (SE_T + SE_C)
+$$
+
+Standardizing by $SE_\Delta$, this is equivalent to
+
+$$
+1.96 < Z < \frac{1.96}{r}, \space r = \frac{SE_\Delta}{SE_T + SE_C}
+$$
+
+Here, $Z = \frac{d}{SE_\Delta}$ is the standardized effect estimate, which (under large n) follows approximately standard normal with mean
+
+$$
+\theta = \frac{\delta}{SE_\Delta}
+$$
+
+where $\delta$ is the true difference is group means.
+
+So the paradox window \[1.96, 1.96/r\] depends on
+
+-   Geometry parameter $r = SE_\Delta / (SE_T + SE_C)$, which reflects study design (e.g. balance, variance structure, etc.
+
+-   Signal parameter $\theta$ = $\delta / SE_\Delta$, which reflects effect size relative to precision
+
+Every scenario I explore below can be understood as changing one of these parameters. These shifts determine how often the "significant while overlapping" phenomenon shows up in practice.
+
+## **(a) Sample size and effect size (signal parameter** $\theta$**)**
+
+Let's start with sample size and effect size. For two groups of sizes $n_T$ and $n_C$ with common variance $\sigma^2$,
+
+$$
+SE_\Delta = \sigma \sqrt{\frac{1}{n_T} + \frac{1}{n_C}}
+$$
+
+So we can rewrite
+
+$$
+\theta = \frac{\delta}{\sigma} \cdot \frac{1}{\sqrt{\frac{1}{n_T} + \frac{1}{n_C}}}
+$$
+
+This breaks into two parts:
+
+-   $\frac{\delta}{\sigma}$ is the signal-to-noise ratio (SNR), meaning how large the effect is relative to individual-level variation
+
+-   $1/\sqrt{1/n_T + 1/n_C}$ is the effective sample size term
+
+For equal groups with size n, this simplifies to
+
+$$
+\theta = \frac{\delta}{\sigma}\sqrt{\frac{n}{2}}
+$$
+
+-   If $\theta$ is too small, most samples fall below 1.96, and we won't observe statistical significance.
+
+-   If $\theta$ is too large, most samples exceed the overlap cutoff 1.96/r, and the CIs won't overlap.
+
+-   Only at intermediate $\theta$ (i.e. modest effect size and moderate n) do we often land in the narrow window \[1.96, 1.96/r\].
+
+To illustrate, I simulated two groups under different combinations of per-group sample size n and standardized effect size ($\frac{\delta}{\sigma}$). For each setting, I recorded whether the group CIs overlapped and the two-sample test was still significant.
+
+The results show that, for any given sample size, the probability of seeing this paradox peaks at moderate effect sizes. Also, with larger sample sizes, smaller effects become enough to land in the paradox window.
+
+![](sample_effect.png)
+
+```{r}
+#| eval: false
+set.seed(123)
+n_grid <- c(50, 100, 150)
+delta_grid <- seq(0, 1.0, by = 0.1)
+B <- 1000
+
+param_grid <- tidyr::expand_grid(n = n_grid, delta = delta_grid)
+
+res <- purrr::pmap_dfr(
+  list(param_grid$n, param_grid$delta),
+  ~ summarize_rates(B = B, n = ..1, delta = ..2)
+)
+
+ggplot(res, aes(x = delta, y = rate_overlap_sig_uncond,
+                color = factor(n), group = n)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  scale_color_brewer(palette = "Dark2", name = "Sample size per group (n)") +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+  labs(
+    x = "Standardized effect size (δ / σ)",
+    y = "P(overlap & sig)"
+  ) +
+  theme_minimal(base_size = 12) + 
+  theme(legend.position = "top")
+
+ggsave("sample_effect.png", width = 7, height = 5, dpi = 300, units = "in")
+
+```
+
+## **(b) Unbalanced and heteroscesdastic groups (geometry parameter r)**
+
+So far, we've assumed two groups of equal size and variance. But in real studies, sample sizes are often unbalanced and group variances may differ. Both of these design features affect the geometry parameter r and thus the width of the paradox window.
+
+With equal variances
+
+$$
+SE_\Delta = \sigma \sqrt{\frac{1}{n_T} + \frac{1}{n_C}}, \space r = \frac{\sqrt{\frac{1}{n_T} + \frac{1}{n_C}}}{\frac{1}{\sqrt{n_T}} + \frac{1}{\sqrt{n_C}}}
+$$
+
+When $n_T$ = $n_C$, the ratio r simplifies to $1/\sqrt{2}$, giving the widest possible overlap window \[1.96, 2.77\].
+
+As the groups become more unbalanced (say $n_T$ $\ll$ $n_C$), the denominator of r grows faster than the numerator, pushing r closer to 1. That shrinks the window toward a single cutoff at 1.96, making "significant while overlapping" less likely.
+
+If group variances differ, the same effect occurs. The group with larger variance dominates both numerator and denominator, again driving r closer to 1 and narrowing the window.
+
+So in practice, imbalance and heteroscedasticity both work against the paradox, while balanced, equal-variance groups maximize the chance of seeing it.
+
+In the simulation below, I varied both group sizes (balanced vs. unbalanced) and group variances (equal vs. unequal). The results show that the paradox "overlap while significant" arises when the test statistic $\theta = \delta / SE_\Delta$ lands in the window \[1.96, 1.96/r\]. Balanced, equal-variance designs maximize this window, making the paradox most visible; imbalance or heteroscedasticity sqeeze it.
+
+![](size_variance.png)
+
+```{r}
+#| eval: false
+sim_once_unbal <- function(n_t, n_c, delta, sd_t = 1, sd_c = 1, alpha = 0.05) {
+  yt <- rnorm(n_t, mean = delta, sd = sd_t)
+  yc <- rnorm(n_c, mean = 0,     sd = sd_c)
+
+  mT  <- mean(yt);   mC  <- mean(yc)
+  seT <- sd(yt)/sqrt(n_t); seC <- sd(yc)/sqrt(n_c)
+
+  tcrit_t <- qt(1 - alpha/2, df = n_t - 1)
+  tcrit_c <- qt(1 - alpha/2, df = n_c - 1)
+  ciT <- c(mT - tcrit_t*seT, mT + tcrit_t*seT)
+  ciC <- c(mC - tcrit_c*seC, mC + tcrit_c*seC)
+
+  overlap <- signed_norm_overlap(ciT, ciC) > 0
+  pval <- t.test(yt, yc, var.equal = FALSE)$p.value
+  data.frame(overlap = overlap, sig = (pval < alpha))
+}
+
+r_ratio <- function(n_t, n_c, sd_t = 1, sd_c = 1) {
+  num <- sqrt(sd_t^2 / n_t + sd_c^2 / n_c)
+  den <- sd_t / sqrt(n_t) + sd_c / sqrt(n_c)
+  num / den
+}
+theta_of <- function(delta, n_t, n_c, sd_t = 1, sd_c = 1) {
+  se_delta <- sqrt(sd_t^2 / n_t + sd_c^2 / n_c)
+  delta / se_delta
+}
+
+summarize_rates_unbal <- function(B = 1000, n_t, n_c, delta, sd_t = 1, sd_c = 1, alpha = 0.05) {
+  sims <- bind_rows(replicate(B, sim_once_unbal(n_t, n_c, delta, sd_t, sd_c, alpha), simplify = FALSE))
+
+  overlap_flag <- sims$overlap
+  sig_flag     <- sims$sig
+
+  # 1) P(overlap & sig)
+  k1 <- sum(overlap_flag & sig_flag); N1 <- nrow(sims)
+  ci1 <- suppressWarnings(prop.test(k1, N1)$conf.int)
+  rate_uncond <- k1 / N1
+
+  # 2) P(sig | overlap)
+  N2 <- sum(overlap_flag)
+  if (N2 > 0) {
+    k2 <- sum(sig_flag[overlap_flag])
+    rate_cond <- k2 / N2
+    ci2 <- suppressWarnings(prop.test(k2, N2)$conf.int)
+  } else {
+    rate_cond <- NA_real_; ci2 <- c(NA_real_, NA_real_)
+  }
+
+  data.frame(
+    n_t = n_t, n_c = n_c, sd_t = sd_t, sd_c = sd_c,
+    delta = delta,
+    theta = theta_of(delta, n_t, n_c, sd_t, sd_c),
+    r = r_ratio(n_t, n_c, sd_t, sd_c),
+    B = B,
+    rate_overlap_sig_uncond = rate_uncond,
+    ci_uncond_lo = ci1[1], ci_uncond_hi = ci1[2],
+    rate_sig_given_overlap  = rate_cond,
+    ci_cond_lo = ci2[1], ci_cond_hi = ci2[2],
+    prop_overlap = N2 / N1
+  )
+}
+
+theta_grid <- seq(1, 3, by = 0.1)
+B <- 1000
+scen <- scenarios %>%
+  mutate(se_delta = sqrt(sd_t^2 / n_t + sd_c^2 / n_c),
+         r       = r_ratio(n_t, n_c, sd_t, sd_c),
+         z_lo    = 1.96,
+         z_hi    = 1.96 / r)
+
+param_grid <- scen %>% crossing(theta = theta_grid)
+
+res_theta <- pmap_dfr(
+  list(param_grid$label, param_grid$n_t, param_grid$n_c,
+       param_grid$sd_t,  param_grid$sd_c, param_grid$theta, param_grid$se_delta),
+  function(label, n_t, n_c, sd_t, sd_c, theta, se_delta) {
+    delta <- theta * se_delta
+    out <- summarize_rates_unbal(B = B, n_t = n_t, n_c = n_c,
+                                 delta = delta, sd_t = sd_t, sd_c = sd_c)
+
+    out$label <- label
+    out$theta <- theta
+    out$z_lo  <- 1.96
+    out$z_hi  <- 1.96 / out$r
+    out
+  }
+)
+
+x_min <- min(res_theta$theta)
+x_max <- max(win$z_hi) + 0.1
+
+ggplot(res_theta, aes(theta, rate_overlap_sig_uncond)) +
+  geom_rect(data = distinct(res_theta, label, z_lo, z_hi),
+            aes(xmin = z_lo, xmax = z_hi, ymin = -Inf, ymax = Inf),
+            inherit.aes = FALSE, alpha = 0.12) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 1.6) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+  labs(
+    subtitle = "Shaded band is the paradox window [1.96, 1.96/r] per scenario",
+    x = expression(theta == delta / SE[Delta]),
+    y = "P(overlap & sig)"
+  ) +
+  facet_wrap(~ label, ncol = 2) +
+  theme_minimal(base_size = 12)
+
+ggsave("size_variance.png", width = 7, height = 5, dpi = 300, units = "in")
+```
+
+# Best practices for communication
+
+The paradox of "overlap but significant" highlights why careful communication of treatment effects matters. Here are some practices I've found to help avoid this trap:
+
+-   Present a CI for the treatment effect, not just per-group means
+
+    The main inferential question is about the difference, not the groups in isolation. A CI around that difference makes the evidence explicit. If we also want to display group means with their own CIs, we need to be clear that inference is based on the difference CI. A good option is to overlay or annotate the effect estimate on the same figure, so readers can't miss it.
+
+-   Keep covariate adjustment consistent
+
+    Covariate adjustment (e.g. via regressions) reduces residual variance, often narrowing narrows the treatment effect's CI. But inconsistency creates confusion: if we report raw, unadjusted group means alongside an adjusted treatment effect, the numbers won't line up. The best practice is to present model-adjusted group means with their CIs and the adjusted treatment effect from the same model.
+
+-   Use alternatives to group error bars when appropriate
+
+    Bar plots or mean plots with group error bars are familiar but can mislead, because audiences might put the focus on overlap instead of the treatment effect. For clearer communication, we can consider **forest plots**, where treatment effects are shown as dots with horizontal CIs against a zero line; **difference plots** in multi-arm studies, which place all contrasts relative to control; or **side-by-side means with annotated differences** if we want to preserve group context but highlight the comparison.
